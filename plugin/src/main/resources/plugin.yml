@@ -1,3 +1,14 @@
 main: dk.manaxi.unikpay.plugin.Main
 version: 1.0.0
 name: UnikPay
+authors:
+  - Itz_Hoffe
+  - Shad0wsense
+  - Iskoldcool
+softdepend:
+  - skript
+commands:
+  unikpay:
+    aliases:
+      - up
+      - unikp
