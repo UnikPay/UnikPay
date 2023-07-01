@@ -1,0 +1,3 @@
+main: dk.manaxi.unikpay.plugin.Main
+version: 1.0.0
+name: UnikPay
