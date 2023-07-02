@@ -20,6 +20,7 @@ public final class Main extends JavaPlugin {
     public static FileConfiguration configYML;
     public static ConsoleCommandSender log;
     private static final HashMap<Hook, Boolean> HOOKS = new HashMap<>();
+    private static String APIKEY;
 
     @Override
     public void onEnable() {
@@ -52,11 +53,22 @@ public final class Main extends JavaPlugin {
         if (!(new File(getDataFolder(), "config.yml")).exists())saveResource("config.yml", false);
         config = new Config(this, null, "config.yml");
         configYML = config.getConfig();
+        log.sendMessage(ColorUtils.getColored("", "  &2Getting your apikey"));
+        if (configYML.getString("Api-key").isEmpty()) {
+            log.sendMessage(ColorUtils.getColored("", "", " &c- Du mangler at putte din apikey ind i config.yml"));
+            APIKEY = null;
+        }
+        log.sendMessage(ColorUtils.getColored("", "", " &a- Fandt din api-key"));
+        APIKEY = configYML.getString("Api-key");
     }
 
     //TO EVERYTHING THERE NEED TO BE RELOADED
     public void reload() {
         initialiseConfigs();
+    }
+
+    public static String getAPIKEY(){
+        return APIKEY;
     }
 
 

@@ -88,4 +88,31 @@ public class Config {
             Bukkit.broadcastMessage(message);
         }
     }
+
+    public static void sendToPerms(String path, String permission) {
+        String[] messages = get(path);
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (player.hasPermission(permission)) {
+                for (String message : messages) {
+                    player.sendMessage(message);
+                }
+            }
+        }
+    }
+
+    public static void sendToPerms(String path, String permission, Object... replacements) {
+        String[] messages = get(path);
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (player.hasPermission(permission)) {
+                for (String message : messages) {
+                    for (int i = 0; i < replacements.length; i += 2) {
+                        message = message.replaceAll((String) replacements[i], (String) replacements[i+1]);
+                    }
+                    player.sendMessage(message);
+                }
+            }
+        }
+    }
+
+
 }
