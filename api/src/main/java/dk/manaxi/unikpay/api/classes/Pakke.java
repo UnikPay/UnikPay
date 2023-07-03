@@ -12,4 +12,17 @@ public class Pakke {
     public Array getPakke() {
         return this.pakke;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    @Override
+    public String toString() {
+        return id.toString();
+    }
 }

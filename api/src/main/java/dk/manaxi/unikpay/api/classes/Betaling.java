@@ -4,18 +4,22 @@ import java.lang.reflect.Array;
 
 public class Betaling {
 
-    private String spiller;
+    private String _id;
 
     private String server;
 
-    private String uuid;
+    private Mcaccount mcaccount;
 
     private Array pakke;
 
     private float amount;
 
-    public String getUuid() {
-        return this.uuid;
+    public String get_id() {
+        return this._id;
+    }
+
+    public Mcaccount getMcaccount() {
+        return this.mcaccount;
     }
 
     public Array getPakke() {
