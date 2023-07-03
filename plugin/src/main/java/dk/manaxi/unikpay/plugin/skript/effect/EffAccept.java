@@ -54,27 +54,7 @@ public class EffAccept extends Effect {
     public String toString(Event e, boolean debug) {
         return null;
     }
-    /*
-    protected void execute(Event event) {
-    final id _queue = (id)this.queue.getSingle(event);
-    if (_queue == null)
-      return;
-    final JsonObject obj = new JsonObject();
-    obj.addProperty("purchase", _queue.toString());
-    Bukkit.getScheduler().runTaskAsynchronously((Plugin)SuperPay.instance, new Runnable() {
-          public void run() {
-            String svar = Utils.put("https://api.superpay.hundeklemmen.com/server/purchase", obj.toString(), SuperPay.authorization);
-            if (svar != null)
-              if (svar.equalsIgnoreCase("success")) {
-                SuperPay.instance.getLogger().info("Accepteret k" + _queue);
-              } else {
-                Skript.error(svar);
-                SuperPay.instance.getLogger().info("En fejl opstod: " + svar);
-              }
-          }
-        });
-  }
-  */
+    
 
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
