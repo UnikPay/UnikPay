@@ -2,7 +2,4 @@ plugins {
     id("java")
 }
 
-repositories {
-    mavenCentral()
-}
-
+repositories { mavenCentral() }

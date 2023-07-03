@@ -20,7 +20,10 @@ public class SkriptHook extends Hook {
 
     @Override
     public boolean init(JavaPlugin paramPlugin) {
-        if (!isEnabled()) return false;
+        if (!isEnabled()) {
+            Main.log.sendMessage(ColorUtils.getColored("   &c - SKRIPT HAS NOT BEEN HOOKED"));
+            return false;
+        }
         Plugin = paramPlugin;
         try {
             Plugin = paramPlugin;

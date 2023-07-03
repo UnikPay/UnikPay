@@ -1,5 +1,10 @@
 package dk.manaxi.unikpay.plugin;
 
+import com.google.gson.Gson;
+import dk.manaxi.unikpay.api.HttpClient;
+import dk.manaxi.unikpay.api.classes.CustomPackage;
+import dk.manaxi.unikpay.api.classes.Request;
+import dk.manaxi.unikpay.api.classes.RequestBody;
 import dk.manaxi.unikpay.plugin.commands.CommandManager;
 import dk.manaxi.unikpay.plugin.enums.Hook;
 import dk.manaxi.unikpay.plugin.hooks.SkriptHook;
@@ -15,6 +20,10 @@ import java.io.File;
 import java.util.HashMap;
 
 public final class Main extends JavaPlugin {
+
+    private static String url = dk.manaxi.unikpay.api.Config.MAINURL + "request";
+
+
     private static Main instance;
     public static Config config;
     public static FileConfiguration configYML;
@@ -54,9 +63,10 @@ public final class Main extends JavaPlugin {
         config = new Config(this, null, "config.yml");
         configYML = config.getConfig();
         log.sendMessage(ColorUtils.getColored("", "  &2Getting your apikey"));
-        if (configYML.getString("Api-key").isEmpty()) {
+        if (configYML.getString("Api-key").isEmpty() || configYML.getString("Api-key").equals("KEY HER")) {
             log.sendMessage(ColorUtils.getColored("", "", " &c- Du mangler at putte din apikey ind i config.yml"));
             APIKEY = null;
+            return;
         }
         log.sendMessage(ColorUtils.getColored("", "", " &a- Fandt din api-key"));
         APIKEY = configYML.getString("Api-key");
@@ -88,5 +98,6 @@ public final class Main extends JavaPlugin {
     public static boolean isHookInitialised(Hook paramHook) {
         return HOOKS.getOrDefault(paramHook, Boolean.FALSE);
     }
+
 
 }
