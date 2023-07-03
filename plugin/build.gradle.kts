@@ -20,6 +20,7 @@ repositories {
 dependencies {
     implementation(project(":unikpay-api"))
     compileOnly("org.jetbrains:annotations:24.0.0")
+
     compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
     compileOnly("ch.njol:skript:2.2-dev32") {
         exclude("com.sk89q", "worldguard")

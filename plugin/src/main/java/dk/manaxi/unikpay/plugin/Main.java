@@ -1,10 +1,5 @@
 package dk.manaxi.unikpay.plugin;
 
-import com.google.gson.Gson;
-import dk.manaxi.unikpay.api.HttpClient;
-import dk.manaxi.unikpay.api.classes.CustomPackage;
-import dk.manaxi.unikpay.api.classes.Request;
-import dk.manaxi.unikpay.api.classes.RequestBody;
 import dk.manaxi.unikpay.plugin.commands.CommandManager;
 import dk.manaxi.unikpay.plugin.enums.Hook;
 import dk.manaxi.unikpay.plugin.hooks.SkriptHook;

@@ -3,7 +3,7 @@ package dk.manaxi.unikpay.plugin.fetch;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import dk.manaxi.unikpay.api.Config;
-import dk.manaxi.unikpay.api.HttpClient;
+import dk.manaxi.unikpay.api.HttpsClient;
 import dk.manaxi.unikpay.api.classes.Betaling;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
@@ -24,7 +24,7 @@ public class Payments {
         lastPaymentFetch = (new Date()).getTime();
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), new Runnable() {
             public void run() {
-                String svar = HttpClient.get(url, Main.getAPIKEY());
+                String svar = HttpsClient.get(url, Main.getAPIKEY());
                 System.out.println("svar - " + svar);
                 Gson gson = new Gson();
                 Type listType = (new TypeToken<List<OnBetaling>>() {
