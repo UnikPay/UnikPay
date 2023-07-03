@@ -1,9 +1,9 @@
 package dk.manaxi.unikpay.plugin.hooks;
 
-import com.sun.istack.internal.NotNull;
+
 import dk.manaxi.unikpay.plugin.interfaces.IHook;
 import org.bukkit.Bukkit;
-
+import org.jetbrains.annotations.NotNull;
 
 public abstract class Hook implements IHook {
     private final String name;
