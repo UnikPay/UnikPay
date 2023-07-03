@@ -6,6 +6,7 @@ import javax.net.ssl.HttpsURLConnection;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Map;
 
 public class HttpsClient {
     public static String sendRequest(String url, String method, String obj, String auth) {

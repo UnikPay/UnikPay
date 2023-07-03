@@ -7,7 +7,7 @@ authors:
   - Shad0wsense
   - Iskoldcool
 softdepend:
-  - skript
+  - Skript
 commands:
   unikpay:
     aliases:

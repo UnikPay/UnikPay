@@ -11,19 +11,22 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.lang.reflect.Array;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 public class EffAnmod extends Effect {
     private Expression<Player> player;
-
     private Expression<Number> amount;
+    private Expression<String> pakke;
+    private Expression<String> id;
 
-    private Expression<JsonArray> pakke;
 
     static {
-        Skript.registerEffect(EffAnmod.class, "unikpay anmod %player% om %number% emeralder for %string%");
+        Skript.registerEffect(EffAnmod.class, "unikpay anmod %player% om %number% emeralder for %string%[ med id %-string%]");
     }
+
+    @SuppressWarnings("unchecked")
     @Override
     protected void execute(@NotNull Event event) {
         final Player player = this.player.getSingle(event);
@@ -33,10 +36,35 @@ public class EffAnmod extends Effect {
         if (player == null || pakke == null)
             return;
 
-        final JsonObject obj = new JsonObject();
-        obj.addProperty("uuid", player.getUniqueId().toString());
-        obj.addProperty("amount", amount);
-        obj.addProperty("pakke", String.valueOf(pakke));
+        JSONObject payload = new JSONObject();
+        payload.put("uuid", player.getUniqueId().toString());
+
+        JSONObject pakkerObj = new JSONObject();
+        pakkerObj.put("name", pakke);
+        pakkerObj.put("id", id != null ? id : pakke);
+        pakkerObj.put("price", amount);
+
+        JSONArray pakker = new JSONArray();
+        pakker.add(pakkerObj);
+
+        payload.put("pakker", pakker);
+
+
+        Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
+            String svar = HttpsClient.sendRequest(url, "POST", payload.toJSONString(), Main.getAPIKEY(), null);
+            if (svar == null) return;
+
+            JsonObject response = new Gson().fromJson(svar, JsonObject.class);
+            String message = response.get("message").getAsString();
+
+            if(message.trim().equalsIgnoreCase(Config.IKKELINKET_MESSAGE)) {
+                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ikkelinket");
+            } else if (message.equalsIgnoreCase(Config.ACCEPTERE_KOEBET)) {
+                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "accepterbetaling");
+            } else if (message.equalsIgnoreCase(Config.RATELIMIT)) {
+                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ratetime");
+            }
+        });
 
 
     }
@@ -48,9 +76,10 @@ public class EffAnmod extends Effect {
 
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
-        this.player = (Expression)expressions[0];
-        this.amount = (Expression)expressions[1];
-        this.pakke = (Expression)expressions[2];
+        this.player = (Expression) expressions[0];
+        this.amount = (Expression) expressions[1];
+        this.pakke = (Expression) expressions[2];
+        this.id = (Expression) expressions[3];
         return true;
     }
 }

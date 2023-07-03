@@ -2,7 +2,14 @@ package dk.manaxi.unikpay.plugin.hooks;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
+import ch.njol.skript.classes.ClassInfo;
+import ch.njol.skript.classes.Parser;
+import ch.njol.skript.expressions.base.EventValueExpression;
+import ch.njol.skript.lang.ParseContext;
+import ch.njol.skript.registrations.Classes;
+import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.Main;
+import dk.manaxi.unikpay.plugin.skript.classes.id;
 import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,11 +27,9 @@ public class SkriptHook extends Hook {
 
     @Override
     public boolean init(JavaPlugin paramPlugin) {
-        if (!isEnabled()) {
-            Main.log.sendMessage(ColorUtils.getColored("   &c - SKRIPT HAS NOT BEEN HOOKED"));
+        if (!isEnabled())
             return false;
-        }
-        Plugin = paramPlugin;
+
         try {
             Plugin = paramPlugin;
             Instance = (Skript) Bukkit.getPluginManager().getPlugin("Skript");
@@ -38,7 +43,8 @@ public class SkriptHook extends Hook {
             Main.log.sendMessage(ColorUtils.getColored("   &a - SKRIPT HAS BEEN HOOKED"));
             return Instance != null;
         } catch (Exception e) {
-            return  false;
+            System.out.print(e);
+            return false;
         }
 
     }
