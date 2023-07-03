@@ -11,4 +11,5 @@ plugins {
 
 subprojects {
     plugins.apply("java")
+    plugins.apply("maven-publish")
 }
