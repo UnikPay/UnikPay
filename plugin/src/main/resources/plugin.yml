@@ -10,6 +10,8 @@ softdepend:
   - Skript
 commands:
   unikpay:
+    description: The command for the plugin.
     aliases:
       - up
       - unikp
+      - unik

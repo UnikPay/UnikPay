@@ -15,6 +15,7 @@ repositories {
     maven("https://repo.codemc.org/repository/maven-public")
     maven("https://papermc.io/repo/repository/maven-public/")
     maven("https://jitpack.io")
+    maven("'https://repo.skriptlang.org/releases'")
 }
 
 dependencies {
@@ -22,7 +23,7 @@ dependencies {
     compileOnly("org.jetbrains:annotations:24.0.1")
 
     compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
-    compileOnly("ch.njol:skript:2.2-dev32") {
+    compileOnly("com.github.SkriptLang:Skript:2.6.2") {
         exclude("com.sk89q", "worldguard")
         exclude("net.milkbowl.vault", "Vault")
     }

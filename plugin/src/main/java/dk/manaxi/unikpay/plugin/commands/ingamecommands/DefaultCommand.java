@@ -20,7 +20,7 @@ public class DefaultCommand extends ISubCommand {
         Config.send(sender, "prefix");
         player.sendMessage("§7");
         player.sendMessage(ColorUtils.getColored("  &7/unikpay discord"));
-        if (sender.hasPermission(Main.configYML.getString("admin-permission")) && !sender.hasPermission("sumo.command")) {
+        if (sender.hasPermission(Main.configYML.getString("admin-permission")) && !sender.hasPermission("unik.command")) {
             player.sendMessage(ColorUtils.getColored("  &7/unikpay reload"));
 
         }

@@ -36,14 +36,6 @@ public class EvtBetaling extends SkriptEvent {
             }
         }, 0);
         /*
-         * Handle the pakket
-         */
-        EventValues.registerEventValue(OnBetaling.class, Array.class, new Getter<Array, OnBetaling>() {
-            public Array get(OnBetaling event) {
-                return event.getPakke();
-            }
-        }, 0);
-        /*
          * Handle the amount
          */
         EventValues.registerEventValue(OnBetaling.class, Number.class, new Getter<Number, OnBetaling>() {
@@ -64,7 +56,7 @@ public class EvtBetaling extends SkriptEvent {
 
         EventValues.registerEventValue(OnBetaling.class, Pakke.class, new Getter<Pakke, OnBetaling>() {
             public Pakke get(OnBetaling event) {
-                return new Pakke(event.getPakke());
+                return event.getPakke();
             }
         }, 0);
 
@@ -79,16 +71,16 @@ public class EvtBetaling extends SkriptEvent {
 
     @Override
     public boolean init(Literal<?>[] args, int matchedPattern, SkriptParser.ParseResult parseResult) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean check(Event e) {
-        return false;
+        return true;
     }
 
     @Override
     public String toString(@Nullable Event e, boolean debug) {
-        return null;
+        return "unikpay betaling";
     }
 }

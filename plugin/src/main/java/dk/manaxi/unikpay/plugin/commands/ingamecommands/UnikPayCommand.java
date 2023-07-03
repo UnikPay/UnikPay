@@ -2,7 +2,7 @@ package dk.manaxi.unikpay.plugin.commands.ingamecommands;
 
 import dk.manaxi.unikpay.plugin.commands.ICommand;
 import dk.manaxi.unikpay.plugin.commands.ISubCommand;
-import dk.manaxi.unikpay.plugin.commands.ingamecommands.subs.Anmod;
+import dk.manaxi.unikpay.plugin.commands.ingamecommands.subs.Discord;
 import dk.manaxi.unikpay.plugin.commands.ingamecommands.subs.Reload;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -15,7 +15,7 @@ public class UnikPayCommand extends ICommand {
         setDefaultCommand(new DefaultCommand());
         addSubCommands(
                 new Reload(),
-                new Anmod()
+                new Discord()
         );
 
     }

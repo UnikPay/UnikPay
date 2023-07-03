@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+@SuppressWarnings("unchecked")
 public class Payments {
     private static long lastPaymentFetch = 0L;
     private static String url = Config.MAINURL + "request";
@@ -24,29 +25,23 @@ public class Payments {
         if (lastPaymentFetch > (new Date()).getTime() - 5000L)
             return;
         lastPaymentFetch = (new Date()).getTime();
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), new Runnable() {
-            public void run() {
-                String svar = HttpsClient.get(url, Main.getAPIKEY());
-                System.out.println("svar - " + svar);
-                Gson gson = new Gson();
-                Type listType = (new TypeToken<List<OnBetaling>>() {
-
-                }).getType();
-                final List<Betaling> betalinger = gson.fromJson(svar, listType);
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-                    public void run() {
-                        for (Betaling betal : betalinger)
-                            Bukkit.getServer().getPluginManager().callEvent(new OnBetaling(
-
-                                    Bukkit.getOfflinePlayer(
-                                            UUID.fromString(betal.getUuid())), betal
-
-                                    .getPakke(), betal
-                                    .getAmount(), betal
-                                    ));
-                    }
-                }, 0L);
-            }
+        Gson gson = new Gson();
+        Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
+            String svar = HttpsClient.getRequest(url, Main.getAPIKEY());
+            JsonObject svarOBJ = gson.fromJson(svar, JsonObject.class);
+            Type listType = (new TypeToken<List<Betaling>>() {}).getType();
+            final List<Betaling> betalinger = (List<Betaling>) gson.fromJson(svarOBJ.getAsJsonArray("requests"), listType);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+                public void run() {
+                    for (Betaling betal : betalinger)
+                        Bukkit.getServer().getPluginManager().callEvent(new OnBetaling(
+                                Bukkit.getOfflinePlayer(betal.getMcaccount().getUuid()),
+                                betal.getPackages()[0],
+                                betal.getAmount(),
+                                new id(betal.get_id())
+                        ));
+                }
+            }, 0L);
         });
     }
 }

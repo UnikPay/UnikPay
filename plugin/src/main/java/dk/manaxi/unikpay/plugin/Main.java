@@ -63,6 +63,7 @@ public final class Main extends JavaPlugin {
             APIKEY = null;
             return;
         }
+        dk.manaxi.unikpay.plugin.configuration.Config.loadALl();
         log.sendMessage(ColorUtils.getColored("", "", " &a- Fandt din api-key"));
         APIKEY = configYML.getString("Api-key");
     }

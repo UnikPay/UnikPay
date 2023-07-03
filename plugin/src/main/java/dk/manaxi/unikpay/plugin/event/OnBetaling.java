@@ -15,23 +15,24 @@ import dk.manaxi.unikpay.plugin.skript.classes.id;
 public class OnBetaling extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     private OfflinePlayer player;
-    private Array pakke;
-
+    private Pakke pakke;
     private float amount;
+    private id id;
 
     private Boolean cancelled = Boolean.FALSE;
 
-    public OnBetaling(OfflinePlayer player, Array pakke, float amount, Betaling betal) {
+    public OnBetaling(OfflinePlayer player, Pakke pakke, float amount, id id) {
         this.player = player;
         this.pakke = pakke;
         this.amount = amount;
+        this.id = id;
     }
 
     public OfflinePlayer getPlayer() {
         return Bukkit.getOfflinePlayer(this.player.getUniqueId());
     }
 
-    public Array getPakke() {
+    public Pakke getPakke() {
         return pakke;
     }
 
@@ -49,6 +50,10 @@ public class OnBetaling extends Event implements Cancellable {
 
     public HandlerList getHandlers() {
         return handlers;
+    }
+
+    public id getId() {
+        return id;
     }
 
     public static HandlerList getHandlerList() {

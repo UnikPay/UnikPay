@@ -30,7 +30,7 @@ public class Config {
             String prefix = configs.get("prefix")[0];
             for (String[] values : configs.values()) {
                 for (int i = 0; i < values.length; i++) {
-                    values[i] = values[i].replace("\\{prefix\\}", prefix);
+                    values[i] = values[i].replace("{prefix}", prefix);
                 }
             }
         }

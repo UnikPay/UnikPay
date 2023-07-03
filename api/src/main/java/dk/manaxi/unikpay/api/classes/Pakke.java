@@ -3,14 +3,12 @@ package dk.manaxi.unikpay.api.classes;
 import java.lang.reflect.Array;
 
 public class Pakke {
-    private Array pakke;
+    private String name;
+    private String id;
+    private float price;
 
-    public Pakke(Array pakke) {
-        this.pakke = pakke;
-    }
-
-    public Array getPakke() {
-        return this.pakke;
+    public String getName() {
+        return name;
     }
 
     public String getId() {

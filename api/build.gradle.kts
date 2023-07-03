@@ -5,5 +5,5 @@ plugins {
 repositories { mavenCentral() }
 
 dependencies {
-    implementation("com.squareup.okhttp3:okhttp:3.2.0")
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
 }

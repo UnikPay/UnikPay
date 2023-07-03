@@ -10,7 +10,7 @@ public class Betaling {
 
     private Mcaccount mcaccount;
 
-    private Array pakke;
+    private Pakke[] packages;
 
     private float amount;
 
@@ -22,8 +22,8 @@ public class Betaling {
         return this.mcaccount;
     }
 
-    public Array getPakke() {
-        return this.pakke;
+    public Pakke[] getPackages() {
+        return this.packages;
     }
 
     public float getAmount() {
