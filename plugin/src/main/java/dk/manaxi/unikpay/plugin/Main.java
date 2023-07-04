@@ -6,6 +6,8 @@ import dk.manaxi.unikpay.plugin.hooks.SkriptHook;
 import dk.manaxi.unikpay.plugin.interfaces.IHook;
 import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import dk.manaxi.unikpay.plugin.utils.Config;
+import dk.manaxi.unikpay.plugin.websocket.IoSocket;
+import io.socket.client.Socket;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -25,6 +27,7 @@ public final class Main extends JavaPlugin {
     public static ConsoleCommandSender log;
     private static final HashMap<Hook, Boolean> HOOKS = new HashMap<>();
     private static String APIKEY;
+    private static Socket socket;
 
     @Override
     public void onEnable() {
@@ -39,6 +42,7 @@ public final class Main extends JavaPlugin {
         //hooks
         log.sendMessage(ColorUtils.getColored("", "  &2Hooking into integrations"));
         initialiseHooks();
+        IoSocket.connectSocket();
 
         log.sendMessage(ColorUtils.getColored("", "  &fUnikpay.jar has been enabled!", "    &aVersion: &f" +
                         getDescription().getVersion(), "    &aAuthors: &f" +
@@ -67,6 +71,8 @@ public final class Main extends JavaPlugin {
         log.sendMessage(ColorUtils.getColored("", "", " &a- Fandt din api-key"));
         APIKEY = configYML.getString("Api-key");
     }
+
+
 
     //TO EVERYTHING THERE NEED TO BE RELOADED
     public void reload() {

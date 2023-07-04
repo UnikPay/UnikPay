@@ -1,7 +1,6 @@
 package dk.manaxi.unikpay.plugin.event;
 
 
-import dk.manaxi.unikpay.api.classes.Betaling;
 import dk.manaxi.unikpay.api.classes.Pakke;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -9,7 +8,6 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-import java.lang.reflect.Array;
 import dk.manaxi.unikpay.plugin.skript.classes.id;
 
 public class OnBetaling extends Event implements Cancellable {

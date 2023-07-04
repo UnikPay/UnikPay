@@ -7,6 +7,12 @@ public class Pakke {
     private String id;
     private float price;
 
+    public Pakke(String name, String id, float price) {
+        this.name = name;
+        this.id = id;
+        this.price = price;
+    }
+
     public String getName() {
         return name;
     }
