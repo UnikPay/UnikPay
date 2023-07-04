@@ -66,6 +66,8 @@ public class EffAnmod extends Effect {
 
             if(message.trim().equalsIgnoreCase(Config.IKKELINKET_MESSAGE)) {
                 dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ikkelinket");
+            } else if(message.trim().equalsIgnoreCase(Config.IKKEMC)) {
+                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ikkelinket");
             } else if (message.equalsIgnoreCase(Config.ACCEPTERE_KOEBET)) {
                 dk.manaxi.unikpay.plugin.configuration.Config.send(player, "accepterbetaling");
             } else if (message.equalsIgnoreCase(Config.RATELIMIT)) {

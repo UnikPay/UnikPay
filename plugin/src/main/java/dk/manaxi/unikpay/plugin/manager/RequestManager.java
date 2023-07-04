@@ -21,7 +21,7 @@ public class RequestManager {
         String url = Config.MAINURL + "request";
 
         JSONObject payload = new JSONObject();
-        payload.put("uuid", player.getUniqueId());
+        payload.put("uuid", player.getUniqueId().toString());
 
         JSONObject pakkerObj = new JSONObject();
         pakkerObj.put("name", pakke);
