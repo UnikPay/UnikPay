@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import dk.manaxi.unikpay.api.classes.Betaling;
+import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
 import dk.manaxi.unikpay.plugin.skript.classes.id;
@@ -19,12 +20,12 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 public class IoSocket {
     private static Socket socket;
 
     public static void connectSocket() {
-        System.out.print("connectSocket()");
         try {
             IO.Options options = IO.Options.builder()
                     .setAuth(Collections.singletonMap("token", Main.getAPIKEY()))
@@ -35,33 +36,25 @@ public class IoSocket {
 
             //when someone accepts on discord
             socket.on("acceptRequest", args -> {
+                String ok = Arrays.toString(args);
+                Gson gson = new Gson();
+                JsonArray jsonArray = gson.fromJson(ok, JsonArray.class);
 
-                System.out.print("Jep der sker noget 1");
-                try {
-                    String ok = Arrays.toString(args);
-                    Gson gson = new Gson();
-                    JsonArray jsonArray = (JsonArray) args[0];
+                JsonObject obj = jsonArray.get(0).getAsJsonObject();
+                UUID uuid = UUID.fromString(obj.getAsJsonObject("mcaccount").get("uuid").getAsString());
+                Pakke pakke = new Pakke(obj.get("packages").getAsJsonArray().get(0).getAsJsonObject().get("name").getAsString(), obj.get("packages").getAsJsonArray().get(0).getAsJsonObject().get("id").getAsString(), obj.get("packages").getAsJsonArray().get(0).getAsJsonObject().get("price").getAsFloat());
 
-                    System.out.print("svarOBJ -> " + jsonArray);
-
-
-                    Type listType = (new TypeToken<List<Betaling>>() {}).getType();
-                    System.out.print("listType -> " + listType);
-
-                    final List<Betaling> betalinger = (List<Betaling>) gson.fromJson(jsonArray, listType);
-                    Bukkit.broadcastMessage("betalinger -> " + betalinger);
-
-                   
-
-                    JSONObject obj = new JSONObject((args[0].toString()));
-                    String uuid = obj.getJSONObject("mcaccount").getString("uuid");
-
-                    Bukkit.broadcastMessage(uuid);
-
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-
+                Bukkit.getScheduler().runTask(Main.getInstance(), new Runnable() {
+                    @Override
+                    public void run() {
+                        Bukkit.getPluginManager().callEvent(new OnBetaling(
+                                Bukkit.getOfflinePlayer(uuid),
+                                pakke,
+                                obj.get("amount").getAsFloat(),
+                                new id(obj.get("_id").getAsString())
+                        ));
+                    }
+                });
             });
 
             socket.connect();

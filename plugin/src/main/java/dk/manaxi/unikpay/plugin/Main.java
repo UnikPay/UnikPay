@@ -62,12 +62,12 @@ public final class Main extends JavaPlugin {
         config = new Config(this, null, "config.yml");
         configYML = config.getConfig();
         log.sendMessage(ColorUtils.getColored("", "  &2Getting your apikey"));
+        dk.manaxi.unikpay.plugin.configuration.Config.loadALl();
         if (configYML.getString("Api-key").isEmpty() || configYML.getString("Api-key").equals("KEY HER")) {
             log.sendMessage(ColorUtils.getColored("", "", " &c- Du mangler at putte din apikey ind i config.yml"));
             APIKEY = null;
             return;
         }
-        dk.manaxi.unikpay.plugin.configuration.Config.loadALl();
         log.sendMessage(ColorUtils.getColored("", "", " &a- Fandt din api-key"));
         APIKEY = configYML.getString("Api-key");
     }

@@ -61,10 +61,8 @@ public class HttpsClient {
 
             Response response = client.newCall(request).execute();
             int responseCode = response.code();
-            System.out.println("Code: " + responseCode);
 
             String responseBody = response.body().string();
-            System.out.println("Response: " + responseBody);
 
             return responseBody;
         } catch (IOException e) {
