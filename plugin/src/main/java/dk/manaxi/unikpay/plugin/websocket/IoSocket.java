@@ -37,7 +37,6 @@ public class IoSocket {
             //when someone accepts on discord
             socket.on("acceptRequest", args -> {
                 String ok = Arrays.toString(args);
-                Bukkit.broadcastMessage(ok);
                 Gson gson = new Gson();
                 JsonArray jsonArray = gson.fromJson(ok, JsonArray.class);
 
@@ -45,12 +44,17 @@ public class IoSocket {
                 UUID uuid = UUID.fromString(obj.getAsJsonObject("mcaccount").get("uuid").getAsString());
                 Pakke pakke = new Pakke(obj.get("packages").getAsJsonArray().get(0).getAsJsonObject().get("name").getAsString(), obj.get("packages").getAsJsonArray().get(0).getAsJsonObject().get("id").getAsString(), obj.get("packages").getAsJsonArray().get(0).getAsJsonObject().get("price").getAsFloat());
 
-                Bukkit.getPluginManager().callEvent(new OnBetaling(
-                        Bukkit.getOfflinePlayer(uuid),
-                        pakke,
-                        obj.get("amount").getAsFloat(),
-                        new id(obj.get("_id").getAsString())
-                ));
+                Bukkit.getScheduler().runTask(Main.getInstance(), new Runnable() {
+                    @Override
+                    public void run() {
+                        Bukkit.getPluginManager().callEvent(new OnBetaling(
+                                Bukkit.getOfflinePlayer(uuid),
+                                pakke,
+                                obj.get("amount").getAsFloat(),
+                                new id(obj.get("_id").getAsString())
+                        ));
+                    }
+                });
             });
 
             socket.connect();
