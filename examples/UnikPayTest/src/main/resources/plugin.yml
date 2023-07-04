@@ -1,0 +1,10 @@
+name: UnikpayTest
+version: '${project.version}'
+main: dk.iskold.unikpaytest.Unikpaytest
+api-version: 1.8
+authors: [ iskoldcool ]
+softdepend:
+  - 'UnikPay'
+commands:
+  anmod:
+    description: anmoder til unikpay
