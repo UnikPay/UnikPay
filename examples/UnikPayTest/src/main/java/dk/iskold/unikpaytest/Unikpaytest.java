@@ -11,7 +11,6 @@ public final class Unikpaytest extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
 
-        System.out.print("ANMOD ER STARTET");
         getCommand("anmod").setExecutor(new anmod());
         Bukkit.getPluginManager().registerEvents(new Betaling(), this);
     }
