@@ -40,6 +40,11 @@ public class EffAnmod extends Effect {
         final String pakke = this.pakke.getSingle(event);
         final String id = this.id != null ? this.id.getSingle(event) : null;
 
+        if (Main.getAPIKEY() == null) {
+            Skript.error("Du mangler at putte din apikey ind i config.yml");
+            return;
+        }
+
         if (player == null || pakke == null)
             return;
 

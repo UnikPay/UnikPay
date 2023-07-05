@@ -19,12 +19,12 @@ public class Reload extends ISubCommand {
             return;
         }
         long timestampBeforeLoad = System.currentTimeMillis();
-        sender.sendMessage(ColorUtils.getColored("&aStarted reloading yml"));
+        sender.sendMessage(Config.get("prefix")[0] + ColorUtils.getColored(" &fReloader pluginet"));
         try {
             Main.getInstance().reload();
-            sender.sendMessage(ColorUtils.getColored("&aSuccessful reloaded all &7took (" + (System.currentTimeMillis() - timestampBeforeLoad) + " ms)"));
+            sender.sendMessage(Config.get("prefix")[0] + ColorUtils.getColored("&aDu genindlaeste alt. &7(" + (System.currentTimeMillis() - timestampBeforeLoad) + " ms)"));
         } catch (Exception e) {
-            sender.sendMessage(ColorUtils.getColored("&cDer skete en fejl under reload"));
+            sender.sendMessage(Config.get("prefix")[0] + ColorUtils.getColored("&cDer skete en fejl under reload, tjek loggen eller din config.yml"));
             e.printStackTrace();
         }
 

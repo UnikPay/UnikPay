@@ -36,6 +36,7 @@ public final class Main extends JavaPlugin {
         long timestampBeforeLoad = System.currentTimeMillis();
         instance = this;
         initialiseConfigs();
+
         //Commands
         log.sendMessage(ColorUtils.getColored("", "  &2Hooking into Commands"));
         CommandManager.initialise(this);

@@ -56,11 +56,14 @@ public class IoSocket {
                     }
                 });
             });
-
             socket.connect();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static Socket getSocket() {
+        return socket;
     }
 
 }
