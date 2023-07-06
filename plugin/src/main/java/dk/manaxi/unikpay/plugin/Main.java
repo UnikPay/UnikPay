@@ -55,6 +55,7 @@ public final class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         log.sendMessage(ColorUtils.getColored("&8&m---------------------------------&r", "", "  &4Unikpay.jar Disabled!", "    &cVersion: &f" + getDescription().getVersion(), "    &cAuthors: &f" + getDescription().getAuthors(), "", "&8&m---------------------------------&r"));
+        IoSocket.getSocket().disconnect();
     }
 
     private void initialiseConfigs() {

@@ -29,7 +29,7 @@ public class EffAnmod extends Effect {
 
 
     static {
-        Skript.registerEffect(EffAnmod.class, "unikpay anmod %player% om %number% emeralder for %string%[ med id %-string%]");
+        Skript.registerEffect(EffAnmod.class, "unikpay (request|anmod) %player% [om ] %number% em(eralds|s|eralder) for %string%[ med id %-string%]");
     }
 
     @SuppressWarnings("unchecked")
