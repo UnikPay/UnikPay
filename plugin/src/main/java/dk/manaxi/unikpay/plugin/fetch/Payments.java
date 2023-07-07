@@ -37,7 +37,7 @@ public class Payments {
                     for (Betaling betal : betalinger)
                         Bukkit.getServer().getPluginManager().callEvent(new OnBetaling(
                                 Bukkit.getOfflinePlayer(betal.getMcaccount().getUuid()),
-                                betal.getPackages()[0],
+                                betal.getPackages(),
                                 betal.getAmount(),
                                 new id(betal.get_id())
                         ));

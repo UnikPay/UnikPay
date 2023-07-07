@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import dk.manaxi.unikpay.api.Config;
 import dk.manaxi.unikpay.api.HttpsClient;
+import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -15,24 +16,26 @@ import java.util.UUID;
 
 public class RequestManager {
 
+    public static void sendPackageRequest(Player player, String pakke, Number price, String id) {
+        sendPackageRequest(player, new Pakke[]{new Pakke(pakke, id, price.floatValue())});
+    }
+
     @SuppressWarnings("unchecked")
-    public static void sendPackageRequest(Player player, String pakke, int price, String id) {
-
+    public static void sendPackageRequest(Player player, Pakke[] packages) {
         String url = Config.MAINURL + "request";
-
         JSONObject payload = new JSONObject();
         payload.put("uuid", player.getUniqueId().toString());
-
-        JSONObject pakkerObj = new JSONObject();
-        pakkerObj.put("name", pakke);
-        pakkerObj.put("id", id != null ? id : pakke);
-        pakkerObj.put("price", price);
-
         JSONArray pakker = new JSONArray();
-        pakker.add(pakkerObj);
+
+        for (Pakke pakke : packages) {
+            JSONObject pakkerObj = new JSONObject();
+            pakkerObj.put("name", pakke.getName());
+            pakkerObj.put("id", pakke.getId() != null ? pakke.getId() : pakke.getName());
+            pakkerObj.put("price", pakke.getPrice());
+            pakker.add(pakkerObj);
+        }
 
         payload.put("pakker", pakker);
-
 
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
             String svar = HttpsClient.sendRequest(url, "POST", payload.toJSONString(), Main.getAPIKEY(), null);
@@ -40,6 +43,8 @@ public class RequestManager {
 
             JsonObject response = new Gson().fromJson(svar, JsonObject.class);
             String message = response.get("message").getAsString();
+
+            Bukkit.broadcastMessage(response.toString());
 
             if(message.trim().equalsIgnoreCase(Config.IKKELINKET_MESSAGE)) {
                 dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ikkelinket");

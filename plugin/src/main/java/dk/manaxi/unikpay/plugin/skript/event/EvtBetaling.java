@@ -53,10 +53,16 @@ public class EvtBetaling extends SkriptEvent {
             }
         }, 0);
 
+        EventValues.registerEventValue(OnBetaling.class, Pakke[].class, new Getter<Pakke[], OnBetaling>() {
+            public Pakke[] get(OnBetaling event) {
+                return event.getPakker();
+            }
+        }, 0);
+
 
         EventValues.registerEventValue(OnBetaling.class, Pakke.class, new Getter<Pakke, OnBetaling>() {
             public Pakke get(OnBetaling event) {
-                return event.getPakke();
+                return event.getPakker()[0];
             }
         }, 0);
 

@@ -1,7 +1,7 @@
 package dk.manaxi.unikpay.plugin.skript.classes;
 
 public class id {
-    private String id;
+    private final String id;
 
     public id(String id) {
         this.id = id;
@@ -9,6 +9,6 @@ public class id {
 
     @Override
     public String toString() {
-        return this.id.toString();
+        return this.id;
     }
 }

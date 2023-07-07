@@ -40,9 +40,9 @@ public class HttpsClient {
             Response response = client.newCall(request).execute();
             int responseCode = response.code();
 
-            String responseBody = response.body().string();
+            assert response.body() != null;
 
-            return responseBody;
+            return response.body().string();
         } catch (IOException e) {
             e.printStackTrace();
         }

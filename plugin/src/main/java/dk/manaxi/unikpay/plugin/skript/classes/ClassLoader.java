@@ -34,7 +34,7 @@ public class ClassLoader {
                 }));
         Classes.registerClass(new ClassInfo<>(Pakke.class, "pakke")
                 .defaultExpression(new EventValueExpression<>(Pakke.class))
-                .user("pakke")
+                .user("pakker?")
                 .name("pakke")
                 .description("pakke")
                 .parser(new Parser<Pakke>() {

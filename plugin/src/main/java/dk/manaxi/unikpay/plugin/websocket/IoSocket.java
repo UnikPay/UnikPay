@@ -42,14 +42,15 @@ public class IoSocket {
 
                 JsonObject obj = jsonArray.get(0).getAsJsonObject();
                 UUID uuid = UUID.fromString(obj.getAsJsonObject("mcaccount").get("uuid").getAsString());
-                Pakke pakke = new Pakke(obj.get("packages").getAsJsonArray().get(0).getAsJsonObject().get("name").getAsString(), obj.get("packages").getAsJsonArray().get(0).getAsJsonObject().get("id").getAsString(), obj.get("packages").getAsJsonArray().get(0).getAsJsonObject().get("price").getAsFloat());
+                Type listType = (new TypeToken<List<Pakke>>() {}).getType();
+                final List<Pakke> pakker = (List<Pakke>) gson.fromJson(obj.getAsJsonArray("requests"), listType);
 
                 Bukkit.getScheduler().runTask(Main.getInstance(), new Runnable() {
                     @Override
                     public void run() {
                         Bukkit.getPluginManager().callEvent(new OnBetaling(
                                 Bukkit.getOfflinePlayer(uuid),
-                                pakke,
+                                (Pakke[]) pakker.toArray(),
                                 obj.get("amount").getAsFloat(),
                                 new id(obj.get("_id").getAsString())
                         ));

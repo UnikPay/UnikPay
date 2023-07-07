@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import dk.manaxi.unikpay.api.Config;
 import dk.manaxi.unikpay.api.HttpsClient;
+import dk.manaxi.unikpay.plugin.API.Internal;
 import dk.manaxi.unikpay.plugin.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -29,7 +30,7 @@ public class EffAnmod extends Effect {
 
 
     static {
-        Skript.registerEffect(EffAnmod.class, "unikpay (request|anmod) %player% [om ] %number% em(eralds|s|eralder) for %string%[ med id %-string%]");
+        Skript.registerEffect(EffAnmod.class, "[unikpay] (request|anmod) %player% [om ]%number% em[(eralds|s|eralder|erald)] for %string%[ (med id|with id) %-string%]");
     }
 
     @SuppressWarnings("unchecked")
@@ -38,7 +39,7 @@ public class EffAnmod extends Effect {
         final Player player = this.player.getSingle(event);
         final Number amount = this.amount.getSingle(event);
         final String pakke = this.pakke.getSingle(event);
-        final String id = this.id != null ? this.id.getSingle(event) : null;
+        final String id = this.id != null ? this.id.getSingle(event) : pakke;
 
         if (Main.getAPIKEY() == null) {
             Skript.error("Du mangler at putte din apikey ind i config.yml");
@@ -48,52 +49,21 @@ public class EffAnmod extends Effect {
         if (player == null || pakke == null)
             return;
 
-        JSONObject payload = new JSONObject();
-        payload.put("uuid", player.getUniqueId().toString());
-
-        JSONObject pakkerObj = new JSONObject();
-        pakkerObj.put("name", pakke);
-        pakkerObj.put("id", id != null ? id : pakke);
-        pakkerObj.put("price", amount);
-
-        JSONArray pakker = new JSONArray();
-        pakker.add(pakkerObj);
-
-        payload.put("pakker", pakker);
-
-
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
-            String svar = HttpsClient.sendRequest(url, "POST", payload.toJSONString(), Main.getAPIKEY(), null);
-            if (svar == null) return;
-
-            JsonObject response = new Gson().fromJson(svar, JsonObject.class);
-            String message = response.get("message").getAsString();
-
-            if(message.trim().equalsIgnoreCase(Config.IKKELINKET_MESSAGE)) {
-                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ikkelinket");
-            } else if(message.trim().equalsIgnoreCase(Config.IKKEMC)) {
-                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ikkelinket");
-            } else if (message.equalsIgnoreCase(Config.ACCEPTERE_KOEBET)) {
-                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "accepterbetaling");
-            } else if (message.equalsIgnoreCase(Config.RATELIMIT)) {
-                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ratetime");
-            }
-        });
-
-
+        Internal.sendPackageRequest(player, pakke, amount, id);
     }
 
     @Override
-    public String toString(@Nullable Event e, boolean debug) {
-        return null;
+    public @NotNull String toString(@Nullable Event e, boolean debug) {
+        return "[unikpay] (request|anmod) %player% [om ]%number% em(eralds|s|eralder) for %string%[ (med id|with id) %-string%]";
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
-        this.player = (Expression) expressions[0];
-        this.amount = (Expression) expressions[1];
-        this.pakke = (Expression) expressions[2];
-        this.id = (Expression) expressions[3];
+        this.player = (Expression<Player>) expressions[0];
+        this.amount = (Expression<Number>) expressions[1];
+        this.pakke = (Expression<String>) expressions[2];
+        this.id = (Expression<String>) expressions[3];
         return true;
     }
 }
