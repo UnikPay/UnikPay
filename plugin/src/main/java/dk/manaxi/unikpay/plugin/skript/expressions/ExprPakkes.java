@@ -1,20 +1,16 @@
 package dk.manaxi.unikpay.plugin.skript.expressions;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.classes.Changer;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
-import ch.njol.skript.log.ErrorQuality;
 import ch.njol.util.Kleenean;
 import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import static ch.njol.skript.registrations.Classes.getParser;
 
 public class ExprPakkes extends SimpleExpression<Pakke> {
     static {

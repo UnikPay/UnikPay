@@ -1,5 +1,6 @@
 package dk.iskold.unikpaytest.commands;
 
+import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.API.Internal;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

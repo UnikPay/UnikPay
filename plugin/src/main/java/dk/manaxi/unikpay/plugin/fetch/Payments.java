@@ -8,13 +8,12 @@ import dk.manaxi.unikpay.api.HttpsClient;
 import dk.manaxi.unikpay.api.classes.Betaling;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
-import org.bukkit.Bukkit;
 import dk.manaxi.unikpay.plugin.skript.classes.id;
+import org.bukkit.Bukkit;
 
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @SuppressWarnings("unchecked")
 public class Payments {

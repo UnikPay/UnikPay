@@ -1,14 +1,14 @@
 package dk.manaxi.unikpay.plugin.commands;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 public abstract class ICommand implements CommandExecutor, TabCompleter {
     private final Collection<ISubCommand> subCommands = new ArrayList<>();

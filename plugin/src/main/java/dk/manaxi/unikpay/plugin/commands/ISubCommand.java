@@ -1,9 +1,6 @@
 package dk.manaxi.unikpay.plugin.commands;
 
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-
-import java.util.List;
 
 public abstract class ISubCommand {
     private final String name;

@@ -2,13 +2,12 @@ package dk.manaxi.unikpay.plugin.event;
 
 
 import dk.manaxi.unikpay.api.classes.Pakke;
+import dk.manaxi.unikpay.plugin.skript.classes.id;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-
-import dk.manaxi.unikpay.plugin.skript.classes.id;
 
 public class OnBetaling extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();

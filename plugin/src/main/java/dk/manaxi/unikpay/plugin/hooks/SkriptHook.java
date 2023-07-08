@@ -2,14 +2,7 @@ package dk.manaxi.unikpay.plugin.hooks;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
-import ch.njol.skript.classes.ClassInfo;
-import ch.njol.skript.classes.Parser;
-import ch.njol.skript.expressions.base.EventValueExpression;
-import ch.njol.skript.lang.ParseContext;
-import ch.njol.skript.registrations.Classes;
-import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.Main;
-import dk.manaxi.unikpay.plugin.skript.classes.id;
 import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;

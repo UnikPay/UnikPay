@@ -1,6 +1,3 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import org.gradle.internal.impldep.org.apache.maven.model.Build
-
 plugins {
     id("java-library")
     id("com.github.johnrengelman.shadow") version "8.1.1"

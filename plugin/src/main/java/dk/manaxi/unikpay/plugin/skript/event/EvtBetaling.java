@@ -1,27 +1,20 @@
 package dk.manaxi.unikpay.plugin.skript.event;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.classes.ClassInfo;
-import ch.njol.skript.classes.Parser;
-import ch.njol.skript.expressions.base.EventValueExpression;
 import ch.njol.skript.lang.Literal;
-import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
-import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
 import dk.manaxi.unikpay.plugin.fetch.Payments;
+import dk.manaxi.unikpay.plugin.skript.classes.id;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.Nullable;
-import dk.manaxi.unikpay.plugin.skript.classes.id;
-
-import java.lang.reflect.Array;
 
 public class EvtBetaling extends SkriptEvent {
 

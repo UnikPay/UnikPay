@@ -4,7 +4,6 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import dk.manaxi.unikpay.api.classes.Betaling;
 import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
@@ -12,8 +11,6 @@ import dk.manaxi.unikpay.plugin.skript.classes.id;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import org.bukkit.Bukkit;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;

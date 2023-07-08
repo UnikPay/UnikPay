@@ -80,11 +80,5 @@
             <scope>provided</scope>
             <version>1.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.github.UnikPay.UnikPay</groupId>
-            <artifactId>unikpay-api</artifactId>
-            <scope>provided</scope>
-            <version>1.0.0</version>
-        </dependency>
     </dependencies>
 </project>

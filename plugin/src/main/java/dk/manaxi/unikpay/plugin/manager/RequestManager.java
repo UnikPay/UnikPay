@@ -12,8 +12,6 @@ import org.bukkit.entity.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.util.UUID;
-
 public class RequestManager {
 
     public static void sendPackageRequest(Player player, String pakke, Number price, String id) {
@@ -43,8 +41,6 @@ public class RequestManager {
 
             JsonObject response = new Gson().fromJson(svar, JsonObject.class);
             String message = response.get("message").getAsString();
-
-            Bukkit.broadcastMessage(response.toString());
 
             if(message.trim().equalsIgnoreCase(Config.IKKELINKET_MESSAGE)) {
                 dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ikkelinket");

@@ -9,8 +9,6 @@ import dk.manaxi.unikpay.plugin.websocket.IoSocket;
 import io.socket.client.Socket;
 import org.bukkit.command.CommandSender;
 
-import java.util.Objects;
-
 public class Status extends ISubCommand {
     public Status() {
         super("status");

@@ -10,12 +10,9 @@ import com.google.gson.JsonObject;
 import dk.manaxi.unikpay.api.Config;
 import dk.manaxi.unikpay.api.HttpsClient;
 import dk.manaxi.unikpay.plugin.Main;
+import dk.manaxi.unikpay.plugin.skript.classes.id;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
-import dk.manaxi.unikpay.plugin.skript.classes.id;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class EffAccept extends Effect {
     private Expression<id> id;

@@ -5,20 +5,13 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import dk.manaxi.unikpay.api.Config;
-import dk.manaxi.unikpay.api.HttpsClient;
 import dk.manaxi.unikpay.plugin.API.Internal;
 import dk.manaxi.unikpay.plugin.Main;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 
 public class EffAnmod extends Effect {
     private static String url = Config.MAINURL + "request";

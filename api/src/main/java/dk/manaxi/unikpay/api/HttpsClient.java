@@ -2,9 +2,6 @@ package dk.manaxi.unikpay.api;
 
 import okhttp3.*;
 
-import javax.net.ssl.HttpsURLConnection;
-import java.awt.*;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Map;
 

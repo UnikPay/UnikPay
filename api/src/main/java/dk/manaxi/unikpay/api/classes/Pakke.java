@@ -1,7 +1,5 @@
 package dk.manaxi.unikpay.api.classes;
 
-import java.lang.reflect.Array;
-
 public class Pakke {
     private String name;
     private String id;
