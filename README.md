@@ -15,12 +15,12 @@
 <dependency>
     <groupId>com.github.UnikPay.UnikPay</groupId>
     <artifactId>unikpay-api</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 <dependency>
     <groupId>com.github.UnikPay.UnikPay</groupId>
     <artifactId>unikpay-plugin</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 ### Gradle Repository
@@ -36,8 +36,8 @@ allprojects {
 
 ```
 dependencies {
-    implementation 'com.github.UnikPay.UnikPay:unikpay-plugin:1.0.0'
-    implementation 'com.github.UnikPay.UnikPay:unikpay-api:1.0.0'
+    implementation 'com.github.UnikPay.UnikPay:unikpay-plugin:1.0.1'
+    implementation 'com.github.UnikPay.UnikPay:unikpay-api:1.0.1'
 }
 
 ```
