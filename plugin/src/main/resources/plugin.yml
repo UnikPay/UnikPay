@@ -1,5 +1,5 @@
 main: dk.manaxi.unikpay.plugin.Main
-version: 1.0.0
+version: 1.0.1
 description: "Modtag emeralder hurtigt og nemt"
 name: UnikPay
 authors:
