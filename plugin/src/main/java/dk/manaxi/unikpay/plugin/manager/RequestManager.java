@@ -15,7 +15,7 @@ import org.json.simple.JSONObject;
 public class RequestManager {
 
     public static void sendPackageRequest(Player player, String pakke, Number price, String id) {
-        sendPackageRequest(player, new Pakke[]{new Pakke(pakke, id, price.floatValue())});
+        sendPackageRequest(player, new Pakke[]{new Pakke(price.floatValue(), pakke, id)});
     }
 
     @SuppressWarnings("unchecked")

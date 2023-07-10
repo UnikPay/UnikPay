@@ -53,10 +53,10 @@ public class ExprPakke extends SimpleExpression<Pakke> {
     @Override
     protected Pakke @NotNull [] get(@NotNull Event e) {
         if(ID != null) {
-            return new Pakke[]{new Pakke(NAME.getSingle(e), ID.getSingle(e), Objects.requireNonNull(PRICE.getSingle(e)).floatValue())};
+            return new Pakke[]{new Pakke(Objects.requireNonNull(PRICE.getSingle(e)).floatValue(), NAME.getSingle(e), ID.getSingle(e))};
         }
 
-        return new Pakke[]{new Pakke(NAME.getSingle(e), NAME.getSingle(e), Objects.requireNonNull(PRICE.getSingle(e)).floatValue())};
+        return new Pakke[]{new Pakke(Objects.requireNonNull(PRICE.getSingle(e)).floatValue(), NAME.getSingle(e), NAME.getSingle(e))};
     }
 
     public Class<?> @NotNull [] acceptChange(Changer.ChangeMode mode) {

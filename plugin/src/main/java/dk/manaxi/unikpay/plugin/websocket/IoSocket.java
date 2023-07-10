@@ -39,20 +39,16 @@ public class IoSocket {
 
                 JsonObject obj = jsonArray.get(0).getAsJsonObject();
                 UUID uuid = UUID.fromString(obj.getAsJsonObject("mcaccount").get("uuid").getAsString());
-                Type listType = (new TypeToken<List<Pakke>>() {}).getType();
-                final List<Pakke> pakker = (List<Pakke>) gson.fromJson(obj.getAsJsonArray("requests"), listType);
+                Type listType = new TypeToken<List<Pakke>>() {}.getType();
+                List<Pakke> pakker = gson.fromJson(obj.getAsJsonArray("packages"), listType);
+                Pakke[] pakkerArray = pakker.toArray(new Pakke[pakker.size()]);
 
-                Bukkit.getScheduler().runTask(Main.getInstance(), new Runnable() {
-                    @Override
-                    public void run() {
-                        Bukkit.getPluginManager().callEvent(new OnBetaling(
-                                Bukkit.getOfflinePlayer(uuid),
-                                (Pakke[]) pakker.toArray(),
-                                obj.get("amount").getAsFloat(),
-                                new id(obj.get("_id").getAsString())
-                        ));
-                    }
-                });
+                Bukkit.getScheduler().runTask(Main.getInstance(), () -> Bukkit.getPluginManager().callEvent(new OnBetaling(
+                        Bukkit.getOfflinePlayer(uuid),
+                        pakkerArray,
+                        obj.get("amount").getAsFloat(),
+                        new id(obj.get("_id").getAsString())
+                )));
             });
             socket.connect();
         } catch (URISyntaxException e) {
