@@ -2,6 +2,7 @@ package dk.manaxi.unikpay.plugin.API;
 
 import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.manager.RequestManager;
+import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import org.bukkit.entity.Player;
 
 public class Internal {
@@ -13,5 +14,9 @@ public class Internal {
     };
     public static void acceptPackageRequest(String id) {
         RequestManager.acceptPackageReqeust(id);
+    };
+
+    public static void acceptPackageRequest(AcceptId Id) {
+        RequestManager.acceptPackageReqeust(Id.toString());
     };
 }

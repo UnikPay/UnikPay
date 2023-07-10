@@ -10,24 +10,24 @@ import dk.manaxi.unikpay.api.classes.Pakke;
 public class ClassLoader {
 
     static {
-        Classes.registerClass(new ClassInfo<>(id.class, "id")
-                .defaultExpression(new EventValueExpression<>(id.class))
+        Classes.registerClass(new ClassInfo<>(AcceptId.class, "id")
+                .defaultExpression(new EventValueExpression<>(AcceptId.class))
                 .user("id")
                 .name("id")
                 .description("betalings id")
-                .parser(new Parser<id>() {
+                .parser(new Parser<AcceptId>() {
                     @Override
-                    public id parse(String arg0, ParseContext arg1) {
+                    public AcceptId parse(String arg0, ParseContext arg1) {
                         return null;
                     }
 
                     @Override
-                    public String toString(id arg0, int arg1) {
+                    public String toString(AcceptId arg0, int arg1) {
                         return arg0.toString();
                     }
 
                     @Override
-                    public String toVariableNameString(id arg0) {
+                    public String toVariableNameString(AcceptId arg0) {
                         return arg0.toString();
                     }
 

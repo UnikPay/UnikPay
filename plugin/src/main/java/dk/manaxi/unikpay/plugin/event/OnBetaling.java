@@ -2,7 +2,7 @@ package dk.manaxi.unikpay.plugin.event;
 
 
 import dk.manaxi.unikpay.api.classes.Pakke;
-import dk.manaxi.unikpay.plugin.skript.classes.id;
+import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Cancellable;
@@ -14,11 +14,11 @@ public class OnBetaling extends Event implements Cancellable {
     private OfflinePlayer player;
     private Pakke[] pakker;
     private float amount;
-    private id id;
+    private AcceptId id;
 
     private Boolean cancelled = Boolean.FALSE;
 
-    public OnBetaling(OfflinePlayer player, Pakke[] pakker, float amount, id id) {
+    public OnBetaling(OfflinePlayer player, Pakke[] pakker, float amount, AcceptId id) {
         this.player = player;
         this.pakker = pakker;
         this.amount = amount;
@@ -53,7 +53,7 @@ public class OnBetaling extends Event implements Cancellable {
         return handlers;
     }
 
-    public id getId() {
+    public AcceptId getId() {
         return id;
     }
 

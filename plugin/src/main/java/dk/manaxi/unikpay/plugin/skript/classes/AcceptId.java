@@ -1,9 +1,9 @@
 package dk.manaxi.unikpay.plugin.skript.classes;
 
-public class id {
+public class AcceptId {
     private final String id;
 
-    public id(String id) {
+    public AcceptId(String id) {
         this.id = id;
     }
 

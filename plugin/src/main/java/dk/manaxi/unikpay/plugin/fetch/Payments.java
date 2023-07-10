@@ -8,7 +8,7 @@ import dk.manaxi.unikpay.api.HttpsClient;
 import dk.manaxi.unikpay.api.classes.Betaling;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
-import dk.manaxi.unikpay.plugin.skript.classes.id;
+import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import org.bukkit.Bukkit;
 
 import java.lang.reflect.Type;
@@ -38,7 +38,7 @@ public class Payments {
                                 Bukkit.getOfflinePlayer(betal.getMcaccount().getUuid()),
                                 betal.getPackages(),
                                 betal.getAmount(),
-                                new id(betal.get_id())
+                                new AcceptId(betal.get_id())
                         ));
                 }
             }, 0L);

@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ExprPakkes extends SimpleExpression<Pakke> {
     static {
-        Skript.registerExpression(ExprPakkes.class, Pakke.class, ExpressionType.SIMPLE, "[the] pakkes", "pakker", "packages", "package");
+        Skript.registerExpression(ExprPakkes.class, Pakke.class, ExpressionType.SIMPLE, "(pakke|pakker|packages|package)");
     }
 
     @Override

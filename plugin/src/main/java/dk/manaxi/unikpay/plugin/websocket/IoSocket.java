@@ -7,7 +7,7 @@ import com.google.gson.JsonObject;
 import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
-import dk.manaxi.unikpay.plugin.skript.classes.id;
+import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import org.bukkit.Bukkit;
@@ -47,7 +47,7 @@ public class IoSocket {
                         Bukkit.getOfflinePlayer(uuid),
                         pakkerArray,
                         obj.get("amount").getAsFloat(),
-                        new id(obj.get("_id").getAsString())
+                        new AcceptId(obj.get("_id").getAsString())
                 )));
             });
             socket.connect();

@@ -10,12 +10,12 @@ import com.google.gson.JsonObject;
 import dk.manaxi.unikpay.api.Config;
 import dk.manaxi.unikpay.api.HttpsClient;
 import dk.manaxi.unikpay.plugin.Main;
-import dk.manaxi.unikpay.plugin.skript.classes.id;
+import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 
 public class EffAccept extends Effect {
-    private Expression<id> id;
+    private Expression<AcceptId> id;
 
     static {
         Skript.registerEffect(EffAccept.class, "unikpay accepter betaling %id%");

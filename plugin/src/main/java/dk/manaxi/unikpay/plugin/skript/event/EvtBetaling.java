@@ -10,7 +10,7 @@ import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
 import dk.manaxi.unikpay.plugin.fetch.Payments;
-import dk.manaxi.unikpay.plugin.skript.classes.id;
+import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -40,8 +40,8 @@ public class EvtBetaling extends SkriptEvent {
         /*
          * Betaling id'et
          */
-        EventValues.registerEventValue(OnBetaling.class, id.class, new Getter<id, OnBetaling>() {
-            public id get(OnBetaling event) {
+        EventValues.registerEventValue(OnBetaling.class, AcceptId.class, new Getter<AcceptId, OnBetaling>() {
+            public AcceptId get(OnBetaling event) {
                 return event.getId();
             }
         }, 0);
