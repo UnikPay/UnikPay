@@ -4,6 +4,7 @@ import dk.manaxi.unikpay.plugin.commands.CommandManager;
 import dk.manaxi.unikpay.plugin.enums.Hook;
 import dk.manaxi.unikpay.plugin.hooks.SkriptHook;
 import dk.manaxi.unikpay.plugin.interfaces.IHook;
+import dk.manaxi.unikpay.plugin.listeners.OnJoin;
 import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import dk.manaxi.unikpay.plugin.utils.Config;
 import dk.manaxi.unikpay.plugin.websocket.Console;
@@ -46,6 +47,7 @@ public final class Main extends JavaPlugin {
         log.sendMessage(ColorUtils.getColored("", "  &2Hooking into integrations"));
         initialiseHooks();
         IoSocket.connectSocket();
+        Bukkit.getServer().getPluginManager().registerEvents(new OnJoin(), this);
 
         log.sendMessage(ColorUtils.getColored("", " &2Hooking into console"));
         Logger logger = (Logger) LogManager.getRootLogger();
