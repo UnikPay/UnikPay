@@ -5,6 +5,7 @@ import dk.manaxi.unikpay.plugin.commands.ISubCommand;
 import dk.manaxi.unikpay.plugin.commands.ingamecommands.subs.Discord;
 import dk.manaxi.unikpay.plugin.commands.ingamecommands.subs.Reload;
 import dk.manaxi.unikpay.plugin.commands.ingamecommands.subs.Status;
+import dk.manaxi.unikpay.plugin.commands.ingamecommands.subs.Update;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,7 +18,8 @@ public class UnikPayCommand extends ICommand {
         addSubCommands(
                 new Reload(),
                 new Discord(),
-                new Status()
+                new Status(),
+                new Update()
         );
 
     }
