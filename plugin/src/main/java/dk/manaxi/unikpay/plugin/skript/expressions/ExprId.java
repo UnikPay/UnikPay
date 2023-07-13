@@ -51,6 +51,6 @@ public class ExprId extends EventValueExpression<String> {
     @Override
     @Nullable
     protected String[] get(Event e) {
-        return new String[]{pakke.getSingle(e).getName()};
+        return new String[]{pakke.getSingle(e).getId()};
     }
 }
