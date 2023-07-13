@@ -6,8 +6,11 @@ import dk.manaxi.unikpay.plugin.hooks.SkriptHook;
 import dk.manaxi.unikpay.plugin.interfaces.IHook;
 import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import dk.manaxi.unikpay.plugin.utils.Config;
+import dk.manaxi.unikpay.plugin.websocket.Console;
 import dk.manaxi.unikpay.plugin.websocket.IoSocket;
 import io.socket.client.Socket;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -18,7 +21,7 @@ import java.util.HashMap;
 
 public final class Main extends JavaPlugin {
 
-    private static String url = dk.manaxi.unikpay.api.Config.MAINURL + "request";
+    private static final String url = dk.manaxi.unikpay.api.Config.MAINURL + "request";
 
 
     private static Main instance;
@@ -27,7 +30,6 @@ public final class Main extends JavaPlugin {
     public static ConsoleCommandSender log;
     private static final HashMap<Hook, Boolean> HOOKS = new HashMap<>();
     private static String APIKEY;
-    private static Socket socket;
 
     @Override
     public void onEnable() {
@@ -45,11 +47,14 @@ public final class Main extends JavaPlugin {
         initialiseHooks();
         IoSocket.connectSocket();
 
+        log.sendMessage(ColorUtils.getColored("", " &2Hooking into console"));
+        Logger logger = (Logger) LogManager.getRootLogger();
+        logger.addAppender(new Console());
+
         log.sendMessage(ColorUtils.getColored("", "  &fUnikpay.jar has been enabled!", "    &aVersion: &f" +
                         getDescription().getVersion(), "    &aAuthors: &f" +
                         getDescription().getAuthors(), "",
                 "  &2Took &a" + ( System.currentTimeMillis() - timestampBeforeLoad) + " millis &2to load!", "", "&8&m---------------------------------&r"));
-
     }
 
     @Override

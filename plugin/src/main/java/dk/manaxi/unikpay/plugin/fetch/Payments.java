@@ -23,6 +23,7 @@ public class Payments {
     public static void fetchPayments() {
         if (lastPaymentFetch > (new Date()).getTime() - 5000L)
             return;
+        if(Main.getAPIKEY() == null) return;
         lastPaymentFetch = (new Date()).getTime();
         Gson gson = new Gson();
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {

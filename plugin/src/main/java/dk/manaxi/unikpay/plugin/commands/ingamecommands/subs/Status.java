@@ -22,7 +22,8 @@ public class Status extends ISubCommand {
         }
         System.out.println("IoSocket.getSocket().isActive() - " + IoSocket.getSocket().isActive());
         sender.sendMessage(Config.get("prefix")[0]);
-        sender.sendMessage(ColorUtils.getColored(" &fWebSocket connected: " + (Socket.EVENT_CONNECT != "connect" ? "&cFalse" : "&aTrue")));
+        sender.sendMessage(ColorUtils.getColored(" &fVersion: &a" + Main.getInstance().getDescription().getVersion()));
+        sender.sendMessage(ColorUtils.getColored(" &fWebSocket connected: " + (!IoSocket.getSocket().connected() ? "&cFalse" : "&aTrue")));
         sender.sendMessage(ColorUtils.getColored(" &fApikey indsat: " + (Main.getAPIKEY() == null ? "&cFalse" : "&aTrue")));
         sender.sendMessage(ColorUtils.getColored(" &fSkript connected: " + (!Main.isHookInitialised(Hook.SKRIPT) ? "&cFalse" : "&aTrue")));
 
