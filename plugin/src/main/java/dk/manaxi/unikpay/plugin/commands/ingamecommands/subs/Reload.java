@@ -22,7 +22,7 @@ public class Reload extends ISubCommand {
         sender.sendMessage(Config.get("prefix")[0] + ColorUtils.getColored(" &fReloader pluginet"));
         try {
             Main.getInstance().reload();
-            sender.sendMessage(Config.get("prefix")[0] + ColorUtils.getColored("&aDu genindlaeste alt. &7(" + (System.currentTimeMillis() - timestampBeforeLoad) + " ms)"));
+            sender.sendMessage(Config.get("prefix")[0] + ColorUtils.getColored("&aDu genindlæste alt. &7(" + (System.currentTimeMillis() - timestampBeforeLoad) + " ms)"));
         } catch (Exception e) {
             sender.sendMessage(Config.get("prefix")[0] + ColorUtils.getColored("&cDer skete en fejl under reload, tjek loggen eller din config.yml"));
             e.printStackTrace();
