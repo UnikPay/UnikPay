@@ -14,9 +14,9 @@ public class Internal {
     };
     public static void acceptPackageRequest(String id) {
         RequestManager.acceptPackageReqeust(id);
-    };
+    }
 
     public static void acceptPackageRequest(AcceptId Id) {
         RequestManager.acceptPackageReqeust(Id.toString());
-    };
+    }
 }
