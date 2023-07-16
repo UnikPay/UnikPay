@@ -21,7 +21,7 @@ public class Update extends ISubCommand {
             return;
         }
         sender.sendMessage(Config.get("prefix")[0]);
-        sender.sendMessage(ColorUtils.getColored(" &fBegynder at updater pluginet"));
+        sender.sendMessage(ColorUtils.getColored(" &fBegynder at opdatere pluginet"));
         try {
             UpdateManager.Update();
             sender.sendMessage(ColorUtils.getColored(" &aDu downloaded den nyeste version af pluginet."));
