@@ -21,10 +21,10 @@ public class Update extends ISubCommand {
             return;
         }
         sender.sendMessage(Config.get("prefix")[0]);
-        sender.sendMessage(ColorUtils.getColored(" &fBegynder at updater pluginet"));
+        sender.sendMessage(ColorUtils.getColored(" &fBegynder at opdatere pluginet"));
         try {
             UpdateManager.Update();
-            sender.sendMessage(ColorUtils.getColored(" &aDu downloade den nyeste version af pluginet"));
+            sender.sendMessage(ColorUtils.getColored(" &aDu downloaded den nyeste version af pluginet."));
         } catch (IOException e) {
             sender.sendMessage(ColorUtils.getColored(" &cDer skete en fejl, under update. &7&o( &fTjek logs &7&o)"));
             throw new RuntimeException(e);
