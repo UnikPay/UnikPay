@@ -7,7 +7,10 @@ apikey-missing: "{prefix} &cDu har ikke sat din apikey ind i config.yml"
 ikkelinket:
   - "{prefix} &cDet ser ud til du ikke har en bruger endnu!"
   - "{prefix} &cJoin vores discord https://discord.gg/jnWKcuVmWf for at oprette en bruger"
+  - "{prefix} &cOg skriv &a/link &ci en hvilken som helst kanal du har adgang til at skrive i."
 accepterbetaling:
   - "{prefix} &aAcceptere købet på Discord."
+paysuccess:
+  - "{prefix} &aDu er blevet payet!"
 ratetime:
   - "{prefix} &cDu skal lige vente 15 sekunder før du kan købe igen."

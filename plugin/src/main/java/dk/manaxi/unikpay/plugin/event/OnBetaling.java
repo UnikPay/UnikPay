@@ -11,10 +11,10 @@ import org.bukkit.event.HandlerList;
 
 public class OnBetaling extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
-    private OfflinePlayer player;
-    private Pakke[] pakker;
-    private float amount;
-    private AcceptId id;
+    private final OfflinePlayer player;
+    private final Pakke[] pakker;
+    private final float amount;
+    private final AcceptId id;
 
     private Boolean cancelled = Boolean.FALSE;
 

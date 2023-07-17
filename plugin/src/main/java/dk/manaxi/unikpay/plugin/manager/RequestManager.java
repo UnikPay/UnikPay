@@ -2,11 +2,13 @@ package dk.manaxi.unikpay.plugin.manager;
 
 import ch.njol.skript.Skript;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import dk.manaxi.unikpay.api.Config;
 import dk.manaxi.unikpay.api.HttpsClient;
 import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.Main;
+import dk.manaxi.unikpay.plugin.event.OnPayRequest;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONArray;
@@ -21,22 +23,18 @@ public class RequestManager {
     @SuppressWarnings("unchecked")
     public static void sendPackageRequest(Player player, Pakke[] packages) {
         String url = Config.MAINURL + "request";
-        JSONObject payload = new JSONObject();
-        payload.put("uuid", player.getUniqueId().toString());
-        JSONArray pakker = new JSONArray();
+        JsonObject payload = new JsonObject();
+        payload.addProperty("uuid", player.getUniqueId().toString());
+        JsonArray pakker = new JsonArray();
 
         for (Pakke pakke : packages) {
-            JSONObject pakkerObj = new JSONObject();
-            pakkerObj.put("name", pakke.getName());
-            pakkerObj.put("id", pakke.getId() != null ? pakke.getId() : pakke.getName());
-            pakkerObj.put("price", pakke.getPrice());
-            pakker.add(pakkerObj);
+            pakker.add(pakke.toJSON());
         }
 
-        payload.put("pakker", pakker);
+        payload.add("pakker", pakker);
 
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
-            String svar = HttpsClient.sendRequest(url, "POST", payload.toJSONString(), Main.getAPIKEY(), null);
+            String svar = HttpsClient.sendRequest(url, "POST", payload.toString(), Main.getAPIKEY(), null);
             if (svar == null) return;
 
             JsonObject response = new Gson().fromJson(svar, JsonObject.class);
@@ -51,6 +49,36 @@ public class RequestManager {
             } else if (message.equalsIgnoreCase(Config.RATELIMIT)) {
                 dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ratetime");
             }
+        });
+    }
+
+    public static void sendPayRequest(Player player, String name, Number amount) {
+        String url = Config.MAINURL + "pay";
+
+        JsonObject payload = new JsonObject();
+        payload.addProperty("uuid", player.getUniqueId().toString());
+        payload.addProperty("amount", amount);
+        payload.addProperty("name", name);
+
+        Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
+            String svar = HttpsClient.sendRequest(url, "POST", payload.toString(), Main.getAPIKEY(), null);
+
+            JsonObject response = new Gson().fromJson(svar, JsonObject.class);
+            String message = response.get("message").getAsString();
+            boolean success = response.get("success").getAsBoolean();
+
+            if(success) {
+                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "paysuccess");
+            } else {
+                if(message.trim().equalsIgnoreCase(Config.IKKELINKET_MESSAGE)) {
+                    dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ikkelinket");
+                } else if(message.trim().equalsIgnoreCase(Config.IKKEMC)) {
+                    dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ikkelinket");
+                }
+                Skript.error(svar);
+                Main.getInstance().getLogger().info("En fejl opstod: " + svar);
+            }
+            Bukkit.getPluginManager().callEvent(new OnPayRequest(player, name, amount.floatValue(), success, message));
         });
     }
 

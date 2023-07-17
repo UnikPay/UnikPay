@@ -9,6 +9,9 @@ public class Internal {
     public static void sendPackageRequest(Player player, Pakke[] packages) {
         RequestManager.sendPackageRequest(player, packages);
     };
+    public static void sendPayRequest(Player player, String name, Number amount) {
+        RequestManager.sendPayRequest(player, name, amount);
+    };
     public static void sendPackageRequest(Player player, String pakke, Number price, String id) {
         RequestManager.sendPackageRequest(player, pakke, price, id);
     };

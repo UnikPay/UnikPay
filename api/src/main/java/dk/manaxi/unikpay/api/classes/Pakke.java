@@ -1,5 +1,7 @@
 package dk.manaxi.unikpay.api.classes;
 
+import com.google.gson.JsonObject;
+
 public class Pakke {
     private String name;
     private String id;
@@ -26,5 +28,13 @@ public class Pakke {
     @Override
     public String toString() {
         return id.toString();
+    }
+
+    public JsonObject toJSON() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("name", getName());
+        jsonObject.addProperty("id", getId() != null ? getId() : getName());
+        jsonObject.addProperty("price", getPrice());
+        return jsonObject;
     }
 }
