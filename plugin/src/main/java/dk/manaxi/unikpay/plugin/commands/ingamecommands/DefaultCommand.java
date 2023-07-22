@@ -19,9 +19,10 @@ public class DefaultCommand extends ISubCommand {
         Player player = (Player) sender;
         Config.send(sender, "prefix");
         player.sendMessage(ColorUtils.getColored("  &7/unikpay discord"));
-        if ((sender.hasPermission(Main.configYML.getString("admin-permission")) || sender.isOp()) && !sender.hasPermission("unik.command")) {
+        if ((sender.hasPermission(Main.configYML.getString("admin-permission")) && !sender.hasPermission("unik.command")) || sender.isOp()) {
             player.sendMessage(ColorUtils.getColored("  &7/unikpay reload"));
             player.sendMessage(ColorUtils.getColored("  &7/unikpay status"));
+            player.sendMessage(ColorUtils.getColored("  &7/unikpay update"));
         }
     }
 }

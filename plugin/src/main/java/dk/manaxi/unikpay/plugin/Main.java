@@ -97,6 +97,10 @@ public final class Main extends JavaPlugin {
         return instance;
     }
 
+    public File getFile() {
+        return super.getFile();
+    }
+
     private void initialiseHooks() {
         IHook[] hooks = {
                 new SkriptHook()

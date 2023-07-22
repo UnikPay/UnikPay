@@ -22,7 +22,7 @@ public class UpdateManager {
     public static final String DownloadUrl = "https://github.com/UnikPay/UnikPay/releases/latest/download/UnikPay.jar";
 
     public static void Update() throws IOException {
-        downloadAndExtractFile(new URL(DownloadUrl), "Unikpay.jar", Main.getInstance().getDataFolder().getParentFile().toPath());
+        downloadAndExtractFile(new URL(DownloadUrl), Main.getInstance().getFile().getName(), Main.getInstance().getDataFolder().getParentFile().toPath());
         Bukkit.getPluginManager().disablePlugin(Main.getInstance());
         Bukkit.getPluginManager().enablePlugin(Main.getInstance());
     }
