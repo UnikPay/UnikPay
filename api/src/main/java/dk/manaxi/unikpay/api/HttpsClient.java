@@ -4,6 +4,7 @@ import okhttp3.*;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 
 public class HttpsClient {
     public static String sendRequest(String url, String method, String obj, String auth, Map<String, String> params) {
@@ -13,11 +14,11 @@ public class HttpsClient {
             RequestBody requestBody = null;
             if (obj != null) {
                 MediaType mediaType = MediaType.parse("application/json");
-                requestBody = RequestBody.create(mediaType, obj);
+                requestBody = RequestBody.create(obj, mediaType);
             }
 
             // Create a new HttpUrl.Builder to modify the request URL if there are parameters
-            HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+            HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(url)).newBuilder();
 
             // Add parameters to the URL builder
             if (params != null) {
@@ -59,9 +60,8 @@ public class HttpsClient {
             Response response = client.newCall(request).execute();
             int responseCode = response.code();
 
-            String responseBody = response.body().string();
-
-            return responseBody;
+            assert response.body() != null;
+            return response.body().string();
         } catch (IOException e) {
             e.printStackTrace();
         }

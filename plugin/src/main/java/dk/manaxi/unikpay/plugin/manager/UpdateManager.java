@@ -18,7 +18,7 @@ import java.nio.file.Path;
 
 public class UpdateManager {
 
-    public static final String ApiUrl = "https://api.github.com/repos/UnikPay/UnikPay/releases/latest";
+    public static final String ApiUrl = "https://unikpay.manaxi.dk/v1/stats/plugin";
     public static final String DownloadUrl = "https://github.com/UnikPay/UnikPay/releases/latest/download/UnikPay.jar";
 
     public static void Update() throws IOException {
@@ -26,7 +26,7 @@ public class UpdateManager {
         Bukkit.getPluginManager().disablePlugin(Main.getInstance());
     }
 
-    public static Boolean isNewestVersionAvailable(String currentVersion) {
+    public static Boolean isANewVersionAvailable(String currentVersion) {
         try {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
@@ -39,13 +39,9 @@ public class UpdateManager {
             String responseBody = response.body().string();
             JsonObject json = new Gson().fromJson(responseBody, JsonObject.class);
 
-            if (json.has("message")) {
-                return true;
-            }
-
             String latestVersion = json.get("tag_name").getAsString();
 
-            return latestVersion.equals(currentVersion);
+            return new Semver(latestVersion).isGreaterThan(currentVersion);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
