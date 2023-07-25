@@ -26,7 +26,6 @@ public class UpdateManager {
     public static void Update() throws IOException {
         downloadAndExtractFile(new URL(DownloadUrl), Main.getInstance().getFile().getName(), Main.getInstance().getDataFolder().getParentFile().toPath());
         Bukkit.getPluginManager().disablePlugin(Main.getInstance());
-        Bukkit.getPluginManager().enablePlugin(Main.getInstance());
     }
 
     public static Boolean isNewestVersionAvailable(String currentVersion) {

@@ -25,6 +25,7 @@ public class Update extends ISubCommand {
         try {
             UpdateManager.Update();
             sender.sendMessage(ColorUtils.getColored(" &aDu downloaded og installerede den nyeste version af pluginet."));
+            sender.sendMessage(ColorUtils.getColored(" &aFor at få den nye version på skal du genstart din server."));
         } catch (IOException e) {
             sender.sendMessage(ColorUtils.getColored(" &cDer skete en fejl, under opdatering. &7&o( &fTjek logs &7&o)"));
             throw new RuntimeException(e);
