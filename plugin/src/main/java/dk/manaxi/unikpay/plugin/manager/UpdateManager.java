@@ -7,13 +7,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.bukkit.Bukkit;
-import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,6 +38,10 @@ public class UpdateManager {
             assert response.body() != null;
             String responseBody = response.body().string();
             JsonObject json = new Gson().fromJson(responseBody, JsonObject.class);
+
+            if (json.has("message")) {
+                return true;
+            }
 
             String latestVersion = json.get("tag_name").getAsString();
 
