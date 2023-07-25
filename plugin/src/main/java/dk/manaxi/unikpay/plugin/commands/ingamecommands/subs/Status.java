@@ -30,10 +30,10 @@ public class Status extends ISubCommand {
         }
         sender.sendMessage(Config.get("prefix")[0]);
         sender.sendMessage(ColorUtils.getColored(" &fVersion: &a" + Main.getInstance().getDescription().getVersion()));
-        sender.sendMessage(ColorUtils.getColored(" &fWebSocket connected: " + (!IoSocket.getSocket().connected() ? "&cFalse" : "&aTrue")));
-        sender.sendMessage(ColorUtils.getColored(" &fApi connected: " + (!isURLAvailable(dk.manaxi.unikpay.api.Config.MAINURL) ? "&cFalse" : "&aTrue")));
-        sender.sendMessage(ColorUtils.getColored(" &fApikey indsat: " + (Main.getAPIKEY() == null ? "&cFalse" : "&aTrue")));
-        sender.sendMessage(ColorUtils.getColored(" &fSkript connected: " + (!Main.isHookInitialised(Hook.SKRIPT) ? "&cFalse" : "&aTrue")));
+        sender.sendMessage(ColorUtils.getColored(" &fWebSocket connected: " + (!IoSocket.getSocket().connected() ? "&c✖" : "&a✓")));
+        sender.sendMessage(ColorUtils.getColored(" &fApi connected: " + (!isURLAvailable(dk.manaxi.unikpay.api.Config.MAINURL) ? "&c✖" : "&a✓")));
+        sender.sendMessage(ColorUtils.getColored(" &fApikey indsat: " + (Main.getAPIKEY() == null ? "&c✖" : "&a✓")));
+        sender.sendMessage(ColorUtils.getColored(" &fSkript connected: " + (!Main.isHookInitialised(Hook.SKRIPT) ? "&c✖" : "&a✓")));
         if (Main.getInstance().getDescription().getVersion().split("-")[1].equals("SNAPSHOT")) {
             sender.sendMessage(ColorUtils.getColored("&7 "));
             sender.sendMessage(ColorUtils.getColored(" &fDu kører en snapshot version af UnikPay og det er ikke anbefalet!"));
