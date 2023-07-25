@@ -1,5 +1,7 @@
 package dk.manaxi.unikpay.plugin.manager;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import dk.manaxi.unikpay.plugin.Main;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -36,9 +38,11 @@ public class UpdateManager {
                     .build();
 
             Response response = client.newCall(request).execute();
+            assert response.body() != null;
             String responseBody = response.body().string();
-            JSONObject json = new JSONObject(responseBody);
-            String latestVersion = json.getString("tag_name");
+            JsonObject json = new Gson().fromJson(responseBody, JsonObject.class);
+
+            String latestVersion = json.get("tag_name").getAsString();
 
             return latestVersion.equals(currentVersion);
         } catch (Exception e) {
