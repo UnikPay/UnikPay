@@ -86,6 +86,10 @@ public final class Main extends JavaPlugin {
     //TO EVERYTHING THERE NEED TO BE RELOADED
     public void reload() {
         initialiseConfigs();
+        if(IoSocket.getSocket().connected()) {
+            IoSocket.getSocket().disconnect();
+        }
+        IoSocket.connectSocket();
     }
 
     public static String getAPIKEY(){
