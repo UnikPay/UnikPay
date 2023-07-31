@@ -31,7 +31,7 @@ public class Status extends ISubCommand {
         sender.sendMessage(ColorUtils.getColored(" &fApi connected: " + (!isURLAvailable(dk.manaxi.unikpay.api.Config.MAINURL) ? "&c✖" : "&a✓")));
         sender.sendMessage(ColorUtils.getColored(" &fApikey indsat: " + (Main.getAPIKEY() == null ? "&c✖" : "&a✓")));
         sender.sendMessage(ColorUtils.getColored(" &fSkript connected: " + (!Main.isHookInitialised(Hook.SKRIPT) ? "&c✖" : "&a✓")));
-        if (Main.getInstance().getDescription().getVersion().split("-")[1].equals("SNAPSHOT")) {
+        if (Main.getInstance().getDescription().getVersion().split("-").length > 1 && Main.getInstance().getDescription().getVersion().split("-")[1].equals("SNAPSHOT")) {
             sender.sendMessage(ColorUtils.getColored("&7 "));
             sender.sendMessage(ColorUtils.getColored(" &fDu kører en snapshot version af UnikPay og det er ikke anbefalet!"));
             sender.sendMessage(ColorUtils.getColored(" &fBenyt dig af &a/unikpay update"));
