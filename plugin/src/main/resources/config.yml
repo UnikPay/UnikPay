@@ -14,3 +14,5 @@ paysuccess:
   - "{prefix} &aDu er blevet payet!"
 ratetime:
   - "{prefix} &cDu skal lige vente 15 sekunder før du kan købe igen."
+allerede_sub:
+  - "{prefix} &cDu har allerede abbonneret til det."

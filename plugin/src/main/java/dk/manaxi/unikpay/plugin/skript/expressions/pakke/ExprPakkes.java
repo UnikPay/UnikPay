@@ -1,10 +1,12 @@
-package dk.manaxi.unikpay.plugin.skript.expressions;
+package dk.manaxi.unikpay.plugin.skript.expressions.pakke;
 
+import ch.njol.skript.ScriptLoader;
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
+import ch.njol.skript.log.ErrorQuality;
 import ch.njol.util.Kleenean;
 import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
@@ -19,6 +21,10 @@ public class ExprPakkes extends SimpleExpression<Pakke> {
 
     @Override
     public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+        if (!ScriptLoader.isCurrentEvent(OnBetaling.class)) {
+            Skript.error("The expression 'pakkes' can only be used in unikpay betaling event", ErrorQuality.SEMANTIC_ERROR);
+            return false;
+        }
         return true;
     }
 

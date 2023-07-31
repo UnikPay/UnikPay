@@ -5,52 +5,49 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import dk.manaxi.unikpay.api.Config;
+import dk.manaxi.unikpay.api.classes.DurationType;
+import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.API.Internal;
-import dk.manaxi.unikpay.plugin.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class EffPay extends Effect {
+public class EffRequestSubscription extends Effect {
     private Expression<Player> player;
-    private Expression<Number> amount;
-    private Expression<String> pakke;
+    private Expression<Pakke> pakke;
+    private Expression<Number> duration;
 
 
     static {
-        Skript.registerEffect(EffPay.class, "[unikpay] pay %player% %number% em[(eralds|s|eralder|erald)] for %string%");
+        Skript.registerEffect(EffRequestSubscription.class, "[unikpay] request %player% package %pakke% in %number% days");
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void execute(@NotNull Event event) {
         final Player player = this.player.getSingle(event);
-        final Number amount = this.amount.getSingle(event);
-        final String pakke = this.pakke.getSingle(event);
-
-        if (Main.getAPIKEY() == null) {
-            Skript.error("Du mangler at putte din apikey ind i config.yml");
-            return;
-        }
+        final Pakke pakke = this.pakke.getSingle(event);
+        final Number duration = this.duration.getSingle(event);
 
         if (player == null || pakke == null)
             return;
 
-        Internal.sendPayRequest(player, pakke, amount);
+        Internal.sendSubscriptionRequest(player, pakke, duration, DurationType.DAY);
     }
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return "[unikpay] (request|anmod) %player% [om ]%number% em(eralds|s|eralder) for %string%[ (med id|with id) %-string%]";
+        return "[unikpay] request %player% package %pakke% in %number% days";
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         this.player = (Expression<Player>) expressions[0];
-        this.amount = (Expression<Number>) expressions[1];
-        this.pakke = (Expression<String>) expressions[2];
+        this.pakke = (Expression<Pakke>) expressions[1];
+        this.duration = (Expression<Number>) expressions[2];
         return true;
     }
 }
+

@@ -58,13 +58,6 @@ public class EvtBetaling extends SkriptEvent {
                 return event.getPakker()[0];
             }
         }, 0);
-
-        (new BukkitRunnable() {
-            @Override
-            public void run() {
-                Payments.fetchPayments();
-            }
-        }).runTaskTimer(Main.getInstance(), 20L, 600L);
     }
 
 

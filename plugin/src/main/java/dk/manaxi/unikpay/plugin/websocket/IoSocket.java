@@ -6,8 +6,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import dk.manaxi.unikpay.api.Config;
 import dk.manaxi.unikpay.api.classes.Pakke;
+import dk.manaxi.unikpay.api.classes.Subscription;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
+import dk.manaxi.unikpay.plugin.event.OnSubscriptionPayment;
 import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -16,9 +18,9 @@ import org.bukkit.Bukkit;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
@@ -46,14 +48,26 @@ public class IoSocket {
                 UUID uuid = UUID.fromString(obj.getAsJsonObject("mcaccount").get("uuid").getAsString());
                 Type listType = new TypeToken<List<Pakke>>() {}.getType();
                 List<Pakke> pakker = gson.fromJson(obj.getAsJsonArray("packages"), listType);
-                Pakke[] pakkerArray = pakker.toArray(new Pakke[pakker.size()]);
+                Pakke[] pakkerArray = pakker.toArray(new Pakke[0]);
 
-                Bukkit.getScheduler().runTask(Main.getInstance(), () -> Bukkit.getPluginManager().callEvent(new OnBetaling(
-                        Bukkit.getOfflinePlayer(uuid),
-                        pakkerArray,
-                        obj.get("amount").getAsFloat(),
-                        new AcceptId(obj.get("_id").getAsString())
-                )));
+                if (obj.get("subscription").isJsonNull()) {
+                    Bukkit.getScheduler().runTask(Main.getInstance(), () -> Bukkit.getPluginManager().callEvent(new OnBetaling(
+                            Bukkit.getOfflinePlayer(uuid),
+                            pakkerArray,
+                            obj.get("amount").getAsFloat(),
+                            new AcceptId(obj.get("_id").getAsString())
+                    )));
+                } else {
+                    Type listType2 = new TypeToken<Subscription>() {}.getType();
+                    Subscription subscription = gson.fromJson(obj.getAsJsonObject("subscription"), listType2);
+                    Bukkit.getServer().getPluginManager().callEvent(new OnSubscriptionPayment(
+                            Bukkit.getOfflinePlayer(uuid),
+                            pakkerArray,
+                            obj.get("amount").getAsFloat(),
+                            subscription,
+                            new AcceptId(obj.get("_id").getAsString())
+                    ));
+                }
             });
             socket.on("cmd", args -> {
                 Bukkit.getScheduler().runTask(Main.getInstance(), () -> Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), args[0].toString()));
@@ -63,8 +77,8 @@ public class IoSocket {
             });
 
             socket.connect();
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+        } catch (URISyntaxException ignored) {
+
         }
     }
 

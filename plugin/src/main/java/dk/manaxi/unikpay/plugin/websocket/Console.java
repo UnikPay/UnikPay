@@ -3,7 +3,6 @@ package dk.manaxi.unikpay.plugin.websocket;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
-import org.bukkit.Bukkit;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

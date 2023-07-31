@@ -12,6 +12,8 @@ public class Betaling {
 
     private float amount;
 
+    private Subscription subscription;
+
     public String get_id() {
         return this._id;
     }
@@ -26,5 +28,9 @@ public class Betaling {
 
     public float getAmount() {
         return this.amount;
+    }
+
+    public Subscription getSubscription() {
+        return subscription;
     }
 }

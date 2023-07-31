@@ -5,6 +5,7 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import dk.manaxi.unikpay.api.classes.Subscription;
 import dk.manaxi.unikpay.plugin.API.Internal;
 import dk.manaxi.unikpay.plugin.Main;
 import org.bukkit.entity.Player;
@@ -12,45 +13,38 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class EffPay extends Effect {
-    private Expression<Player> player;
-    private Expression<Number> amount;
-    private Expression<String> pakke;
+import java.util.List;
 
+public class EffCancelSubscription extends Effect {
+    private Expression<Subscription> subscriptions;
 
     static {
-        Skript.registerEffect(EffPay.class, "[unikpay] pay %player% %number% em[(eralds|s|eralder|erald)] for %string%");
+        Skript.registerEffect(EffCancelSubscription.class, "[unikpay] cancel subscription %subscriptions%");
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void execute(@NotNull Event event) {
-        final Player player = this.player.getSingle(event);
-        final Number amount = this.amount.getSingle(event);
-        final String pakke = this.pakke.getSingle(event);
+        final Subscription[] subscriptions = this.subscriptions.getAll(event);
 
         if (Main.getAPIKEY() == null) {
             Skript.error("Du mangler at putte din apikey ind i config.yml");
             return;
         }
 
-        if (player == null || pakke == null)
-            return;
-
-        Internal.sendPayRequest(player, pakke, amount);
+        for (Subscription subscription : subscriptions) {
+            Internal.cancelSubscription(subscription);
+        }
     }
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return "[unikpay] (request|anmod) %player% [om ]%number% em(eralds|s|eralder) for %string%[ (med id|with id) %-string%]";
+        return "[unikpay] cancel subscription %subscriptions%";
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
-        this.player = (Expression<Player>) expressions[0];
-        this.amount = (Expression<Number>) expressions[1];
-        this.pakke = (Expression<String>) expressions[2];
+        this.subscriptions = (Expression<Subscription>) expressions[0];
         return true;
     }
 }

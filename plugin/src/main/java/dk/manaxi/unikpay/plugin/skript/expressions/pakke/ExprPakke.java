@@ -1,4 +1,4 @@
-package dk.manaxi.unikpay.plugin.skript.expressions;
+package dk.manaxi.unikpay.plugin.skript.expressions.pakke;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
@@ -31,7 +31,7 @@ public class ExprPakke extends SimpleExpression<Pakke> {
 
     @Override
     public boolean isSingle() {
-        return false;
+        return true;
     }
 
 
@@ -59,7 +59,7 @@ public class ExprPakke extends SimpleExpression<Pakke> {
         return new Pakke[]{new Pakke(Objects.requireNonNull(PRICE.getSingle(e)).floatValue(), NAME.getSingle(e), NAME.getSingle(e))};
     }
 
-    public Class<?> @NotNull [] acceptChange(Changer.ChangeMode mode) {
+    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
         return (Class[]) CollectionUtils.array((Object[])new Class[0]);
     }
 

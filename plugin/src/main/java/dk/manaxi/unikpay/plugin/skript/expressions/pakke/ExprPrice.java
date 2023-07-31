@@ -1,4 +1,4 @@
-package dk.manaxi.unikpay.plugin.skript.expressions;
+package dk.manaxi.unikpay.plugin.skript.expressions.pakke;
 
 import ch.njol.skript.ScriptLoader;
 import ch.njol.skript.Skript;
@@ -6,10 +6,12 @@ import ch.njol.skript.expressions.base.EventValueExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
+import ch.njol.skript.lang.parser.ParserInstance;
 import ch.njol.skript.log.ErrorQuality;
 import ch.njol.util.Kleenean;
 import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
+import dk.manaxi.unikpay.plugin.event.OnSubscriptionPayment;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,10 +37,6 @@ public class ExprPrice extends EventValueExpression<Float> {
 
     @Override
     public boolean init(final Expression<?>[] exprs, final int matchedPattern, final Kleenean isDelayed, final SkriptParser.ParseResult parser) {
-        if (!ScriptLoader.isCurrentEvent(OnBetaling.class)) {
-            Skript.error("The expression 'pakke price' can only be used in unikpay betaling event", ErrorQuality.SEMANTIC_ERROR);
-            return false;
-        }
         pakke = (Expression<Pakke>) exprs[0];
         return true;
     }

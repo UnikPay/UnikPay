@@ -1,7 +1,5 @@
 package dk.manaxi.unikpay.plugin.event;
 
-import dk.manaxi.unikpay.api.classes.Pakke;
-import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Cancellable;

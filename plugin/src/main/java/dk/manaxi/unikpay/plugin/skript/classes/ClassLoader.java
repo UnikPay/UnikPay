@@ -6,6 +6,8 @@ import ch.njol.skript.expressions.base.EventValueExpression;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import dk.manaxi.unikpay.api.classes.Pakke;
+import dk.manaxi.unikpay.api.classes.Subscription;
+import org.jetbrains.annotations.NotNull;
 
 public class ClassLoader {
 
@@ -50,6 +52,28 @@ public class ClassLoader {
 
                     @Override
                     public String toVariableNameString(Pakke arg0) {
+                        return arg0.toString();
+                    }
+
+                }));
+        Classes.registerClass(new ClassInfo<>(Subscription.class, "subscription")
+                .defaultExpression(new EventValueExpression<>(Subscription.class))
+                .user("subscription?")
+                .name("subscription")
+                .description("subscription")
+                .parser(new Parser<Subscription>() {
+                    @Override
+                    public Subscription parse(String arg0, ParseContext arg1) {
+                        return null;
+                    }
+
+                    @Override
+                    public @NotNull String toString(Subscription arg0, int arg1) {
+                        return arg0.toString();
+                    }
+
+                    @Override
+                    public @NotNull String toVariableNameString(Subscription arg0) {
                         return arg0.toString();
                     }
 

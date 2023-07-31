@@ -8,6 +8,7 @@ import dk.manaxi.unikpay.api.HttpsClient;
 import dk.manaxi.unikpay.api.classes.Betaling;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
+import dk.manaxi.unikpay.plugin.event.OnSubscriptionPayment;
 import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import org.bukkit.Bukkit;
 
@@ -34,13 +35,24 @@ public class Payments {
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
                 public void run() {
-                    for (Betaling betal : betalinger)
-                        Bukkit.getServer().getPluginManager().callEvent(new OnBetaling(
-                                Bukkit.getOfflinePlayer(betal.getMcaccount().getUuid()),
-                                betal.getPackages(),
-                                betal.getAmount(),
-                                new AcceptId(betal.get_id())
-                        ));
+                    for (Betaling betal : betalinger) {
+                        if (betal.getSubscription() == null) {
+                            Bukkit.getServer().getPluginManager().callEvent(new OnBetaling(
+                                    Bukkit.getOfflinePlayer(betal.getMcaccount().getUuid()),
+                                    betal.getPackages(),
+                                    betal.getAmount(),
+                                    new AcceptId(betal.get_id())
+                            ));
+                        } else {
+                            Bukkit.getServer().getPluginManager().callEvent(new OnSubscriptionPayment(
+                                    Bukkit.getOfflinePlayer(betal.getMcaccount().getUuid()),
+                                    betal.getPackages(),
+                                    betal.getAmount(),
+                                    betal.getSubscription(),
+                                    new AcceptId(betal.get_id())
+                            ));
+                        }
+                    }
                 }
             }, 0L);
         });

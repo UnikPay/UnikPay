@@ -2,6 +2,7 @@ package dk.manaxi.unikpay.plugin;
 
 import dk.manaxi.unikpay.plugin.commands.CommandManager;
 import dk.manaxi.unikpay.plugin.enums.Hook;
+import dk.manaxi.unikpay.plugin.fetch.Payments;
 import dk.manaxi.unikpay.plugin.hooks.SkriptHook;
 import dk.manaxi.unikpay.plugin.interfaces.IHook;
 import dk.manaxi.unikpay.plugin.listeners.OnJoin;
@@ -9,13 +10,13 @@ import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import dk.manaxi.unikpay.plugin.utils.Config;
 import dk.manaxi.unikpay.plugin.websocket.Console;
 import dk.manaxi.unikpay.plugin.websocket.IoSocket;
-import io.socket.client.Socket;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
 import java.util.HashMap;
@@ -57,6 +58,12 @@ public final class Main extends JavaPlugin {
                         getDescription().getVersion(), "    &aAuthors: &f" +
                         getDescription().getAuthors(), "",
                 "  &2Took &a" + ( System.currentTimeMillis() - timestampBeforeLoad) + " millis &2to load!", "", "&8&m---------------------------------&r"));
+        (new BukkitRunnable() {
+            @Override
+            public void run() {
+                Payments.fetchPayments();
+            }
+        }).runTaskTimer(Main.getInstance(), 20L, 600L);
     }
 
     @Override
