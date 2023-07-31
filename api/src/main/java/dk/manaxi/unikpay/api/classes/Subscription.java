@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class Subscription {
     private String _id;
+    private String status;
     private String server;
     private Number duration;
     private String durationType;
@@ -21,6 +22,10 @@ public class Subscription {
 
     public String get_id() {
         return _id;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public Number getDuration() {
