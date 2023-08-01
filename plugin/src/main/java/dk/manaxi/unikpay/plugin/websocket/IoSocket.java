@@ -50,7 +50,7 @@ public class IoSocket {
                 List<Pakke> pakker = gson.fromJson(obj.getAsJsonArray("packages"), listType);
                 Pakke[] pakkerArray = pakker.toArray(new Pakke[0]);
 
-                if (obj.get("subscription").isJsonNull()) {
+                if (!obj.has("subscription") || obj.get("subscription").isJsonNull()) {
                     Bukkit.getScheduler().runTask(Main.getInstance(), () -> Bukkit.getPluginManager().callEvent(new OnBetaling(
                             Bukkit.getOfflinePlayer(uuid),
                             pakkerArray,
