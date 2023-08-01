@@ -20,7 +20,6 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;

@@ -8,13 +8,10 @@ import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.api.classes.Subscription;
-import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnSubscriptionPayment;
-import dk.manaxi.unikpay.plugin.fetch.Payments;
 import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.Nullable;
 
 public class EvtSubscriptionPayment extends SkriptEvent {

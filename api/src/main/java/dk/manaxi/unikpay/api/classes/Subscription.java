@@ -1,8 +1,5 @@
 package dk.manaxi.unikpay.api.classes;
 
-import com.google.gson.annotations.JsonAdapter;
-import dk.manaxi.unikpay.api.UnixTimestampAdapter;
-
 import java.util.Date;
 
 public class Subscription {

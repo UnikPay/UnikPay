@@ -5,7 +5,6 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import dk.manaxi.unikpay.api.Config;
 import dk.manaxi.unikpay.api.classes.DurationType;
 import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.API.Internal;

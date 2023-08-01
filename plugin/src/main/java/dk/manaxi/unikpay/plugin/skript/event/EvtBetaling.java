@@ -7,13 +7,10 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import dk.manaxi.unikpay.api.classes.Pakke;
-import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
-import dk.manaxi.unikpay.plugin.fetch.Payments;
 import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.Nullable;
 
 public class EvtBetaling extends SkriptEvent {

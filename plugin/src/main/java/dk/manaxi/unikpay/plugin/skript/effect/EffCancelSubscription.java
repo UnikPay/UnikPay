@@ -8,12 +8,9 @@ import ch.njol.util.Kleenean;
 import dk.manaxi.unikpay.api.classes.Subscription;
 import dk.manaxi.unikpay.plugin.API.Internal;
 import dk.manaxi.unikpay.plugin.Main;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class EffCancelSubscription extends Effect {
     private Expression<Subscription> subscriptions;

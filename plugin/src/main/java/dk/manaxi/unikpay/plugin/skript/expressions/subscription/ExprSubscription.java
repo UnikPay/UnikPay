@@ -7,7 +7,6 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import dk.manaxi.unikpay.api.classes.Subscription;
-import dk.manaxi.unikpay.plugin.API.Internal;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
