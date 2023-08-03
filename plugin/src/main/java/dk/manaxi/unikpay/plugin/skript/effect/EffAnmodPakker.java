@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class EffAnmodPakker extends Effect {
-    private static String url = Config.MAINURL + "request";
+    private static final String url = Config.MAINURL + "request";
 
     private Expression<Player> player;
     private Expression<Pakke> pakke;
@@ -42,7 +42,7 @@ public class EffAnmodPakker extends Effect {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull SkriptParser.ParseResult parseResult) {
         this.player = (Expression<Player>) expressions[0];
         this.pakke = (Expression<Pakke>) expressions[1];
         return true;

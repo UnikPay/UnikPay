@@ -20,17 +20,13 @@ public class ExprPakkes extends SimpleExpression<Pakke> {
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
-        ParserInstance parserInstance = new ParserInstance();
-        if (!parserInstance.isCurrentEvent(OnBetaling.class)) {
-            Skript.error("The expression 'pakkes' can only be used in unikpay betaling event", ErrorQuality.SEMANTIC_ERROR);
-            return false;
-        }
+    public boolean init(@NotNull Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull SkriptParser.ParseResult parseResult) {
         return true;
     }
 
+    @NotNull
     @Override
-    protected Pakke @NotNull [] get(@NotNull Event e) {
+    protected Pakke[] get(@NotNull Event e) {
         if (!(e instanceof OnBetaling)) {
             return new Pakke[]{};
         }

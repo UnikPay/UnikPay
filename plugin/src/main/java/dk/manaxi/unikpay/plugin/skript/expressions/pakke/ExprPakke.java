@@ -38,7 +38,7 @@ public class ExprPakke extends SimpleExpression<Pakke> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] e, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parser) {
+    public boolean init(Expression<?>[] e, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull SkriptParser.ParseResult parser) {
         NAME = (Expression<String>) e[0];
         PRICE = (Expression<Number>) e[1];
         ID = (Expression<String>) e[2];
@@ -50,8 +50,9 @@ public class ExprPakke extends SimpleExpression<Pakke> {
         return "[the] (pakke|package) (named|navngivet) %string% for %number% em(eralds|s|eralder)[ (med id|with id) %-string%]";
     }
 
+    @NotNull
     @Override
-    protected Pakke @NotNull [] get(@NotNull Event e) {
+    protected Pakke[] get(@NotNull Event e) {
         if(ID != null) {
             return new Pakke[]{new Pakke(Objects.requireNonNull(PRICE.getSingle(e)).floatValue(), NAME.getSingle(e), ID.getSingle(e))};
         }
@@ -59,7 +60,8 @@ public class ExprPakke extends SimpleExpression<Pakke> {
         return new Pakke[]{new Pakke(Objects.requireNonNull(PRICE.getSingle(e)).floatValue(), NAME.getSingle(e), NAME.getSingle(e))};
     }
 
-    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
+    @NotNull
+    public Class<?>[] acceptChange(@NotNull Changer.ChangeMode mode) {
         return (Class[]) CollectionUtils.array((Object[])new Class[0]);
     }
 

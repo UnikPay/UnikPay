@@ -18,12 +18,13 @@ public class ExprSubscriptions extends SimpleExpression<Subscription> {
     }
 
     @Override
-    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(@NotNull Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull SkriptParser.ParseResult parseResult) {
         return true;
     }
 
+    @NotNull
     @Override
-    protected Subscription @NotNull [] get(@NotNull Event e) {
+    protected Subscription[] get(@NotNull Event e) {
         return Internal.getSubscriptionsRequest().toArray(new Subscription[0]);
     }
 

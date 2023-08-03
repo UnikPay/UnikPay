@@ -19,15 +19,17 @@ public class ClassLoader {
                 .description("betalings id")
                 .parser(new Parser<AcceptId>() {
                     @Override
-                    public AcceptId parse(String arg0, ParseContext arg1) {
+                    public AcceptId parse(@NotNull String arg0, @NotNull ParseContext arg1) {
                         return null;
                     }
 
+                    @NotNull
                     @Override
                     public String toString(AcceptId arg0, int arg1) {
                         return arg0.toString();
                     }
 
+                    @NotNull
                     @Override
                     public String toVariableNameString(AcceptId arg0) {
                         return arg0.toString();
@@ -41,15 +43,17 @@ public class ClassLoader {
                 .description("pakke")
                 .parser(new Parser<Pakke>() {
                     @Override
-                    public Pakke parse(String arg0, ParseContext arg1) {
+                    public Pakke parse(@NotNull String arg0, @NotNull ParseContext arg1) {
                         return null;
                     }
 
+                    @NotNull
                     @Override
                     public String toString(Pakke arg0, int arg1) {
                         return arg0.toString();
                     }
 
+                    @NotNull
                     @Override
                     public String toVariableNameString(Pakke arg0) {
                         return arg0.toString();
@@ -63,7 +67,7 @@ public class ClassLoader {
                 .description("subscription")
                 .parser(new Parser<Subscription>() {
                     @Override
-                    public Subscription parse(String arg0, ParseContext arg1) {
+                    public Subscription parse(@NotNull String arg0, @NotNull ParseContext arg1) {
                         return null;
                     }
 

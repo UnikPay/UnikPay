@@ -12,6 +12,7 @@ import dk.manaxi.unikpay.plugin.event.OnSubscriptionPayment;
 import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class EvtSubscriptionPayment extends SkriptEvent {
@@ -67,15 +68,16 @@ public class EvtSubscriptionPayment extends SkriptEvent {
 
 
     @Override
-    public boolean init(Literal<?>[] args, int matchedPattern, SkriptParser.ParseResult parseResult) {
+    public boolean init(@NotNull Literal<?>[] args, int matchedPattern, @NotNull SkriptParser.ParseResult parseResult) {
         return true;
     }
 
     @Override
-    public boolean check(Event e) {
+    public boolean check(@NotNull Event e) {
         return true;
     }
 
+    @NotNull
     @Override
     public String toString(@Nullable Event e, boolean debug) {
         return "unikpay subscription payment";

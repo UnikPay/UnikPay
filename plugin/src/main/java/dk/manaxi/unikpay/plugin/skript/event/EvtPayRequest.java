@@ -45,7 +45,7 @@ public class EvtPayRequest extends SkriptEvent {
     }
 
     @Override
-    public boolean init(Literal<?> @NotNull [] args, int matchedPattern, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(@NotNull Literal<?>[] args, int matchedPattern, @NotNull SkriptParser.ParseResult parseResult) {
         return true;
     }
 

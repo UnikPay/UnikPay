@@ -12,17 +12,17 @@ public class Config {
     private static Map<String, String[]> configs;
 
     public static void loadALl() {
-        configs = (HashMap)new HashMap<>();
+        configs = new HashMap<>();
         for (String path : Main.configYML.getKeys(true)) {
             if (!Main.configYML.isConfigurationSection(path)) {
                 if (Main.configYML.getStringList(path) != null && Main.configYML.isList(path)) {
                     List<String> stringList = ColorUtils.getColored(Main.configYML.getStringList(path));
-                    configs.put(path, stringList.<String>toArray(new String[0]));
+                    configs.put(path, stringList.toArray(new String[0]));
                     continue;
                 }
                 if (Main.configYML.getString(path) != null) {
                     List<String> stringList = Collections.singletonList(ColorUtils.getColored(Main.configYML.getString(path)));
-                    configs.put(path, stringList.<String>toArray(new String[0]));
+                    configs.put(path, stringList.toArray(new String[0]));
                 }
             }
         }

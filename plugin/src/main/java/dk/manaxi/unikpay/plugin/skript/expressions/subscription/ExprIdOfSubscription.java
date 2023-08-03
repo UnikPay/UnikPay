@@ -30,7 +30,7 @@ public class ExprIdOfSubscription extends SimpleExpression<String> {
     }
 
     @Override
-    public boolean init(final Expression<?>[] exprs, final int matchedPattern, final @NotNull Kleenean isDelayed, final SkriptParser.@NotNull ParseResult parser) {
+    public boolean init(final Expression<?>[] exprs, final int matchedPattern, final @NotNull Kleenean isDelayed, @NotNull final SkriptParser.ParseResult parser) {
         subscription = (Expression<Subscription>) exprs[0];
         return true;
     }
@@ -40,8 +40,9 @@ public class ExprIdOfSubscription extends SimpleExpression<String> {
         return "[the] id of %subscription%";
     }
 
+    @NotNull
     @Override
-    protected String @NotNull [] get(@NotNull Event e) {
+    protected String[] get(@NotNull Event e) {
         return new String[]{Objects.requireNonNull(subscription.getSingle(e)).get_id()};
     }
 }

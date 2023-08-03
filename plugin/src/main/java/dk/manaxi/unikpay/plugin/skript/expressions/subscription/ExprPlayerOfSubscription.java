@@ -32,7 +32,7 @@ public class ExprPlayerOfSubscription extends SimpleExpression<OfflinePlayer> {
     }
 
     @Override
-    public boolean init(final Expression<?>[] exprs, final int matchedPattern, final @NotNull Kleenean isDelayed, final SkriptParser.@NotNull ParseResult parser) {
+    public boolean init(final Expression<?>[] exprs, final int matchedPattern, final @NotNull Kleenean isDelayed, @NotNull final SkriptParser.ParseResult parser) {
         subscription = (Expression<Subscription>) exprs[0];
         return true;
     }
@@ -42,8 +42,9 @@ public class ExprPlayerOfSubscription extends SimpleExpression<OfflinePlayer> {
         return "[the] player of %subscription%";
     }
 
+    @NotNull
     @Override
-    protected OfflinePlayer @NotNull [] get(@NotNull Event e) {
+    protected OfflinePlayer[] get(@NotNull Event e) {
         return new OfflinePlayer[]{Bukkit.getOfflinePlayer(Objects.requireNonNull(subscription.getSingle(e)).getMcaccount().getUuid())};
     }
 }

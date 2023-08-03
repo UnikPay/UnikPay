@@ -42,7 +42,7 @@ public class EffRequestSubscription extends Effect {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull SkriptParser.ParseResult parseResult) {
         this.player = (Expression<Player>) expressions[0];
         this.pakke = (Expression<Pakke>) expressions[1];
         this.duration = (Expression<Number>) expressions[2];

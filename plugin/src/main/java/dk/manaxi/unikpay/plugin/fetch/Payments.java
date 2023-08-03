@@ -19,7 +19,7 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public class Payments {
     private static long lastPaymentFetch = 0L;
-    private static String url = Config.MAINURL + "request";
+    private static final String url = Config.MAINURL + "request";
 
     public static void fetchPayments() {
         if (lastPaymentFetch > (new Date()).getTime() - 5000L)
@@ -31,7 +31,7 @@ public class Payments {
             String svar = HttpsClient.getRequest(url, Main.getAPIKEY());
             JsonObject svarOBJ = gson.fromJson(svar, JsonObject.class);
             Type listType = (new TypeToken<List<Betaling>>() {}).getType();
-            final List<Betaling> betalinger = (List<Betaling>) gson.fromJson(svarOBJ.getAsJsonArray("requests"), listType);
+            final List<Betaling> betalinger = gson.fromJson(svarOBJ.getAsJsonArray("requests"), listType);
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
                 public void run() {

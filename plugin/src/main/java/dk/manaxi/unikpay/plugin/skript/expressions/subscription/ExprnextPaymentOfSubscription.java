@@ -31,7 +31,7 @@ public class ExprnextPaymentOfSubscription extends SimpleExpression<Date> {
     }
 
     @Override
-    public boolean init(final Expression<?>[] exprs, final int matchedPattern, final @NotNull Kleenean isDelayed, final SkriptParser.@NotNull ParseResult parser) {
+    public boolean init(final Expression<?>[] exprs, final int matchedPattern, final @NotNull Kleenean isDelayed, @NotNull final SkriptParser.ParseResult parser) {
         subscription = (Expression<Subscription>) exprs[0];
         return true;
     }
@@ -41,8 +41,9 @@ public class ExprnextPaymentOfSubscription extends SimpleExpression<Date> {
         return "[the] player of %subscription%";
     }
 
+    @NotNull
     @Override
-    protected Date @NotNull [] get(@NotNull Event e) {
+    protected Date[] get(@NotNull Event e) {
         return new Date[]{Objects.requireNonNull(subscription.getSingle(e)).getNextPayment()};
     }
 }

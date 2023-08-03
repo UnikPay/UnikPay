@@ -22,7 +22,6 @@ public class EffPay extends Effect {
         Skript.registerEffect(EffPay.class, "[unikpay] pay %player% %number% em[(eralds|s|eralder|erald)] for %string%");
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void execute(@NotNull Event event) {
         final Player player = this.player.getSingle(event);
@@ -47,7 +46,7 @@ public class EffPay extends Effect {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull SkriptParser.ParseResult parseResult) {
         this.player = (Expression<Player>) expressions[0];
         this.amount = (Expression<Number>) expressions[1];
         this.pakke = (Expression<String>) expressions[2];

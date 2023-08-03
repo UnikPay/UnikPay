@@ -10,7 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.IOException;
 
 public class SkriptHook extends Hook {
-    private static JavaPlugin Plugin;
     private static SkriptAddon addon = null;
     private static Skript Instance = null;
 
@@ -24,7 +23,6 @@ public class SkriptHook extends Hook {
             return false;
 
         try {
-            Plugin = paramPlugin;
             Instance = (Skript) Bukkit.getPluginManager().getPlugin("Skript");
             try {
                 addon = Skript.registerAddon(Main.getInstance());

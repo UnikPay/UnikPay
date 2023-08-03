@@ -40,7 +40,7 @@ public class EffCancelSubscription extends Effect {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull SkriptParser.ParseResult parseResult) {
         this.subscriptions = (Expression<Subscription>) expressions[0];
         return true;
     }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TabCompleteListener implements TabCompleter {
-    private ICommand commandManager;
+    private final ICommand commandManager;
 
     public TabCompleteListener(UnikPayCommand unikPayCommand) {
         this.commandManager = unikPayCommand;

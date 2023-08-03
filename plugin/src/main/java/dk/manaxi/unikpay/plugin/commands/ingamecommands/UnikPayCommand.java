@@ -31,7 +31,7 @@ public class UnikPayCommand extends ICommand {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (args.length <= 0 && getDefaultCommand() != null) {
+        if (args.length == 0 && getDefaultCommand() != null) {
             execute(sender, getDefaultCommand(), args);
         } else if (args.length > 0) {
             ISubCommand subCommand = findSubCommand(args[0]);

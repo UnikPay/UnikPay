@@ -33,7 +33,7 @@ public class Config {
                 this.configFile = new File(this.plugin.getDataFolder(), this.fileName);
             }
         }
-        this.config = (FileConfiguration) YamlConfiguration.loadConfiguration(this.configFile);
+        this.config = YamlConfiguration.loadConfiguration(this.configFile);
     }
 
     public void saveConfig() {

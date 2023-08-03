@@ -32,7 +32,7 @@ public class ExprPakkeOfSubscription extends SimpleExpression<Pakke> {
     }
 
     @Override
-    public boolean init(final Expression<?>[] exprs, final int matchedPattern, final @NotNull Kleenean isDelayed, final SkriptParser.@NotNull ParseResult parser) {
+    public boolean init(final Expression<?>[] exprs, final int matchedPattern, final @NotNull Kleenean isDelayed, @NotNull final SkriptParser.ParseResult parser) {
         subscription = (Expression<Subscription>) exprs[0];
         return true;
     }
@@ -42,8 +42,9 @@ public class ExprPakkeOfSubscription extends SimpleExpression<Pakke> {
         return "[the] pakke of %subscription%";
     }
 
+    @NotNull
     @Override
-    protected Pakke @NotNull [] get(@NotNull Event e) {
+    protected Pakke[] get(@NotNull Event e) {
         return new Pakke[]{Objects.requireNonNull(subscription.getSingle(e)).getPakke()};
     }
 }

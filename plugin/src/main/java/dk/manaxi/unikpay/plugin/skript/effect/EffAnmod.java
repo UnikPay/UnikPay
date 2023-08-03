@@ -23,7 +23,6 @@ public class EffAnmod extends Effect {
         Skript.registerEffect(EffAnmod.class, "[unikpay] (request|anmod) %player% [om ]%number% em[(eralds|s|eralder|erald)] for %string%[ (med id|with id) %-string%]");
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void execute(@NotNull Event event) {
         final Player player = this.player.getSingle(event);
@@ -49,7 +48,7 @@ public class EffAnmod extends Effect {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull SkriptParser.ParseResult parseResult) {
         this.player = (Expression<Player>) expressions[0];
         this.amount = (Expression<Number>) expressions[1];
         this.pakke = (Expression<String>) expressions[2];
