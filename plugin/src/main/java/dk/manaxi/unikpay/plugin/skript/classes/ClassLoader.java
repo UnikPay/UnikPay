@@ -19,6 +19,10 @@ public class ClassLoader {
                 .description("betalings id")
                 .parser(new Parser<AcceptId>() {
                     @Override
+                    public boolean canParse(@NotNull ParseContext context) {
+                        return false;
+                    }
+                    @Override
                     public AcceptId parse(@NotNull String arg0, @NotNull ParseContext arg1) {
                         return null;
                     }
@@ -43,6 +47,11 @@ public class ClassLoader {
                 .description("pakke")
                 .parser(new Parser<Pakke>() {
                     @Override
+                    public boolean canParse(@NotNull ParseContext context) {
+                        return false;
+                    }
+
+                    @Override
                     public Pakke parse(@NotNull String arg0, @NotNull ParseContext arg1) {
                         return null;
                     }
@@ -66,6 +75,10 @@ public class ClassLoader {
                 .name("subscription")
                 .description("subscription")
                 .parser(new Parser<Subscription>() {
+                    @Override
+                    public boolean canParse(@NotNull ParseContext context) {
+                        return false;
+                    }
                     @Override
                     public Subscription parse(@NotNull String arg0, @NotNull ParseContext arg1) {
                         return null;
