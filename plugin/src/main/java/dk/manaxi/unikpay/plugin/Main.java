@@ -48,7 +48,9 @@ public final class Main extends JavaPlugin {
         log.sendMessage(ColorUtils.getColored("", "  &2Hooking into integrations"));
         initialiseHooks();
         IoSocket.connectSocket();
-        Bukkit.getServer().getPluginManager().registerEvents(new OnJoin(), this);
+        if(Main.configYML.getBoolean("update-notify", true)) {
+            Bukkit.getServer().getPluginManager().registerEvents(new OnJoin(), this);
+        }
 
         log.sendMessage(ColorUtils.getColored("", " &2Hooking into console"));
         Logger logger = (Logger) LogManager.getRootLogger();

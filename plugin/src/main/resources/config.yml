@@ -3,7 +3,8 @@ prefix: "&8&l[ &a&lUNIKPAY &8&l]"
 admin-permission: "unikpay.*"
 no-permission: "{prefix} &cDu har ikke adgang til denne kommando."
 apikey-missing: "{prefix} &cDu har ikke sat din apikey ind i config.yml"
-skript-hook: "true"
+skript-hook: true
+update-notify: true
 
 ikkelinket:
   - "{prefix} &cDet ser ud til du ikke har en bruger endnu!"
