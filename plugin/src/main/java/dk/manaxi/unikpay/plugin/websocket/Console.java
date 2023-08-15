@@ -1,10 +1,8 @@
 package dk.manaxi.unikpay.plugin.websocket;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
-import org.bukkit.Bukkit;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -15,7 +13,7 @@ import java.util.Date;
 public class Console extends AbstractAppender {
     SimpleDateFormat formatter;
     public Console() {
-        super("Log4JAppender", null, null);
+        super("Log4JAppender", null, null, false, null);
         formatter = new SimpleDateFormat("HH:mm:ss");
     }
     @Override
@@ -24,19 +22,23 @@ public class Console extends AbstractAppender {
     }
     @Override
     public void append(LogEvent event) {
+        if(!(IoSocket.getSocket() != null && IoSocket.getSocket().connected())) return;
         String message = event.getMessage().getFormattedMessage();
         String formattedMessage = "[" + formatter.format(new Date()) + " " + event.getLevel().toString() + "] " + message;
+
+        IoSocket.getSocket().emit("console", formattedMessage);
+
         Throwable throwable = event.getThrown();
         if (throwable != null) {
+            // get the throwable as a string[]
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             throwable.printStackTrace(pw);
-            String exceptionDetails = sw.toString();
-            formattedMessage += "\n" + exceptionDetails;
-        }
-
-        if (IoSocket.getSocket() != null && IoSocket.getSocket().connected()) {
-            IoSocket.getSocket().emit("console", formattedMessage);
+            String[] lines = sw.toString().split(System.lineSeparator());
+            for (String line : lines) {
+                // send each line to the client
+                IoSocket.getSocket().emit("console", line);
+            }
         }
     }
 }
