@@ -22,7 +22,6 @@ public class Console extends AbstractAppender {
     public void append(LogEvent event) {
         String message = event.getMessage().getFormattedMessage();
         message = "[" +formatter.format(new Date()) + " " + event.getLevel().toString() + "] " + message;
-
         if(IoSocket.getSocket() != null && IoSocket.getSocket().connected()) {
             IoSocket.getSocket().emit("console", message);
         }

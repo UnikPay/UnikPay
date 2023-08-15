@@ -3,7 +3,6 @@ package dk.manaxi.unikpay.plugin.hooks;
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
 import dk.manaxi.unikpay.plugin.Main;
-import dk.manaxi.unikpay.plugin.configuration.Config;
 import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
