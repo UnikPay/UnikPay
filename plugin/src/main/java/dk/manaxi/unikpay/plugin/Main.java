@@ -63,7 +63,7 @@ public final class Main extends JavaPlugin {
             public void run() {
                 Payments.fetchPayments();
             }
-        }).runTaskTimer(Main.getInstance(), 20L, 600L);
+        }).runTaskTimerAsynchronously(Main.getInstance(), 20L, 600L);
     }
 
     @Override

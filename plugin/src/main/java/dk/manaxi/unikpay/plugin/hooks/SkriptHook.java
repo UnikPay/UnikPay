@@ -3,11 +3,13 @@ package dk.manaxi.unikpay.plugin.hooks;
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
 import dk.manaxi.unikpay.plugin.Main;
+import dk.manaxi.unikpay.plugin.configuration.Config;
 import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class SkriptHook extends Hook {
     private static SkriptAddon addon = null;
@@ -22,13 +24,16 @@ public class SkriptHook extends Hook {
         if (!isEnabled())
             return false;
 
+        if(Arrays.equals(Config.get("skript-hook"), new String[]{"false"}))
+            return false;
+
         try {
             Instance = (Skript) Bukkit.getPluginManager().getPlugin("Skript");
             try {
                 addon = Skript.registerAddon(Main.getInstance());
                 addon.loadClasses("dk.manaxi.unikpay.plugin", "skript");
             } catch (IOException exception) {
-                Main.log.sendMessage(ColorUtils.getColored("   &c - SKRIPT COULD BE HOOKED"));
+                Main.log.sendMessage(ColorUtils.getColored("   &c - SKRIPT COULD NOT BE HOOKED"));
                 exception.printStackTrace();
             }
             Main.log.sendMessage(ColorUtils.getColored("   &a - SKRIPT HAS BEEN HOOKED"));
