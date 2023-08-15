@@ -11,7 +11,7 @@ import java.util.Date;
 public class Console extends AbstractAppender {
     SimpleDateFormat formatter;
     public Console() {
-        super("Log4JAppender", null, null, true, null);
+        super("Log4JAppender", null, null, false, null);
         formatter = new SimpleDateFormat("HH:mm:ss");
     }
     @Override
