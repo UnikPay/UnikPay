@@ -23,7 +23,7 @@ public class SkriptHook extends Hook {
         if (!isEnabled())
             return false;
 
-        if(!Main.configYML.getBoolean("skript-hook"))
+        if(!Main.configYML.getBoolean("skript-hook", true))
             return false;
 
         try {
