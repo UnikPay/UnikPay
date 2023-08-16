@@ -36,7 +36,7 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         log = Bukkit.getConsoleSender();
-        log.sendMessage(ColorUtils.getColored("&8&m---------------------------------&r", "", "  &2Enabling &aUnikpay.jar &fv" + getDescription().getVersion()));
+        log.sendMessage(ColorUtils.getColored("&8&m---------------------------------&r", "", "  &2Enabling &aUnikPay &fv" + getDescription().getVersion()));
         long timestampBeforeLoad = System.currentTimeMillis();
         instance = this;
         initialiseConfigs();
@@ -56,7 +56,7 @@ public final class Main extends JavaPlugin {
         Logger logger = (Logger) LogManager.getRootLogger();
         logger.addAppender(new Console());
 
-        log.sendMessage(ColorUtils.getColored("", "  &fUnikpay.jar has been enabled!", "    &aVersion: &f" +
+        log.sendMessage(ColorUtils.getColored("", "  &fUnikPay has been enabled!", "    &aVersion: &f" +
                         getDescription().getVersion(), "    &aAuthors: &f" +
                         getDescription().getAuthors(), "",
                 "  &2Took &a" + ( System.currentTimeMillis() - timestampBeforeLoad) + " millis &2to load!", "", "&8&m---------------------------------&r"));
@@ -70,7 +70,7 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        log.sendMessage(ColorUtils.getColored("&8&m---------------------------------&r", "", "  &4Unikpay.jar Disabled!", "    &cVersion: &f" + getDescription().getVersion(), "    &cAuthors: &f" + getDescription().getAuthors(), "", "&8&m---------------------------------&r"));
+        log.sendMessage(ColorUtils.getColored("&8&m---------------------------------&r", "", "  &4UnikPay Disabled!", "    &cVersion: &f" + getDescription().getVersion(), "    &cAuthors: &f" + getDescription().getAuthors(), "", "&8&m---------------------------------&r"));
         IoSocket.getSocket().disconnect();
     }
 
