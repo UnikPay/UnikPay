@@ -78,7 +78,7 @@
             <groupId>com.github.UnikPay.UnikPay</groupId>
             <artifactId>unikpay-plugin</artifactId>
             <scope>provided</scope>
-            <version>1.0.8</version>
+            <version>1.0.9</version>
         </dependency>
     </dependencies>
 </project>
