@@ -15,6 +15,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 public class UpdateManager {
 
@@ -58,12 +59,18 @@ public class UpdateManager {
         }
 
         /*
-        If the file exist, it deletes the file
+            If the file exist, it deletes the file
          */
         if (Files.exists(outputFile)) {
             Files.delete(outputFile);
         }
 
+        //Ikke tested
+        try (InputStream in = url.openStream()) {
+            Files.copy(in, outputFile, StandardCopyOption.REPLACE_EXISTING);
+        }
+
+        /* Det gamle
         try (InputStream in = new BufferedInputStream(url.openStream());
              OutputStream out = Files.newOutputStream(outputFile)) {
             byte[] buffer = new byte[4096];
@@ -72,6 +79,8 @@ public class UpdateManager {
                 out.write(buffer, 0, bytesRead);
             }
         }
+        */
+
     }
 
 

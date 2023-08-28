@@ -2,19 +2,19 @@ Api-key: "KEY HER"
 prefix: "&8&l[ &a&lUNIKPAY &8&l]"
 admin-permission: "unikpay.*"
 no-permission: "{prefix} &cDu har ikke adgang til denne kommando."
-apikey-missing: "{prefix} &cDu har ikke sat din apikey ind i config.yml"
+apikey-missing: "{prefix} &cDu har ikke sat din API-key ind i config.yml"
 skript-hook: true
 update-notify: true
 
 ikkelinket:
-  - "{prefix} &cDet ser ud til du ikke har en bruger endnu!"
-  - "{prefix} &cJoin vores discord https://discord.gg/jnWKcuVmWf for at oprette en bruger"
+  - "{prefix} &cDet ser ud til, at du ikke har en bruger endnu!"
+  - "{prefix} &cJoin vores Discord-server: ( https://discord.gg/jnWKcuVmWf ) for at oprette en bruger."
   - "{prefix} &cOg skriv &a/link &ci en hvilken som helst kanal du har adgang til at skrive i."
 accepterbetaling:
-  - "{prefix} &aAcceptere købet på Discord."
+  - "{prefix} &aAccepter købet på Discord."
 paysuccess:
   - "{prefix} &aDu er blevet payet!"
 ratetime:
-  - "{prefix} &cDu skal lige vente 15 sekunder før du kan købe igen."
+  - "{prefix} &cDu skal lige vente 15 sekunder, før du kan købe igen."
 allerede_sub:
   - "{prefix} &cDu har allerede abbonneret til det."
