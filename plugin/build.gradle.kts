@@ -25,6 +25,7 @@ dependencies {
     }
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("org.apache.logging.log4j:log4j-core:2.20.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.10")
 
     compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT") {
         exclude("com.google.code.gson", "gson")
