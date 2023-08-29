@@ -39,7 +39,7 @@ public class ClassLoader {
                         return arg0.toString();
                     }
 
-                }));
+                }).serializeAs(AcceptId.class));
         Classes.registerClass(new ClassInfo<>(Pakke.class, "pakke")
                 .user("pakker?")
                 .name("pakke")
@@ -67,7 +67,7 @@ public class ClassLoader {
                         return arg0.toString();
                     }
 
-                }));
+                }).serializeAs(Pakke.class));
         Classes.registerClass(new ClassInfo<>(Subscription.class, "subscription")
                 .user("subscription?")
                 .name("subscription")
@@ -92,6 +92,6 @@ public class ClassLoader {
                         return arg0.toString();
                     }
 
-                }));
+                }).serializeAs(Subscription.class));
     }
 }
