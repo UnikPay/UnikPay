@@ -5,12 +5,13 @@ import ch.njol.skript.expressions.base.EventValueExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
+import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import dk.manaxi.unikpay.api.classes.Pakke;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-public class ExprPrice extends EventValueExpression<Float> {
+public class ExprPrice extends SimpleExpression<Float> {
     private Expression<Pakke> pakke;
     static {
         Skript.registerExpression(ExprPrice.class, Float.class, ExpressionType.SIMPLE, "[the] price of %pakke%");
@@ -24,10 +25,6 @@ public class ExprPrice extends EventValueExpression<Float> {
     @Override
     public boolean isSingle() {
         return true;
-    }
-
-    public ExprPrice() {
-        super(Float.class);
     }
 
     @Override

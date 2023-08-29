@@ -5,6 +5,7 @@ import ch.njol.skript.expressions.base.EventValueExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
+import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import dk.manaxi.unikpay.api.classes.Pakke;
 import org.bukkit.event.Event;
@@ -13,20 +14,21 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class ExprId extends EventValueExpression<String> {
+public class ExprId extends SimpleExpression<String> {
     private Expression<Pakke> pakke;
     static {
         Skript.registerExpression(ExprId.class, String.class, ExpressionType.SIMPLE, "[the] id of %pakke%");
+    }
+
+    @Override
+    public boolean isSingle() {
+        return true;
     }
 
     @NotNull
     @Override
     public Class<? extends String> getReturnType() {
         return String.class;
-    }
-
-    public ExprId() {
-        super(String.class);
     }
 
     @Override

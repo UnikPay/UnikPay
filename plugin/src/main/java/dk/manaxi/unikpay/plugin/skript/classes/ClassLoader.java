@@ -41,7 +41,6 @@ public class ClassLoader {
 
                 }));
         Classes.registerClass(new ClassInfo<>(Pakke.class, "pakke")
-                .defaultExpression(new EventValueExpression<>(Pakke.class))
                 .user("pakker?")
                 .name("pakke")
                 .description("pakke")
@@ -70,7 +69,6 @@ public class ClassLoader {
 
                 }));
         Classes.registerClass(new ClassInfo<>(Subscription.class, "subscription")
-                .defaultExpression(new EventValueExpression<>(Subscription.class))
                 .user("subscription?")
                 .name("subscription")
                 .description("subscription")
