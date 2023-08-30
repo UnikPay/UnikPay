@@ -2,6 +2,7 @@ package dk.manaxi.unikpay.plugin.skript.expressions.pakke;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.expressions.base.EventValueExpression;
+import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -14,15 +15,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class ExprId extends SimpleExpression<String> {
-    private Expression<Pakke> pakke;
+public class ExprId extends SimplePropertyExpression<Pakke, String> {
     static {
-        Skript.registerExpression(ExprId.class, String.class, ExpressionType.SIMPLE, "[the] id of %pakke%");
-    }
-
-    @Override
-    public boolean isSingle() {
-        return true;
+        register(ExprId.class, String.class, "id", "pakke");
     }
 
     @NotNull
@@ -32,20 +27,12 @@ public class ExprId extends SimpleExpression<String> {
     }
 
     @Override
-    public boolean init(final Expression<?>[] exprs, final int matchedPattern, @NotNull final Kleenean isDelayed, @NotNull final SkriptParser.ParseResult parser) {
-        pakke = (Expression<Pakke>) exprs[0];
-        return true;
+    protected String getPropertyName() {
+        return "id";
     }
 
-    @NotNull
     @Override
-    public String toString(final @Nullable Event e, final boolean debug) {
-        return "[the] id of %pakke%";
-    }
-
-    @NotNull
-    @Override
-    protected String[] get(@NotNull Event e) {
-        return new String[]{Objects.requireNonNull(pakke.getSingle(e)).getId()};
+    public @Nullable String convert(Pakke pakke) {
+        return pakke.getId();
     }
 }
