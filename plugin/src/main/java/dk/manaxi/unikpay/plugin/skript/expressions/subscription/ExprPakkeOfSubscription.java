@@ -1,6 +1,7 @@
 package dk.manaxi.unikpay.plugin.skript.expressions.subscription;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -14,11 +15,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class ExprPakkeOfSubscription extends SimpleExpression<Pakke> {
-    private Expression<Subscription> subscription;
-
+public class ExprPakkeOfSubscription extends SimplePropertyExpression<Subscription, Pakke> {
     static {
-        Skript.registerExpression(ExprPakkeOfSubscription.class, Pakke.class, ExpressionType.SIMPLE, "[the] pakke of %subscription%");
+        register(ExprPakkeOfSubscription.class, Pakke.class, "pakke", "subscription");
     }
 
     @Override
@@ -26,25 +25,14 @@ public class ExprPakkeOfSubscription extends SimpleExpression<Pakke> {
         return Pakke.class;
     }
 
-    @Override
-    public boolean isSingle() {
-        return true;
-    }
-
-    @Override
-    public boolean init(final Expression<?>[] exprs, final int matchedPattern, final @NotNull Kleenean isDelayed, @NotNull final SkriptParser.ParseResult parser) {
-        subscription = (Expression<Subscription>) exprs[0];
-        return true;
-    }
-
-    @Override
-    public @NotNull String toString(final @Nullable Event e, final boolean debug) {
-        return "[the] pakke of %subscription%";
-    }
-
     @NotNull
     @Override
-    protected Pakke[] get(@NotNull Event e) {
-        return new Pakke[]{Objects.requireNonNull(subscription.getSingle(e)).getPakke()};
+    protected String getPropertyName() {
+        return "pakke";
+    }
+
+    @Override
+    public @Nullable Pakke convert(Subscription subscription) {
+        return subscription.getPakke();
     }
 }

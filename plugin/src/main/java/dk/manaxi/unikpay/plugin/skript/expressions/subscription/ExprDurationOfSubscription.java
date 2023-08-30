@@ -1,6 +1,7 @@
 package dk.manaxi.unikpay.plugin.skript.expressions.subscription;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -13,10 +14,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class ExprDurationOfSubscription extends SimpleExpression<Number> {
-    private Expression<Subscription> subscription;
+public class ExprDurationOfSubscription extends SimplePropertyExpression<Subscription, Number> {
     static {
-        Skript.registerExpression(ExprDurationOfSubscription.class, Number.class, ExpressionType.SIMPLE, "[the] duration of %subscription%");
+        register(ExprDurationOfSubscription.class, Number.class, "duration", "subscription");
     }
 
     @Override
@@ -24,25 +24,14 @@ public class ExprDurationOfSubscription extends SimpleExpression<Number> {
         return Number.class;
     }
 
-    @Override
-    public boolean isSingle() {
-        return true;
-    }
-
-    @Override
-    public boolean init(final Expression<?>[] exprs, final int matchedPattern, final @NotNull Kleenean isDelayed, @NotNull final SkriptParser.ParseResult parser) {
-        subscription = (Expression<Subscription>) exprs[0];
-        return true;
-    }
-
-    @Override
-    public @NotNull String toString(final @Nullable Event e, final boolean debug) {
-        return "[the] duration of %subscription%";
-    }
-
     @NotNull
     @Override
-    protected Number[] get(@NotNull Event e) {
-        return new Number[]{Objects.requireNonNull(subscription.getSingle(e)).getDuration()};
+    protected String getPropertyName() {
+        return "duration";
+    }
+
+    @Override
+    public @Nullable Number convert(Subscription subscription) {
+        return subscription.getDuration();
     }
 }

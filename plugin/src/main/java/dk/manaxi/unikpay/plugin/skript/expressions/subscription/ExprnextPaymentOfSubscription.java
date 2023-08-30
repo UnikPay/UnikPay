@@ -1,6 +1,7 @@
 package dk.manaxi.unikpay.plugin.skript.expressions.subscription;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -14,10 +15,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Date;
 import java.util.Objects;
 
-public class ExprnextPaymentOfSubscription extends SimpleExpression<Date> {
-    private Expression<Subscription> subscription;
+public class ExprnextPaymentOfSubscription extends SimplePropertyExpression<Subscription, Date> {
     static {
-        Skript.registerExpression(ExprnextPaymentOfSubscription.class, Date.class, ExpressionType.SIMPLE, "[the] next payment of %subscription%");
+        register(ExprnextPaymentOfSubscription.class, Date.class, "next payment", "subscription");
     }
 
     @Override
@@ -25,25 +25,15 @@ public class ExprnextPaymentOfSubscription extends SimpleExpression<Date> {
         return Date.class;
     }
 
-    @Override
-    public boolean isSingle() {
-        return true;
-    }
-
-    @Override
-    public boolean init(final Expression<?>[] exprs, final int matchedPattern, final @NotNull Kleenean isDelayed, @NotNull final SkriptParser.ParseResult parser) {
-        subscription = (Expression<Subscription>) exprs[0];
-        return true;
-    }
-
-    @Override
-    public @NotNull String toString(final @Nullable Event e, final boolean debug) {
-        return "[the] player of %subscription%";
-    }
 
     @NotNull
     @Override
-    protected Date[] get(@NotNull Event e) {
-        return new Date[]{Objects.requireNonNull(subscription.getSingle(e)).getNextPayment()};
+    protected String getPropertyName() {
+        return "next payment";
+    }
+
+    @Override
+    public @Nullable Date convert(Subscription subscription) {
+        return subscription.getNextPayment();
     }
 }
