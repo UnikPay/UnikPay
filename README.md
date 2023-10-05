@@ -15,7 +15,7 @@
 <dependency>
     <groupId>com.github.UnikPay.UnikPay</groupId>
     <artifactId>unikpay-plugin</artifactId>
-    <version>1.0.10</version>
+    <version>1.0.11</version>
 </dependency>
 ```
 ### Gradle Repository
