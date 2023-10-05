@@ -58,6 +58,7 @@ tasks.withType<ShadowJar> {
     exclude("META-INF/*.RSA")
     exclude("META-INF/LICENSE")
     minimize()
+    relocate("okhttp3", "dk.manaxi.okhttp3")
     archiveFileName.set("UnikPay.jar")
 }
 

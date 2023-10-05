@@ -65,21 +65,9 @@ public class UpdateManager {
             Files.delete(outputFile);
         }
 
-        //Ikke tested
         try (InputStream in = url.openStream()) {
             Files.copy(in, outputFile, StandardCopyOption.REPLACE_EXISTING);
         }
-
-        /* Det gamle
-        try (InputStream in = new BufferedInputStream(url.openStream());
-             OutputStream out = Files.newOutputStream(outputFile)) {
-            byte[] buffer = new byte[4096];
-            int bytesRead;
-            while ((bytesRead = in.read(buffer)) != -1) {
-                out.write(buffer, 0, bytesRead);
-            }
-        }
-        */
 
     }
 
