@@ -33,7 +33,7 @@ dependencies {
         exclude("junit", "junit")
         exclude("org.yaml", "snakeyaml")
     }
-    implementation("com.google.guava:guava:32.1.2-jre")
+    implementation("com.google.guava:guava:32.1.3-jre")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("org.json:json:20230618")
     compileOnly("com.github.SkriptLang:Skript:2.7.1") {
