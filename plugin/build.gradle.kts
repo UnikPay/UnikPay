@@ -35,7 +35,7 @@ dependencies {
     }
     implementation("com.google.guava:guava:32.1.3-jre")
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation("org.json:json:20230618")
+    implementation("org.json:json:20231013")
     compileOnly("com.github.SkriptLang:Skript:2.7.1") {
         exclude("com.sk89q", "worldguard")
         exclude("net.milkbowl.vault", "Vault")
