@@ -14,7 +14,7 @@ repositories {
     maven("https://repo.codemc.org/repository/maven-public")
     maven("https://papermc.io/repo/repository/maven-public/")
     maven("https://jitpack.io")
-    maven("'https://repo.skriptlang.org/releases'")
+    maven("https://repo.skriptlang.org/releases")
 }
 
 dependencies {
