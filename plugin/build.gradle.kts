@@ -23,7 +23,7 @@ dependencies {
         exclude("org.json", "json")
         exclude("com.squareup.okhttp3", "okhttp")
     }
-    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("org.apache.logging.log4j:log4j-core:2.21.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.10")
 
