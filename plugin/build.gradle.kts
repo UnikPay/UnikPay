@@ -25,7 +25,7 @@ dependencies {
     }
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("org.apache.logging.log4j:log4j-core:2.21.1")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.20")
 
     compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT") {
         exclude("com.google.code.gson", "gson")
@@ -36,7 +36,7 @@ dependencies {
     implementation("com.google.guava:guava:32.1.3-jre")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("org.json:json:20231013")
-    compileOnly("com.github.SkriptLang:Skript:2.7.1") {
+    compileOnly("com.github.SkriptLang:Skript:2.7.2") {
         exclude("com.sk89q", "worldguard")
         exclude("net.milkbowl.vault", "Vault")
     }
