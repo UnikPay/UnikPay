@@ -59,6 +59,14 @@ tasks.withType<ShadowJar> {
     exclude("META-INF/LICENSE")
     minimize()
     relocate("okhttp3", "dk.manaxi.okhttp3")
+    relocate("okio", "dk.manaxi.okio")
+    relocate("org.json", "dk.manaxi.json")
+    relocate("com.google", "dk.manaxi.google")
+    relocate("io.socket", "dk.manaxi.socket")
+    relocate("javax.annotation", "dk.manaxi.annotation")
+    relocate("kotlin", "dk.manaxi.kotlin")
+    relocate("org.jetbrains.annotations", "dk.manaxi.annotations")
+    relocate("org.checkerframework", "dk.manaxi.checkerframework")
     archiveFileName.set("UnikPay.jar")
 }
 
