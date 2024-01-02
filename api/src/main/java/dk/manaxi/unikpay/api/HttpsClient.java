@@ -10,11 +10,12 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.*;
 
 public class HttpsClient {
+    private static final OkHttpClient client = new OkHttpClient();
     public static String sendRequest(String url, String method, String obj, String auth, Map<String, String> params) {
         try {
-            OkHttpClient client = new OkHttpClient();
 
             RequestBody requestBody = null;
             if (obj != null) {
@@ -40,13 +41,16 @@ public class HttpsClient {
                     .header("Authorization", auth)
                     .build();
 
-            Response response = client.newCall(request).execute();
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            Callable<Response> callable = () -> client.newCall(request).execute();
+            Future<Response> future = executor.submit(callable);
+            Response response = future.get();
             int responseCode = response.code();
 
             assert response.body() != null;
 
             return response.body().string();
-        } catch (IOException e) {
+        } catch (IOException | ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
         return null;
@@ -54,20 +58,20 @@ public class HttpsClient {
 
     public static String getRequest(String url, String auth) {
         try {
-            OkHttpClient client = new OkHttpClient();
-
-
             Request request = new Request.Builder()
                     .url(url).get()
                     .header("Authorization", auth)
                     .build();
 
-            Response response = client.newCall(request).execute();
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            Callable<Response> callable = () -> client.newCall(request).execute();
+            Future<Response> future = executor.submit(callable);
+            Response response = future.get();
             int responseCode = response.code();
 
             assert response.body() != null;
             return response.body().string();
-        } catch (IOException e) {
+        } catch (IOException | ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
         return null;
