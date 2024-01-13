@@ -42,8 +42,8 @@ public class ClassLoader {
 
                     }).serializeAs(AcceptId.class));
         } catch (Exception ex) {
-            System.out.println("Fejlet med at register classinfo: AcceptId fordi " + ex.getMessage());
-            System.out.println("Hvis du har SaStore på din server, så skal du fjerne den, da den er inkompatibel med UnikPay");
+            Main.log.sendMessage("Fejlet med at register classinfo: AcceptId fordi " + ex.getMessage());
+            Main.log.sendMessage("Hvis du har SaStore på din server, så skal du fjerne den, da den er inkompatibel med UnikPay");
         }
         try {
             Classes.registerClass(new ClassInfo<>(Pakke.class, "pakke")
@@ -76,8 +76,8 @@ public class ClassLoader {
 
                     }).serializeAs(Pakke.class));
         } catch (Exception ex) {
-            System.out.println("Fejlet med at register classinfo: Pakke fordi " + ex.getMessage());
-            System.out.println("Hvis du har SaStore på din server, så skal du fjerne den, da den er inkompatibel med UnikPay");
+            Main.log.sendMessage("Fejlet med at register classinfo: Pakke fordi " + ex.getMessage());
+            Main.log.sendMessage("Hvis du har SaStore på din server, så skal du fjerne den, da den er inkompatibel med UnikPay");
         }
         try {
             Classes.registerClass(new ClassInfo<>(Subscription.class, "subscription")
@@ -106,8 +106,8 @@ public class ClassLoader {
 
                     }).serializeAs(Subscription.class));
         } catch (Exception ex) {
-            System.out.println("Fejlet med at register classinfo: Subscription fordi " + ex.getMessage());
-            System.out.println("Hvis du har SaStore på din server, så skal du fjerne den, da den er inkompatibel med UnikPay");
+            Main.log.sendMessage("Fejlet med at register classinfo: Subscription fordi " + ex.getMessage());
+            Main.log.sendMessage("Hvis du har SaStore på din server, så skal du fjerne den, da den er inkompatibel med UnikPay");
         }
     }
 }
