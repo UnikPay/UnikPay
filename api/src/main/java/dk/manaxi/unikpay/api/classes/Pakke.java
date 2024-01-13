@@ -3,9 +3,15 @@ package dk.manaxi.unikpay.api.classes;
 import com.google.gson.JsonObject;
 
 public class Pakke {
-    private String name;
-    private String id;
-    private float price;
+    private final String name;
+    private final String id;
+    private final float price;
+
+    public Pakke(String id) {
+        this.id = id;
+        this.name = id;
+        this.price = 0;
+    }
 
     public Pakke(float price, String name, String id) {
         this.name = name;
@@ -27,7 +33,7 @@ public class Pakke {
 
     @Override
     public String toString() {
-        return id.toString();
+        return id;
     }
 
     public JsonObject toJSON() {
