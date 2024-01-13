@@ -8,6 +8,8 @@ authors:
   - Iskoldcool
 softdepend:
   - Skript
+loadbefore:
+  - SAStore
 commands:
   unikpay:
     description: The command for the plugin.
