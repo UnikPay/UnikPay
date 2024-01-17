@@ -10,6 +10,7 @@ import dk.manaxi.unikpay.api.classes.Subscription;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
 import dk.manaxi.unikpay.plugin.event.OnSubscriptionPayment;
+import dk.manaxi.unikpay.plugin.fetch.Payments;
 import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -49,12 +50,18 @@ public class IoSocket {
                 List<Pakke> pakker = gson.fromJson(obj.getAsJsonArray("packages"), listType);
                 Pakke[] pakkerArray = pakker.toArray(new Pakke[0]);
 
+                String id = obj.get("_id").getAsString();
+
+                if(Payments.isSeen(id)) {
+                    return;
+                }
+
                 if (!obj.has("subscription") || obj.get("subscription").isJsonNull()) {
                     Bukkit.getScheduler().runTask(Main.getInstance(), () -> Bukkit.getPluginManager().callEvent(new OnBetaling(
                             Bukkit.getOfflinePlayer(uuid),
                             pakkerArray,
                             obj.get("amount").getAsFloat(),
-                            new AcceptId(obj.get("_id").getAsString())
+                            new AcceptId(id)
                     )));
                 } else {
                     Type listType2 = new TypeToken<Subscription>() {}.getType();
@@ -64,9 +71,12 @@ public class IoSocket {
                             pakkerArray,
                             obj.get("amount").getAsFloat(),
                             subscription,
-                            new AcceptId(obj.get("_id").getAsString())
+                            new AcceptId(id)
                     ));
                 }
+
+                Payments.addHandledBySocket(id);
+
             });
             socket.on("cmd", args -> {
                 Bukkit.getScheduler().runTask(Main.getInstance(), () -> Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), args[0].toString()));
