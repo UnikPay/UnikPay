@@ -42,7 +42,7 @@ public class Subscription {
     }
 
     public Package getPackage() {
-        return pakke;
+        return Package;
     }
 
     public String toString() {
