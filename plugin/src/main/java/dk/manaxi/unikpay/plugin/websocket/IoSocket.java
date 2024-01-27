@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import dk.manaxi.unikpay.api.Config;
-import dk.manaxi.unikpay.api.classes.Pakke;
+import dk.manaxi.unikpay.api.classes.Package;
 import dk.manaxi.unikpay.api.classes.Subscription;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
@@ -46,9 +46,9 @@ public class IoSocket {
 
                 JsonObject obj = jsonArray.get(0).getAsJsonObject();
                 UUID uuid = UUID.fromString(obj.getAsJsonObject("mcaccount").get("uuid").getAsString());
-                Type listType = new TypeToken<List<Pakke>>() {}.getType();
-                List<Pakke> pakker = gson.fromJson(obj.getAsJsonArray("packages"), listType);
-                Pakke[] pakkerArray = pakker.toArray(new Pakke[0]);
+                Type listType = new TypeToken<List<Package>>() {}.getType();
+                List<Package> Packages = gson.fromJson(obj.getAsJsonArray("packages"), listType);
+                Package[] packagesArray = Packages.toArray(new Package[0]);
 
                 String id = obj.get("_id").getAsString();
 
@@ -59,7 +59,7 @@ public class IoSocket {
                 if (!obj.has("subscription") || obj.get("subscription").isJsonNull()) {
                     Bukkit.getScheduler().runTask(Main.getInstance(), () -> Bukkit.getPluginManager().callEvent(new OnBetaling(
                             Bukkit.getOfflinePlayer(uuid),
-                            pakkerArray,
+                            packagesArray,
                             obj.get("amount").getAsFloat(),
                             new AcceptId(id)
                     )));
@@ -68,7 +68,7 @@ public class IoSocket {
                     Subscription subscription = gson.fromJson(obj.getAsJsonObject("subscription"), listType2);
                     Bukkit.getServer().getPluginManager().callEvent(new OnSubscriptionPayment(
                             Bukkit.getOfflinePlayer(uuid),
-                            pakkerArray,
+                            packagesArray,
                             obj.get("amount").getAsFloat(),
                             subscription,
                             new AcceptId(id)

@@ -8,7 +8,7 @@ public class Betaling {
 
     private Mcaccount mcaccount;
 
-    private Pakke[] packages;
+    private Package[] packages;
 
     private float amount;
 
@@ -22,7 +22,7 @@ public class Betaling {
         return this.mcaccount;
     }
 
-    public Pakke[] getPackages() {
+    public Package[] getPackages() {
         return this.packages;
     }
 

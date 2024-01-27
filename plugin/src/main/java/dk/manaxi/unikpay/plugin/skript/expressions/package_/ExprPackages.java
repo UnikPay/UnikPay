@@ -1,4 +1,4 @@
-package dk.manaxi.unikpay.plugin.skript.expressions.pakke;
+package dk.manaxi.unikpay.plugin.skript.expressions.package_;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Expression;
@@ -6,15 +6,15 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import dk.manaxi.unikpay.api.classes.Pakke;
+import dk.manaxi.unikpay.api.classes.Package;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ExprPakkes extends SimpleExpression<Pakke> {
+public class ExprPackages extends SimpleExpression<Package> {
     static {
-        Skript.registerExpression(ExprPakkes.class, Pakke.class, ExpressionType.SIMPLE, "(pakke|pakker|packages|package)");
+        Skript.registerExpression(ExprPackages.class, Package.class, ExpressionType.SIMPLE, "(packages|package)");
     }
 
     @Override
@@ -24,12 +24,12 @@ public class ExprPakkes extends SimpleExpression<Pakke> {
 
     @NotNull
     @Override
-    protected Pakke[] get(@NotNull Event e) {
+    protected Package[] get(@NotNull Event e) {
         if (!(e instanceof OnBetaling)) {
-            return new Pakke[]{};
+            return new Package[]{};
         }
 
-        return ((OnBetaling) e).getPakker();
+        return ((OnBetaling) e).getPackages();
     }
 
     @Override
@@ -38,13 +38,13 @@ public class ExprPakkes extends SimpleExpression<Pakke> {
     }
 
     @Override
-    public @NotNull Class<? extends Pakke> getReturnType() {
-        return Pakke.class;
+    public @NotNull Class<? extends Package> getReturnType() {
+        return Package.class;
     }
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean debug) {
-        return "the pakkes";
+        return "the packages";
     }
 
 

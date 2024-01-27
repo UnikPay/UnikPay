@@ -1,4 +1,4 @@
-package dk.manaxi.unikpay.plugin.skript.expressions.pakke;
+package dk.manaxi.unikpay.plugin.skript.expressions.package_;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
@@ -8,16 +8,16 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
-import dk.manaxi.unikpay.api.classes.Pakke;
+import dk.manaxi.unikpay.api.classes.Package;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class ExprPakke extends SimpleExpression<Pakke> {
+public class ExprPackage extends SimpleExpression<Package> {
     static {
-        Skript.registerExpression(ExprPakke.class, Pakke.class, ExpressionType.COMBINED, "[the] (pakke|package) (named|navngivet) %string% for %number% em[(eralds|s|eralder|erald)][ (med id|with id) %-string%] ");
+        Skript.registerExpression(ExprPackage.class, Package.class, ExpressionType.COMBINED, "[the] package named %string% for %number% em[(eralds|s)][ with id %-string%] ");
     }
 
     private Expression<String> NAME;
@@ -25,8 +25,8 @@ public class ExprPakke extends SimpleExpression<Pakke> {
     private Expression<String> ID;
 
     @Override
-    public @NotNull Class<? extends Pakke> getReturnType() {
-        return Pakke.class;
+    public @NotNull Class<? extends Package> getReturnType() {
+        return Package.class;
     }
 
     @Override
@@ -47,17 +47,17 @@ public class ExprPakke extends SimpleExpression<Pakke> {
 
     @Override
     public @NotNull String toString(@Nullable Event e, boolean arg1) {
-        return "[the] (pakke|package) (named|navngivet) %string% for %number% em(eralds|s|eralder)[ (med id|with id) %-string%]";
+        return "[the] package named %string% for %number% em[(eralds|s)][ with id %-string%] ";
     }
 
     @NotNull
     @Override
-    protected Pakke[] get(@NotNull Event e) {
+    protected Package[] get(@NotNull Event e) {
         if(ID != null) {
-            return new Pakke[]{new Pakke(Objects.requireNonNull(PRICE.getSingle(e)).floatValue(), NAME.getSingle(e), ID.getSingle(e))};
+            return new Package[]{new Package(Objects.requireNonNull(PRICE.getSingle(e)).floatValue(), NAME.getSingle(e), ID.getSingle(e))};
         }
 
-        return new Pakke[]{new Pakke(Objects.requireNonNull(PRICE.getSingle(e)).floatValue(), NAME.getSingle(e), NAME.getSingle(e))};
+        return new Package[]{new Package(Objects.requireNonNull(PRICE.getSingle(e)).floatValue(), NAME.getSingle(e), NAME.getSingle(e))};
     }
 
     @NotNull
@@ -67,6 +67,6 @@ public class ExprPakke extends SimpleExpression<Pakke> {
 
     @Override
     public boolean isLoopOf(String string) {
-        return string.equals("pakke");
+        return string.equals("package");
     }
 }

@@ -5,7 +5,7 @@ import ch.njol.skript.classes.Parser;
 import ch.njol.skript.expressions.base.EventValueExpression;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
-import dk.manaxi.unikpay.api.classes.Pakke;
+import dk.manaxi.unikpay.api.classes.Package;
 import dk.manaxi.unikpay.api.classes.Subscription;
 import dk.manaxi.unikpay.plugin.Main;
 import org.jetbrains.annotations.NotNull;
@@ -46,37 +46,37 @@ public class ClassLoader {
             Main.log.sendMessage("Hvis du har SaStore på din server, så skal du fjerne den, da den er inkompatibel med UnikPay");
         }
         try {
-            Classes.registerClass(new ClassInfo<>(Pakke.class, "pakke")
-                    .defaultExpression(new EventValueExpression<>(Pakke.class))
-                    .user("pakker?")
-                    .name("pakke")
-                    .description("pakke")
-                    .parser(new Parser<Pakke>() {
+            Classes.registerClass(new ClassInfo<>(Package.class, "package")
+                    .defaultExpression(new EventValueExpression<>(Package.class))
+                    .user("packages?")
+                    .name("package")
+                    .description("package")
+                    .parser(new Parser<Package>() {
                         @Override
                         public boolean canParse(@NotNull ParseContext context) {
                             return false;
                         }
 
                         @Override
-                        public Pakke parse(@NotNull String arg0, @NotNull ParseContext arg1) {
+                        public Package parse(@NotNull String arg0, @NotNull ParseContext arg1) {
                             return null;
                         }
 
                         @NotNull
                         @Override
-                        public String toString(Pakke arg0, int arg1) {
+                        public String toString(Package arg0, int arg1) {
                             return arg0.toString();
                         }
 
                         @NotNull
                         @Override
-                        public String toVariableNameString(Pakke arg0) {
+                        public String toVariableNameString(Package arg0) {
                             return arg0.toString();
                         }
 
-                    }).serializeAs(Pakke.class));
+                    }).serializeAs(Package.class));
         } catch (Exception ex) {
-            Main.log.sendMessage("Fejlet med at register classinfo: Pakke fordi " + ex.getMessage());
+            Main.log.sendMessage("Fejlet med at register classinfo: Package fordi " + ex.getMessage());
             Main.log.sendMessage("Hvis du har SaStore på din server, så skal du fjerne den, da den er inkompatibel med UnikPay");
         }
         try {

@@ -2,18 +2,18 @@ package dk.manaxi.unikpay.api.classes;
 
 import com.google.gson.JsonObject;
 
-public class Pakke {
+public class Package {
     private final String name;
     private final String id;
     private final float price;
 
-    public Pakke(String id) {
+    public Package(String id) {
         this.id = id;
         this.name = id;
         this.price = 0;
     }
 
-    public Pakke(float price, String name, String id) {
+    public Package(Float price, String name, String id) {
         this.name = name;
         this.id = id;
         this.price = price;

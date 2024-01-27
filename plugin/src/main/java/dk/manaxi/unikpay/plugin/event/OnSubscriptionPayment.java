@@ -1,7 +1,7 @@
 package dk.manaxi.unikpay.plugin.event;
 
 
-import dk.manaxi.unikpay.api.classes.Pakke;
+import dk.manaxi.unikpay.api.classes.Package;
 import dk.manaxi.unikpay.api.classes.Subscription;
 import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import org.bukkit.Bukkit;
@@ -13,15 +13,15 @@ import org.bukkit.event.HandlerList;
 public class OnSubscriptionPayment extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     private final OfflinePlayer player;
-    private final Pakke[] pakker;
+    private final Package[] packages;
     private final float amount;
     private final Subscription sub;
     private final AcceptId id;
     private Boolean cancelled = Boolean.FALSE;
 
-    public OnSubscriptionPayment(OfflinePlayer player, Pakke[] pakker, float amount, Subscription sub, AcceptId id) {
+    public OnSubscriptionPayment(OfflinePlayer player, Package[] packages, float amount, Subscription sub, AcceptId id) {
         this.player = player;
-        this.pakker = pakker;
+        this.packages = packages;
         this.amount = amount;
         this.sub = sub;
         this.id = id;
@@ -31,12 +31,8 @@ public class OnSubscriptionPayment extends Event implements Cancellable {
         return Bukkit.getOfflinePlayer(this.player.getUniqueId());
     }
 
-    public Pakke[] getPakker() {
-        return pakker;
-    }
-
-    public Pakke getPakke() {
-        return pakker[0];
+    public Package[] getPackages() {
+        return packages;
     }
 
     public float getAmount() {

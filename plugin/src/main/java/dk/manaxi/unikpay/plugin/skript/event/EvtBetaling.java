@@ -6,7 +6,7 @@ import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
-import dk.manaxi.unikpay.api.classes.Pakke;
+import dk.manaxi.unikpay.api.classes.Package;
 import dk.manaxi.unikpay.plugin.event.OnBetaling;
 import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import org.bukkit.OfflinePlayer;
@@ -44,16 +44,16 @@ public class EvtBetaling extends SkriptEvent {
             }
         }, 0);
 
-        EventValues.registerEventValue(OnBetaling.class, Pakke[].class, new Getter<Pakke[], OnBetaling>() {
-            public Pakke[] get(OnBetaling event) {
-                return event.getPakker();
+        EventValues.registerEventValue(OnBetaling.class, Package[].class, new Getter<Package[], OnBetaling>() {
+            public Package[] get(OnBetaling event) {
+                return event.getPackages();
             }
         }, 0);
 
 
-        EventValues.registerEventValue(OnBetaling.class, Pakke.class, new Getter<Pakke, OnBetaling>() {
-            public Pakke get(OnBetaling event) {
-                return event.getPakker()[0];
+        EventValues.registerEventValue(OnBetaling.class, Package.class, new Getter<Package, OnBetaling>() {
+            public Package get(OnBetaling event) {
+                return event.getPackages()[0];
             }
         }, 0);
     }

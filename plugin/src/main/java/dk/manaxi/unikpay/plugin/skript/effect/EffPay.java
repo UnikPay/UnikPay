@@ -15,28 +15,28 @@ import org.jetbrains.annotations.Nullable;
 public class EffPay extends Effect {
     private Expression<Player> player;
     private Expression<Number> amount;
-    private Expression<String> pakke;
+    private Expression<String> Package;
 
 
     static {
-        Skript.registerEffect(EffPay.class, "[unikpay] pay %player% %number% em[(eralds|s|eralder|erald)] for %string%");
+        Skript.registerEffect(EffPay.class, "[unikpay] pay %player% %number% em[(eralds|s)] for %string%");
     }
 
     @Override
     protected void execute(@NotNull Event event) {
         final Player player = this.player.getSingle(event);
         final Number amount = this.amount.getSingle(event);
-        final String pakke = this.pakke.getSingle(event);
+        final String Package = this.Package.getSingle(event);
 
         if (Main.getAPIKEY() == null) {
             Skript.error("Du mangler at putte din apikey ind i config.yml");
             return;
         }
 
-        if (player == null || pakke == null)
+        if (player == null || Package == null)
             return;
 
-        Internal.sendPayRequest(player, pakke, amount);
+        Internal.sendPayRequest(player, Package, amount);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class EffPay extends Effect {
     public boolean init(Expression<?>[] expressions, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull SkriptParser.ParseResult parseResult) {
         this.player = (Expression<Player>) expressions[0];
         this.amount = (Expression<Number>) expressions[1];
-        this.pakke = (Expression<String>) expressions[2];
+        this.Package = (Expression<String>) expressions[2];
         return true;
     }
 }

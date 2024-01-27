@@ -10,7 +10,7 @@ public class Subscription {
     private String durationType;
     private String nextPayment;
     private Mcaccount mcaccount;
-    private Pakke pakke;
+    private Package Package;
     private float amount;
 
     public Subscription(String id) {
@@ -41,7 +41,7 @@ public class Subscription {
         return mcaccount;
     }
 
-    public Pakke getPakke() {
+    public Package getPackage() {
         return pakke;
     }
 

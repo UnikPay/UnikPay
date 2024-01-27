@@ -6,7 +6,7 @@ import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
-import dk.manaxi.unikpay.api.classes.Pakke;
+import dk.manaxi.unikpay.api.classes.Package;
 import dk.manaxi.unikpay.api.classes.Subscription;
 import dk.manaxi.unikpay.plugin.event.OnSubscriptionPayment;
 import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
@@ -45,16 +45,16 @@ public class EvtSubscriptionPayment extends SkriptEvent {
             }
         }, 0);
 
-        EventValues.registerEventValue(OnSubscriptionPayment.class, Pakke[].class, new Getter<Pakke[], OnSubscriptionPayment>() {
-            public Pakke[] get(OnSubscriptionPayment event) {
-                return event.getPakker();
+        EventValues.registerEventValue(OnSubscriptionPayment.class, Package[].class, new Getter<Package[], OnSubscriptionPayment>() {
+            public Package[] get(OnSubscriptionPayment event) {
+                return event.getPackages();
             }
         }, 0);
 
 
-        EventValues.registerEventValue(OnSubscriptionPayment.class, Pakke.class, new Getter<Pakke, OnSubscriptionPayment>() {
-            public Pakke get(OnSubscriptionPayment event) {
-                return event.getPakker()[0];
+        EventValues.registerEventValue(OnSubscriptionPayment.class, Package.class, new Getter<Package, OnSubscriptionPayment>() {
+            public Package get(OnSubscriptionPayment event) {
+                return event.getPackages()[0];
             }
         }, 0);
 

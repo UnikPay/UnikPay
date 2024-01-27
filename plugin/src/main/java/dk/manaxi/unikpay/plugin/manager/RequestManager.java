@@ -8,7 +8,7 @@ import com.google.gson.JsonObject;
 import dk.manaxi.unikpay.api.Config;
 import dk.manaxi.unikpay.api.HttpsClient;
 import dk.manaxi.unikpay.api.classes.DurationType;
-import dk.manaxi.unikpay.api.classes.Pakke;
+import dk.manaxi.unikpay.api.classes.Package;
 import dk.manaxi.unikpay.api.classes.Subscription;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnPayRequest;
@@ -19,22 +19,17 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class RequestManager {
-
-    public static void sendPackageRequest(Player player, String pakke, Number price, String id) {
-        sendPackageRequest(player, new Pakke[]{new Pakke(price.floatValue(), pakke, id)});
-    }
-
-    public static void sendPackageRequest(Player player, Pakke[] packages) {
+    public static void sendPackageRequest(Player player, Package[] packages) {
         String url = Config.MAINURL + "request";
         JsonObject payload = new JsonObject();
         payload.addProperty("uuid", player.getUniqueId().toString());
-        JsonArray pakker = new JsonArray();
+        JsonArray packagesJson = new JsonArray();
 
-        for (Pakke pakke : packages) {
-            pakker.add(pakke.toJSON());
+        for (Package Package : packages) {
+            packagesJson.add(Package.toJSON());
         }
 
-        payload.add("pakker", pakker);
+        payload.add("packages", packagesJson);
 
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
             String svar = HttpsClient.sendRequest(url, "POST", payload.toString(), Main.getAPIKEY(), null);
@@ -55,11 +50,11 @@ public class RequestManager {
         });
     }
 
-    public static JsonObject sendSubscriptionRequest(Player player, Pakke pakke, Number duration, DurationType type) {
+    public static JsonObject sendSubscriptionRequest(Player player, Package Package, Number duration, DurationType type) {
         String url = Config.MAINURL + "subscription";
         JsonObject payload = new JsonObject();
         payload.addProperty("uuid", player.getUniqueId().toString());
-        payload.add("pakke", pakke.toJSON());
+        payload.add("packages", Package.toJSON());
         payload.addProperty("duration", duration);
         payload.addProperty("durationType", type.shortName);
 
