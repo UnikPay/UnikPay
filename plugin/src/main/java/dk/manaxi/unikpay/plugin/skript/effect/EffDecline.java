@@ -19,7 +19,7 @@ public class EffDecline extends Effect {
     private Expression<AcceptId> id;
 
     static {
-        Skript.registerEffect(EffDecline.class, "unikpay afvis betaling %id%");
+        Skript.registerEffect(EffDecline.class, "unikpay afvis betaling %unikid%");
     }
 
     @Override
@@ -48,7 +48,7 @@ public class EffDecline extends Effect {
     @NotNull
     @Override
     public String toString(Event e, boolean debug) {
-        return "unikpay accepter betaling %id%";
+        return "unikpay accepter betaling %unikid%";
     }
     
 
