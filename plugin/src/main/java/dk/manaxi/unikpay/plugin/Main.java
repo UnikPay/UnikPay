@@ -5,7 +5,7 @@ import dk.manaxi.unikpay.plugin.enums.Hook;
 import dk.manaxi.unikpay.plugin.fetch.Payments;
 import dk.manaxi.unikpay.plugin.hooks.SkriptHook;
 import dk.manaxi.unikpay.plugin.interfaces.IHook;
-import dk.manaxi.unikpay.plugin.listeners.OnJoin;
+import dk.manaxi.unikpay.plugin.listeners.OnSync;
 import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import dk.manaxi.unikpay.plugin.utils.Config;
 import dk.manaxi.unikpay.plugin.websocket.Console;
@@ -49,7 +49,7 @@ public final class Main extends JavaPlugin {
         initialiseHooks();
         IoSocket.connectSocket();
         if(Main.configYML.getBoolean("update-notify", true)) {
-            Bukkit.getServer().getPluginManager().registerEvents(new OnJoin(), this);
+            Bukkit.getServer().getPluginManager().registerEvents(new OnSync(), this);
         }
 
         log.sendMessage(ColorUtils.getColored("", " &2Hooking into console"));
