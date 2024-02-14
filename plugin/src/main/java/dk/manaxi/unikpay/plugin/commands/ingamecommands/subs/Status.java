@@ -35,17 +35,15 @@ public class Status extends ISubCommand {
                 Placeholder.parsed("wsstatus", (!IoSocket.getSocket().connected() ? "<#55FF55>✖" : "<#55FF55>✓")),
                 Placeholder.parsed("apistatus", (!isURLAvailable(dk.manaxi.unikpay.api.Config.MAINURL) ? "<#FF5555>✖" : "<#55FF55>✓")),
                 Placeholder.parsed("apikey", (Main.getAPIKEY() == null ? "<#FF5555>✖" : "<#55FF55>✓")),
-                Placeholder.parsed("skriptstatus", (!Main.isHookInitialised(Hook.SKRIPT) ? "<#FF5555>✖" : "<#55FF55>✓")),
+                Placeholder.parsed("skriptstatus", (!Main.isHookInitialised(Hook.SKRIPT) ? "<#FF5555>✖" : "<#55FF55>✓"))
         );
         if (Main.getInstance().getDescription().getVersion().split("-").length > 1 && Main.getInstance().getDescription().getVersion().split("-")[1].equals("SNAPSHOT")) {
-            sender.sendMessage(ColorUtils.getColored("&7 "));
-            sender.sendMessage(ColorUtils.getColored(" &fDu kører en snapshot version af UnikPay og det er ikke anbefalet!"));
-            sender.sendMessage(ColorUtils.getColored(" &fBenyt dig af &a/unikpay update"));
+            Main.getInstance().getLang().send(player, "unikpay.status.snapshot",
+                    Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
         }
         if (UpdateManager.isANewVersionAvailable(Main.getInstance().getDescription().getVersion())) {
-            sender.sendMessage(ColorUtils.getColored("&7 "));
-            sender.sendMessage(ColorUtils.getColored(" &fDer er en ny version af &aUnikpay.Jar"));
-            sender.sendMessage(ColorUtils.getColored(" &fBenyt dig af &a/unikpay update"));
+            Main.getInstance().getLang().send(player, "unikpay.status.update",
+                    Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
         }
     }
 

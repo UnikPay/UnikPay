@@ -33,7 +33,12 @@ unikpay:
         - "<#55FF55> - <#AAAAAA>Skript forbindelse: <#55FF55><skriptstatus>"
     snapshot:
         - "<prefix>"
-        -
+        - "<#FF5555>Du kører en snapshot version af UnikPay og det er ikke anbefalet!"
+        - "<#FF5555>Benyt dig af <#55FF55>/unikpay update"
+    update:
+      - "<prefix>"
+      - "<#55FF55>Der er en ny version af <#55FF55>UnikPay <#55FF55>tilgængelig!"
+      - "<#55FF55>Benyt dig af <#55FF55>/unikpay update"
 
 
 no-permission:
