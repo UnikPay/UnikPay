@@ -12,6 +12,7 @@ import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.api.classes.Subscription;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnPayRequest;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -44,13 +45,13 @@ public class RequestManager {
             String message = response.get("message").getAsString();
 
             if(message.trim().equalsIgnoreCase(Config.IKKELINKET_MESSAGE)) {
-                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ikkelinket");
+                Main.getInstance().getLang().send(player, "ikkelinket", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
             } else if(message.trim().equalsIgnoreCase(Config.IKKEMC)) {
-                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ikkelinket");
+                Main.getInstance().getLang().send(player, "ikkelinket", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
             } else if (message.equalsIgnoreCase(Config.ACCEPTERE_KOEBET)) {
-                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "accepterbetaling");
+                Main.getInstance().getLang().send(player, "accepterbetaling", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
             } else if (message.equalsIgnoreCase(Config.RATELIMIT)) {
-                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ratetime");
+                Main.getInstance().getLang().send(player, "ratetime", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
             }
         });
     }
@@ -71,15 +72,15 @@ public class RequestManager {
 
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
             if(message.trim().equalsIgnoreCase(Config.IKKELINKET_MESSAGE)) {
-                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ikkelinket");
+                Main.getInstance().getLang().send(player, "ikkelinket", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
             } else if(message.trim().equalsIgnoreCase(Config.IKKEMC)) {
-                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ikkelinket");
+                Main.getInstance().getLang().send(player, "ikkelinket", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
             } else if (message.equalsIgnoreCase(Config.ACCEPTERE_KOEBET)) {
-                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "accepterbetaling");
+                Main.getInstance().getLang().send(player, "accepterbetaling", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
             } else if (message.equalsIgnoreCase(Config.RATELIMIT)) {
-                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ratetime");
+                Main.getInstance().getLang().send(player, "ratetime", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
             } else if (message.equalsIgnoreCase(Config.ALLEREDE_SUB)) {
-                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "allerede_sub");
+                Main.getInstance().getLang().send(player, "alleredesub", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
             }
         });
 
@@ -123,12 +124,12 @@ public class RequestManager {
             boolean success = response.get("success").getAsBoolean();
 
             if(success) {
-                dk.manaxi.unikpay.plugin.configuration.Config.send(player, "paysuccess");
+                Main.getInstance().getLang().send(player, "unikpay.pay.success", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
             } else {
                 if(message.trim().equalsIgnoreCase(Config.IKKELINKET_MESSAGE)) {
-                    dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ikkelinket");
+                    Main.getInstance().getLang().send(player, "ikkelinket", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
                 } else if(message.trim().equalsIgnoreCase(Config.IKKEMC)) {
-                    dk.manaxi.unikpay.plugin.configuration.Config.send(player, "ikkelinket");
+                    Main.getInstance().getLang().send(player, "ikkelinket", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
                 }
                 Skript.error(svar);
                 Main.getInstance().getLogger().info("En fejl opstod: " + svar);

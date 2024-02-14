@@ -1,66 +1,60 @@
 package dk.manaxi.unikpay.plugin.configuration;
 
 import dk.manaxi.unikpay.plugin.Main;
-import dk.manaxi.unikpay.plugin.utils.ColorUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import org.spongepowered.configurate.ConfigurationNode;
+import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 
-import java.util.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class Config {
-    private static Map<String, String[]> configs;
+    private ConfigurationNode node;
+    private String splitNode(String key, String defaultValue) {
+        String[] nodes = key.split("\\.");
+        ConfigurationNode node = this.node;
+        for (String subNode : nodes) {
+            node = node.node(subNode);
+        }
+        return node.getString(defaultValue);
+    }
 
-    public static void loadALl() {
-        configs = new HashMap<>();
-        for (String path : Main.configYML.getKeys(true)) {
-            if (!Main.configYML.isConfigurationSection(path)) {
-                if (Main.configYML.getStringList(path) != null && Main.configYML.isList(path)) {
-                    List<String> stringList = ColorUtils.getColored(Main.configYML.getStringList(path));
-                    configs.put(path, stringList.toArray(new String[0]));
-                    continue;
-                }
-                if (Main.configYML.getString(path) != null) {
-                    List<String> stringList = Collections.singletonList(ColorUtils.getColored(Main.configYML.getString(path)));
-                    configs.put(path, stringList.toArray(new String[0]));
-                }
+    private Boolean splitNode(String key, Boolean defaultValue) {
+        String[] nodes = key.split("\\.");
+        ConfigurationNode node = this.node;
+        for (String subNode : nodes) {
+            node = node.node(subNode);
+        }
+        return node.getBoolean(defaultValue);
+    }
+
+    public String getAPIKEY() {
+        return splitNode("api-key", "KEY HER");
+    }
+
+    public String getADMINPERMISSION() {
+        return splitNode("admin-permission", "unikpay.admin");
+    }
+
+    public Boolean getSKRIPTHOOK() {
+        return splitNode("skript-hook", true);
+    }
+
+    public Boolean getUPDATENOTIFY() {
+        return splitNode("update-notify", true);
+    }
+
+    public void load() throws IOException {
+        final Path config = Main.getInstance().getDataFolder().toPath().resolve("config.yml");
+        if (!Files.exists(config)) {
+            try (InputStream stream = Main.getInstance().getResource("config.yml")) {
+                assert stream != null;
+                Files.copy(stream, config);
             }
         }
-    }
-    public static String[] get(String path) {
-        return configs.getOrDefault(path, new String[]{});
-    }
-
-    public static String[] get(String path, String... replacements) {
-        if (configs.containsKey(path)) {
-            String[] messages = get(path);
-            List<String> messageList = new ArrayList<>();
-            for (String message : messages) {
-                for (int i = 0; i < replacements.length; i += 2) {
-                    message = message.replaceAll(replacements[i], replacements[i + 1]);
-                }
-                messageList.add(message);
-            }
-            return messageList.toArray(new String[0]);
-        }
-        return new String[]{};
-    }
-
-    private static void sendMessages(CommandSender player, String path, String... replacements) {
-        String[] messages = get(path);
-        for (String message : messages) {
-            for (int i = 0; i < replacements.length; i += 2) {
-                message = message.replaceAll(replacements[i], replacements[i + 1]);
-            }
-            player.sendMessage(message);
-        }
-    }
-
-    public static void send(CommandSender player, String path, String... replacements) {
-        sendMessages(player, path, replacements);
-    }
-
-    public static void send(Player player, String path, String... replacements) {
-        sendMessages(player, path, replacements);
+        final YamlConfigurationLoader loader = YamlConfigurationLoader.builder().path(config).build();
+        this.node = loader.load();
+        // Convert the InputStream to a ConfigurationNode
     }
 }

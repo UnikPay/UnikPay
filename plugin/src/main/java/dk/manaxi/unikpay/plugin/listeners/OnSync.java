@@ -6,6 +6,7 @@ import dk.manaxi.unikpay.plugin.configuration.Config;
 import dk.manaxi.unikpay.plugin.manager.UpdateManager;
 import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import dk.manaxi.unikpay.plugin.websocket.IoSocket;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,9 +23,7 @@ public class OnSync implements Listener {
             jsonObject.addProperty("username", event.getPlayer().getName());
             IoSocket.getSocket().emit("playerJoin", jsonObject);
             if (event.getPlayer().isOp() && UpdateManager.isANewVersionAvailable(Main.getInstance().getDescription().getVersion()))  {
-                event.getPlayer().sendMessage(Config.get("prefix")[0]);
-                event.getPlayer().sendMessage(ColorUtils.getColored(" &fDer er en ny version af &aUnikpay.Jar"));
-                event.getPlayer().sendMessage(ColorUtils.getColored(" &fBenyt dig af &a/unikpay update"));
+                Main.getInstance().getLang().send(event.getPlayer(), "unikpay.status.update", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
             }
         });
 

@@ -2,9 +2,7 @@ package dk.manaxi.unikpay.plugin.commands.ingamecommands.subs;
 
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.commands.ISubCommand;
-import dk.manaxi.unikpay.plugin.configuration.Config;
 import dk.manaxi.unikpay.plugin.manager.UpdateManager;
-import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

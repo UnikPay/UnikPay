@@ -1,6 +1,7 @@
 package dk.manaxi.unikpay.plugin;
 
 import dk.manaxi.unikpay.plugin.commands.CommandManager;
+import dk.manaxi.unikpay.plugin.configuration.Config;
 import dk.manaxi.unikpay.plugin.configuration.Lang;
 import dk.manaxi.unikpay.plugin.enums.Hook;
 import dk.manaxi.unikpay.plugin.fetch.Payments;
@@ -8,7 +9,6 @@ import dk.manaxi.unikpay.plugin.hooks.SkriptHook;
 import dk.manaxi.unikpay.plugin.interfaces.IHook;
 import dk.manaxi.unikpay.plugin.listeners.OnSync;
 import dk.manaxi.unikpay.plugin.utils.ColorUtils;
-import dk.manaxi.unikpay.plugin.utils.Config;
 import dk.manaxi.unikpay.plugin.websocket.Console;
 import dk.manaxi.unikpay.plugin.websocket.IoSocket;
 import lombok.Getter;
@@ -32,7 +32,7 @@ public final class Main extends JavaPlugin {
     private static Main instance;
     @Getter
     private Lang lang;
-    public static Config config;
+    public static dk.manaxi.unikpay.plugin.configuration.Config config;
     public static FileConfiguration configYML;
     public static ConsoleCommandSender log;
     private static final HashMap<Hook, Boolean> HOOKS = new HashMap<>();
@@ -86,19 +86,20 @@ public final class Main extends JavaPlugin {
     }
 
     private void initialiseConfigs() {
-        saveDefaultConfig();
-        if (!(new File(getDataFolder(), "config.yml")).exists())saveResource("config.yml", false);
-        config = new Config(this, null, "config.yml");
-        configYML = config.getConfig();
+        try {
+            config = new Config();
+            config.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         log.sendMessage(ColorUtils.getColored("", "  &2Getting your apikey"));
-        dk.manaxi.unikpay.plugin.configuration.Config.loadALl();
-        if (configYML.getString("Api-key").isEmpty() || configYML.getString("Api-key").equals("KEY HER")) {
+        if (config.getAPIKEY().isEmpty() || config.getAPIKEY().equals("KEY HER")) {
             log.sendMessage(ColorUtils.getColored("", "", " &c- Du mangler at putte din apikey ind i config.yml"));
             APIKEY = null;
             return;
         }
         log.sendMessage(ColorUtils.getColored("", "", " &a- Fandt din api-key"));
-        APIKEY = configYML.getString("Api-key");
+        APIKEY = config.getAPIKEY();
         try {
             this.lang = new Lang();
             this.lang.load();
