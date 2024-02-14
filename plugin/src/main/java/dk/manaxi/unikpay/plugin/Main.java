@@ -10,6 +10,7 @@ import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import dk.manaxi.unikpay.plugin.utils.Config;
 import dk.manaxi.unikpay.plugin.websocket.Console;
 import dk.manaxi.unikpay.plugin.websocket.IoSocket;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.bukkit.Bukkit;
@@ -22,10 +23,8 @@ import java.io.File;
 import java.util.HashMap;
 
 public final class Main extends JavaPlugin {
-
     private static final String url = dk.manaxi.unikpay.api.Config.MAINURL + "request";
-
-
+    private BukkitAudiences adventure;
     private static Main instance;
     public static Config config;
     public static FileConfiguration configYML;
@@ -35,6 +34,7 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        this.adventure = BukkitAudiences.create(this);
         log = Bukkit.getConsoleSender();
         log.sendMessage(ColorUtils.getColored("&8&m---------------------------------&r", "", "  &2Enabling &aUnikPay &fv" + getDescription().getVersion()));
         long timestampBeforeLoad = System.currentTimeMillis();
@@ -70,6 +70,10 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if(this.adventure != null) {
+            this.adventure.close();
+            this.adventure = null;
+        }
         log.sendMessage(ColorUtils.getColored("&8&m---------------------------------&r", "", "  &4UnikPay Disabled!", "    &cVersion: &f" + getDescription().getVersion(), "    &cAuthors: &f" + getDescription().getAuthors(), "", "&8&m---------------------------------&r"));
         IoSocket.getSocket().disconnect();
     }

@@ -40,6 +40,9 @@ dependencies {
         exclude("com.sk89q", "worldguard")
         exclude("net.milkbowl.vault", "Vault")
     }
+    implementation("org.spongepowered:configurate-yaml:4.2.0-SNAPSHOT")
+    implementation("net.kyori:adventure-api:4.15.0")
+    implementation("net.kyori:adventure-platform-bukkit:4.3.2")
 }
 
 tasks.processResources {
