@@ -1,0 +1,110 @@
+unikpay:
+    help:
+        default:
+            - "<prefix>"
+            - "<#AAAAAA> - <#55FF55>/unikpay <#FF5555>Viser denne hjælp."
+            - "<#AAAAAA> - <#55FF55>/unikpay discord <#FF5555>Sender et link til vores Discord-server."
+        admin:
+            - "<#AAAAAA> - <#55FF55>/unikpay reload <#FF5555>Genindlæser konfigurationen."
+            - "<#AAAAAA> - <#55FF55>/unikpay status <#FF5555>Viser status for din server."
+            - "<#AAAAAA> - <#55FF55>/unikpay update <#FF5555>Opdaterer pluginen."
+    discord:
+        - "<prefix>"
+        - "<#55FF55>Join vores Discord-server: ( https://discord.gg/jnWKcuVmWf )"
+    reload:
+        reloading:
+            - "<prefix>"
+            - "<#55FF55>Genindlæser konfigurationen."
+        reloaded:
+            - " "
+            - "<#55FF55>Genindlæste alt. <#AAAAAA>(<time> ms)"
+        error:
+            - " "
+            - "<#FF5555>Der skete en fejl under genindlæsningen."
+            - "<#FF5555>Se konsollen for mere information."
+    status:
+        info:
+            - "<prefix>"
+            - "<#55FF55>UnikPay status:"
+            - "<#55FF55> - <#AAAAAA>Version: <#55FF55><version>"
+            - "<#55FF55> - <#AAAAAA>WebSocket forbindelse: <#55FF55><wsstatus>"
+            - "<#55FF55> - <#AAAAAA>API forbindelse: <#55FF55><apistatus>"
+            - "<#55FF55> - <#AAAAAA>API-nøgle indsat: <#55FF55><apikey>"
+            - "<#55FF55> - <#AAAAAA>Skript forbindelse: <#55FF55><skriptstatus>"
+        snapshot:
+            - " "
+            - "<#FF5555>Du kører en snapshot version af UnikPay og det er ikke anbefalet!"
+            - "<#FF5555>Benyt dig af <#55FF55>/unikpay update"
+        update:
+            - " "
+            - "<#55FF55>Der er en ny version af <#55FF55>UnikPay <#55FF55>tilgængelig!"
+            - "<#55FF55>Benyt dig af <#55FF55>/unikpay update"
+    update:
+        start:
+            - "<prefix>"
+            - "<#55FF55>Opdaterer pluginen..."
+        success:
+            - " "
+            - "<#55FF55>Opdateringen blev gennemført."
+            - "<#55FF55>Genstart din server for at anvende opdateringen."
+        error:
+            - " "
+            - "<#FF5555>Der skete en fejl under opdateringen."
+            - "<#FF5555>Se konsollen for mere information."
+
+console:
+    enabling:
+        - "<#555555><st>---------------------------------</st>"
+        - " "
+        - "<#00AA00>Enabling <#55FF55>UnikPay <#FFFFFF>v<version>"
+    config:
+        - " "
+        - "<#00AA00>Hooking into <#55FF55>Lang <#00AA00>and <#55FF55>Config systems"
+    commands:
+        - " "
+        - "<#00AA00>Hooking into <#55FF55>Commands"
+    successCommands:
+        - "<#55FF55>Commands <#00AA00>successfully hooked"
+    errorCommands:
+        - "<#FF5555>Commands <#00AA00>failed to hook"
+    integrations:
+        - " "
+        - "<#00AA00>Hooking into <#55FF55>Integrations"
+    successSkript:
+        - "<#55FF55>Skript <#00AA00>successfully hooked"
+    errorSkript:
+        - "<#FF5555>Skript <#00AA00>failed to hook"
+    webSocket:
+        - " "
+        - "<#00AA00>Hooking into <#55FF55>WebSocket"
+    console:
+        - " "
+        - "<#00AA00>Hooking into <#55FF55>Console"
+    done:
+        - " "
+        - "<#00AA00>UnikPay <#55FF55>v<version> <#00AA00>is now enabled!"
+        - "<#00AA00>Authors: <#55FF55><authors>"
+        - "<#00AA00>It took <#55FF55><time>ms <#00AA00>to enable the plugin."
+        - "<#555555><st>---------------------------------</st>"
+    getapi:
+        - "<#555555>- <#00AA00>Getting API-key from config.yml"
+    apikeymissing:
+        - "<#FF5555>API-key is missing in config.yml"
+    apikeyfound:
+        - "<#00AA00>API-key found in config.yml"
+    disabled:
+        - "<#555555><st>---------------------------------</st>"
+        - " "
+        - "<#FF5555>UnikPay <#FFFFFF>v<version> <#FF5555>is disabled!"
+        - "<#FF5555>Authors: <#FFFFFF><authors>"
+        - " "
+        - "<#555555><st>---------------------------------</st>"
+    reloading:
+        - "<#555555><st>---------------------------------</st>"
+        - " "
+        - "<#00AA00>Reloading <#55FF55>UnikPay <#FFFFFF>v<version>"
+    reloaded:
+        - " "
+        - "<#00AA00>UnikPay <#55FF55>v<version> <#00AA00>has been reloaded!"
+        - "<#00AA00>It took <#55FF55><time>ms <#00AA00>to reload the plugin."
+        - "<#555555><st>---------------------------------</st>"

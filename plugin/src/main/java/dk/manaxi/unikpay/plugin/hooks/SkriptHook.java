@@ -3,14 +3,16 @@ package dk.manaxi.unikpay.plugin.hooks;
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
 import dk.manaxi.unikpay.plugin.Main;
-import dk.manaxi.unikpay.plugin.utils.ColorUtils;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 
 public class SkriptHook extends Hook {
+    @Getter
     private static SkriptAddon addon = null;
+    @Getter
     private static Skript Instance = null;
 
     public SkriptHook() {
@@ -22,7 +24,7 @@ public class SkriptHook extends Hook {
         if (!isEnabled())
             return false;
 
-        if(!Main.configYML.getBoolean("skript-hook", true))
+        if(!Main.getInstance().getConfigSystem().getSKRIPTHOOK())
             return false;
 
         try {
@@ -31,10 +33,10 @@ public class SkriptHook extends Hook {
                 addon = Skript.registerAddon(Main.getInstance());
                 addon.loadClasses("dk.manaxi.unikpay.plugin", "skript");
             } catch (IOException exception) {
-                Main.log.sendMessage(ColorUtils.getColored("   &c - SKRIPT COULD NOT BE HOOKED"));
-                exception.printStackTrace();
+                Main.getInstance().getInternalLang().send(Main.getInstance().getAdventure().console(), "console.errorSkript");
+                Main.getInstance().getLogger().severe("An error occurred while loading the skript addon: " + exception.getMessage());
             }
-            Main.log.sendMessage(ColorUtils.getColored("   &a - SKRIPT HAS BEEN HOOKED"));
+            Main.getInstance().getInternalLang().send(Main.getInstance().getAdventure().console(), "console.successSkript");
 
             return Instance != null;
 
@@ -44,15 +46,4 @@ public class SkriptHook extends Hook {
         }
 
     }
-
-    public static Skript getInstance() {
-        return Instance;
-    }
-
-    public static SkriptAddon getAddon() {
-        return addon;
-    }
-
-
-
 }

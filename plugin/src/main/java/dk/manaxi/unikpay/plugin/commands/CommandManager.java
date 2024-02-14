@@ -1,7 +1,7 @@
 package dk.manaxi.unikpay.plugin.commands;
 
+import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.commands.ingamecommands.UnikPayCommand;
-import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,9 +11,9 @@ public class CommandManager {
         try {
             Bukkit.getPluginCommand("unikpay").setExecutor(unikPayCommand);
             Bukkit.getPluginCommand("unikpay").setTabCompleter(new TabCompleteListener(unikPayCommand));
-            Bukkit.getConsoleSender().sendMessage(ColorUtils.getColored("   &a - Successful enabled commands"));
+            Main.getInstance().getInternalLang().send(Main.getInstance().getAdventure().console(), "console.successCommands");
         } catch (Exception e) {
-            Bukkit.getConsoleSender().sendMessage(ColorUtils.getColored("   &c - Could not enable commands"));
+            Main.getInstance().getInternalLang().send(Main.getInstance().getAdventure().console(), "console.errorCommands");
         }
 
 

@@ -16,9 +16,9 @@ public class DefaultCommand extends ISubCommand {
     public void onCommand(CommandSender sender, String[] args, String paramString) {
         if(!(sender instanceof Player)) return;
         Player player = (Player) sender;
-        Main.getInstance().getLang().send(player, "unikpay.help.default", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
-        if ((sender.hasPermission(Main.configYML.getString("admin-permission")) && !sender.hasPermission("unik.command")) || sender.isOp()) {
-            Main.getInstance().getLang().send(player, "unikpay.help.admin");
+        Main.getInstance().getInternalLang().send(player, "unikpay.help.default", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
+        if ((sender.hasPermission(Main.getInstance().getConfigSystem().getADMINPERMISSION()) && !sender.hasPermission("unik.command")) || sender.isOp()) {
+            Main.getInstance().getInternalLang().send(player, "unikpay.help.admin");
         }
     }
 }

@@ -2,22 +2,22 @@ package dk.manaxi.unikpay.plugin;
 
 import dk.manaxi.unikpay.plugin.commands.CommandManager;
 import dk.manaxi.unikpay.plugin.configuration.Config;
+import dk.manaxi.unikpay.plugin.configuration.InternalLang;
 import dk.manaxi.unikpay.plugin.configuration.Lang;
 import dk.manaxi.unikpay.plugin.enums.Hook;
 import dk.manaxi.unikpay.plugin.fetch.Payments;
 import dk.manaxi.unikpay.plugin.hooks.SkriptHook;
 import dk.manaxi.unikpay.plugin.interfaces.IHook;
 import dk.manaxi.unikpay.plugin.listeners.OnSync;
-import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import dk.manaxi.unikpay.plugin.websocket.Console;
 import dk.manaxi.unikpay.plugin.websocket.IoSocket;
 import lombok.Getter;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -32,8 +32,10 @@ public final class Main extends JavaPlugin {
     private static Main instance;
     @Getter
     private Lang lang;
-    public static dk.manaxi.unikpay.plugin.configuration.Config config;
-    public static FileConfiguration configYML;
+    @Getter
+    private InternalLang internalLang;
+    @Getter
+    public Config configSystem;
     public static ConsoleCommandSender log;
     private static final HashMap<Hook, Boolean> HOOKS = new HashMap<>();
     @Getter
@@ -41,32 +43,42 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        this.adventure = BukkitAudiences.create(this);
-        log = Bukkit.getConsoleSender();
-        log.sendMessage(ColorUtils.getColored("&8&m---------------------------------&r", "", "  &2Enabling &aUnikPay &fv" + getDescription().getVersion()));
         long timestampBeforeLoad = System.currentTimeMillis();
         instance = this;
+        this.adventure = BukkitAudiences.create(this);
+        try {
+            this.internalLang = new InternalLang();
+            this.internalLang.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        log = Bukkit.getConsoleSender();
+        Main.getInstance().getInternalLang().send(adventure.console(), "console.enabling", Placeholder.unparsed("version", getDescription().getVersion()));
+        Main.getInstance().getInternalLang().send(adventure.console(), "console.config");
         initialiseConfigs();
 
-        //Commands
-        log.sendMessage(ColorUtils.getColored("", "  &2Hooking into Commands"));
+        Main.getInstance().getInternalLang().send(adventure.console(), "console.commands");
         CommandManager.initialise(this);
-        //hooks
-        log.sendMessage(ColorUtils.getColored("", "  &2Hooking into integrations"));
+
+        Main.getInstance().getInternalLang().send(adventure.console(), "console.integrations");
         initialiseHooks();
+
+        Main.getInstance().getInternalLang().send(adventure.console(), "console.webSocket");
         IoSocket.connectSocket();
-        if(Main.configYML.getBoolean("update-notify", true)) {
+        if(configSystem.getUPDATENOTIFY()) {
             Bukkit.getServer().getPluginManager().registerEvents(new OnSync(), this);
         }
 
-        log.sendMessage(ColorUtils.getColored("", " &2Hooking into console"));
+        Main.getInstance().getInternalLang().send(adventure.console(), "console.console");
         Logger logger = (Logger) LogManager.getRootLogger();
         logger.addAppender(new Console());
 
-        log.sendMessage(ColorUtils.getColored("", "  &fUnikPay has been enabled!", "    &aVersion: &f" +
-                        getDescription().getVersion(), "    &aAuthors: &f" +
-                        getDescription().getAuthors(), "",
-                "  &2Took &a" + ( System.currentTimeMillis() - timestampBeforeLoad) + " millis &2to load!", "", "&8&m---------------------------------&r"));
+        Main.getInstance().getInternalLang().send(adventure.console(), "console.done",
+                Placeholder.unparsed("time", String.valueOf(System.currentTimeMillis() - timestampBeforeLoad)),
+                Placeholder.unparsed("version", getDescription().getVersion()),
+                Placeholder.unparsed("authors", String.join(", ", getDescription().getAuthors()))
+        );
+
         (new BukkitRunnable() {
             @Override
             public void run() {
@@ -77,51 +89,64 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        Main.getInstance().getInternalLang().send(adventure.console(), "console.disabled",
+                Placeholder.unparsed("version", getDescription().getVersion()),
+                Placeholder.unparsed("authors", String.join(", ", getDescription().getAuthors()))
+        );
         if(this.adventure != null) {
             this.adventure.close();
             this.adventure = null;
         }
-        log.sendMessage(ColorUtils.getColored("&8&m---------------------------------&r", "", "  &4UnikPay Disabled!", "    &cVersion: &f" + getDescription().getVersion(), "    &cAuthors: &f" + getDescription().getAuthors(), "", "&8&m---------------------------------&r"));
         IoSocket.getSocket().disconnect();
     }
 
     private void initialiseConfigs() {
-        try {
-            config = new Config();
-            config.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        log.sendMessage(ColorUtils.getColored("", "  &2Getting your apikey"));
-        if (config.getAPIKEY().isEmpty() || config.getAPIKEY().equals("KEY HER")) {
-            log.sendMessage(ColorUtils.getColored("", "", " &c- Du mangler at putte din apikey ind i config.yml"));
-            APIKEY = null;
-            return;
-        }
-        log.sendMessage(ColorUtils.getColored("", "", " &a- Fandt din api-key"));
-        APIKEY = config.getAPIKEY();
         try {
             this.lang = new Lang();
             this.lang.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        try {
+            configSystem = new Config();
+            configSystem.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Main.getInstance().getInternalLang().send(adventure.console(), "console.getapi");
+        if (configSystem.getAPIKEY().isEmpty() || configSystem.getAPIKEY().equals("KEY HER")) {
+            Main.getInstance().getInternalLang().send(adventure.console(), "console.apikeymissing");
+            APIKEY = null;
+            return;
+        }
+        Main.getInstance().getInternalLang().send(adventure.console(), "console.apikeyfound");
+        APIKEY = configSystem.getAPIKEY();
     }
 
-
-
-    //TO EVERYTHING THERE NEED TO BE RELOADED
     public void reload() {
+        long timestampBeforeLoad = System.currentTimeMillis();
+        Main.getInstance().getInternalLang().send(adventure.console(), "console.reloading", Placeholder.unparsed("version", getDescription().getVersion()));
+        Main.getInstance().getInternalLang().send(adventure.console(), "console.internalLang");
+        try {
+            this.internalLang = new InternalLang();
+            this.internalLang.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Main.getInstance().getInternalLang().send(adventure.console(), "console.config");
         initialiseConfigs();
+
+        Main.getInstance().getInternalLang().send(adventure.console(), "console.webSocket");
         if(IoSocket.getSocket().connected()) {
             IoSocket.getSocket().disconnect();
         }
         IoSocket.connectSocket();
-    }
 
-
-    public File getFile() {
-        return super.getFile();
+        Main.getInstance().getInternalLang().send(adventure.console(), "console.reloaded",
+                Placeholder.unparsed("version", getDescription().getVersion()),
+                Placeholder.unparsed("time", String.valueOf(System.currentTimeMillis() - timestampBeforeLoad))
+        );
     }
 
     private void initialiseHooks() {

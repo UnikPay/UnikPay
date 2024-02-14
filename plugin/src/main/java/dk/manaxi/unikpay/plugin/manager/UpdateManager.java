@@ -8,10 +8,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.bukkit.Bukkit;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -44,13 +42,12 @@ public class UpdateManager {
 
             return new Semver(latestVersion).isGreaterThan(currentVersion);
         } catch (Exception e) {
-            e.printStackTrace();
+            Main.getInstance().getLogger().severe("Failed to check for updates: " + e.getMessage());
             return false;
         }
     }
 
     private static void downloadAndExtractFile(URL url, String fileName, Path outputDirectory) throws IOException {
-
         Path outputFile = outputDirectory.resolve(fileName);
 
 
@@ -68,7 +65,6 @@ public class UpdateManager {
         try (InputStream in = url.openStream()) {
             Files.copy(in, outputFile, StandardCopyOption.REPLACE_EXISTING);
         }
-
     }
 
 

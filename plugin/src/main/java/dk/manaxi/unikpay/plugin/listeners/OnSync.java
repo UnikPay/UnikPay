@@ -2,9 +2,7 @@ package dk.manaxi.unikpay.plugin.listeners;
 
 import com.google.gson.JsonObject;
 import dk.manaxi.unikpay.plugin.Main;
-import dk.manaxi.unikpay.plugin.configuration.Config;
 import dk.manaxi.unikpay.plugin.manager.UpdateManager;
-import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import dk.manaxi.unikpay.plugin.websocket.IoSocket;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
@@ -31,9 +29,11 @@ public class OnSync implements Listener {
 
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent event) {
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("uuid", event.getPlayer().getUniqueId().toString());
-        jsonObject.addProperty("username", event.getPlayer().getName());
-        IoSocket.getSocket().emit("playerLeave", jsonObject);
+        Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("uuid", event.getPlayer().getUniqueId().toString());
+            jsonObject.addProperty("username", event.getPlayer().getName());
+            IoSocket.getSocket().emit("playerLeave", jsonObject);
+        });
     }
 }

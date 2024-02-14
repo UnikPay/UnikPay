@@ -16,19 +16,19 @@ public class Reload extends ISubCommand {
         if(!(sender instanceof Player)) return;
         Player player = (Player) sender;
         //Checks, if player have permission.
-        if (!player.hasPermission(Main.configYML.getString("admin-permission")) && !player.hasPermission("unikpay.reload")) {
-                Main.getInstance().getLang().send(player, "no-permission");
+        if (!player.hasPermission(Main.getInstance().getConfigSystem().getADMINPERMISSION()) && !player.hasPermission("unikpay.reload")) {
+                Main.getInstance().getInternalLang().send(player, "no-permission");
             return;
         }
 
         long timestampBeforeLoad = System.currentTimeMillis();
-        Main.getInstance().getLang().send(player, "unikpay.reload.reloading");
+        Main.getInstance().getInternalLang().send(player, "unikpay.reload.reloading", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
         try {
             Main.getInstance().reload();
-            Main.getInstance().getLang().send(player, "unikpay.reload.reloaded", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")), Placeholder.unparsed("time", String.valueOf(System.currentTimeMillis() - timestampBeforeLoad)));
+            Main.getInstance().getInternalLang().send(player, "unikpay.reload.reloaded", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")), Placeholder.unparsed("time", String.valueOf(System.currentTimeMillis() - timestampBeforeLoad)));
         } catch (Exception e) {
-            Main.getInstance().getLang().send(player, "unikpay.reload.error", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
-            e.printStackTrace();
+            Main.getInstance().getInternalLang().send(player, "unikpay.reload.error", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
+            Main.getInstance().getLogger().severe("An error occurred while reloading the plugin: " + e.getMessage());
         }
 
     }

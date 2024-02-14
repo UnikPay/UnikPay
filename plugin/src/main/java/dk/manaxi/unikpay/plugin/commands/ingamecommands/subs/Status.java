@@ -23,11 +23,11 @@ public class Status extends ISubCommand {
     public void onCommand(CommandSender sender, String[] args, String paramString) {
         if(!(sender instanceof Player)) return;
         Player player = (Player) sender;
-        if (!player.hasPermission(Main.configYML.getString("admin-permission")) && !player.hasPermission("unikpay.reload")) {
-            Main.getInstance().getLang().send(player, "no-permission");
+        if (!player.hasPermission(Main.getInstance().getConfigSystem().getADMINPERMISSION()) && !player.hasPermission("unikpay.reload")) {
+            Main.getInstance().getInternalLang().send(player, "no-permission");
             return;
         }
-        Main.getInstance().getLang().send(player, "unikpay.status.info",
+        Main.getInstance().getInternalLang().send(player, "unikpay.status.info",
                 Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")),
                 Placeholder.unparsed("version", Main.getInstance().getDescription().getVersion()),
                 Placeholder.parsed("wsstatus", (!IoSocket.getSocket().connected() ? "<#55FF55>✖" : "<#55FF55>✓")),
@@ -36,11 +36,11 @@ public class Status extends ISubCommand {
                 Placeholder.parsed("skriptstatus", (!Main.isHookInitialised(Hook.SKRIPT) ? "<#FF5555>✖" : "<#55FF55>✓"))
         );
         if (Main.getInstance().getDescription().getVersion().split("-").length > 1 && Main.getInstance().getDescription().getVersion().split("-")[1].equals("SNAPSHOT")) {
-            Main.getInstance().getLang().send(player, "unikpay.status.snapshot",
+            Main.getInstance().getInternalLang().send(player, "unikpay.status.snapshot",
                     Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
         }
         if (UpdateManager.isANewVersionAvailable(Main.getInstance().getDescription().getVersion())) {
-            Main.getInstance().getLang().send(player, "unikpay.status.update",
+            Main.getInstance().getInternalLang().send(player, "unikpay.status.update",
                     Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
         }
     }

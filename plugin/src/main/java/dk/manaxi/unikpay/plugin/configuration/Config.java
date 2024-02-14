@@ -30,7 +30,7 @@ public class Config {
     }
 
     public String getAPIKEY() {
-        return splitNode("api-key", "KEY HER");
+        return splitNode("Api-key", "KEY HER");
     }
 
     public String getADMINPERMISSION() {

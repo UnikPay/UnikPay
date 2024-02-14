@@ -18,20 +18,20 @@ public class Update extends ISubCommand {
     public void onCommand(CommandSender sender, String[] args, String paramString) {
         if(!(sender instanceof Player)) return;
         Player player = (Player) sender;
-        if (!player.hasPermission(Main.configYML.getString("admin-permission")) && !player.hasPermission("unikpay.reload")) {
-            Main.getInstance().getLang().send(player, "no-permission");
+        if (!player.hasPermission(Main.getInstance().getConfigSystem().getADMINPERMISSION()) && !player.hasPermission("unikpay.reload")) {
+            Main.getInstance().getInternalLang().send(player, "no-permission");
             return;
         }
-        Main.getInstance().getLang().send(player, "unikpay.update.start",
+        Main.getInstance().getInternalLang().send(player, "unikpay.update.start",
                 Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
         try {
             UpdateManager.Update();
-            Main.getInstance().getLang().send(player, "unikpay.update.success",
+            Main.getInstance().getInternalLang().send(player, "unikpay.update.success",
                     Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
         } catch (IOException e) {
-            Main.getInstance().getLang().send(player, "unikpay.update.error",
+            Main.getInstance().getInternalLang().send(player, "unikpay.update.error",
                     Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
-            e.printStackTrace();
+            Main.getInstance().getLogger().severe("An error occurred while updating the plugin: " + e.getMessage());
         }
     }
 }
