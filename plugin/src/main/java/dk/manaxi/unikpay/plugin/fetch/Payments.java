@@ -34,8 +34,8 @@ public class Payments {
             JsonObject svarOBJ = gson.fromJson(svar, JsonObject.class);
             Type listType = (new TypeToken<List<Betaling>>() {}).getType();
             final List<Betaling> betalinger = gson.fromJson(svarOBJ.getAsJsonArray("requests"), listType);
-
             lastSeenIds.clear();
+            if(betalinger == null) return;
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
                 public void run() {
