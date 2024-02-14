@@ -2,6 +2,7 @@ package dk.manaxi.unikpay.plugin;
 
 import dk.manaxi.unikpay.plugin.commands.CommandManager;
 import dk.manaxi.unikpay.plugin.configuration.Config;
+import dk.manaxi.unikpay.plugin.configuration.ConfigMigrate;
 import dk.manaxi.unikpay.plugin.configuration.InternalLang;
 import dk.manaxi.unikpay.plugin.configuration.Lang;
 import dk.manaxi.unikpay.plugin.enums.Hook;
@@ -20,6 +21,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.spongepowered.configurate.ConfigurateException;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,6 +53,11 @@ public final class Main extends JavaPlugin {
             this.internalLang.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+        try {
+            ConfigMigrate.migrate();
+        } catch (ConfigurateException e) {
+            getLogger().severe("An error occurred while migrating the config: " + e.getMessage());
         }
         log = Bukkit.getConsoleSender();
         Main.getInstance().getInternalLang().send(adventure.console(), "console.enabling", Placeholder.unparsed("version", getDescription().getVersion()));
@@ -162,5 +169,7 @@ public final class Main extends JavaPlugin {
         return HOOKS.getOrDefault(paramHook, Boolean.FALSE);
     }
 
-
+    public File getFile() {
+        return super.getFile();
+    }
 }

@@ -1,5 +1,4 @@
-version: "1.0"
-
+version: "1.0.0"
 api-key: "KEY HER"
 admin-permission: "unikpay.*"
 skript-hook: true

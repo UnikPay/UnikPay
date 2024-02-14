@@ -15,6 +15,6 @@ public class Discord extends ISubCommand {
     public void onCommand(CommandSender sender, String[] args, String paramString) {
         if(!(sender instanceof Player)) return;
         Player player = (Player) sender;
-        Main.getInstance().getInternalLang().send(player, "unikpay.help.discord", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
+        Main.getInstance().getInternalLang().send(player, "unikpay.discord", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
     }
 }
