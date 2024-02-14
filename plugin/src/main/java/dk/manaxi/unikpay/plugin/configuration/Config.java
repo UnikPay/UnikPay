@@ -26,14 +26,6 @@ public class Config {
                 }
             }
         }
-        if (configs.containsKey("prefix")) {
-            String prefix = configs.get("prefix")[0];
-            for (String[] values : configs.values()) {
-                for (int i = 0; i < values.length; i++) {
-                    values[i] = values[i].replace("{prefix}", prefix);
-                }
-            }
-        }
     }
     public static String[] get(String path) {
         return configs.getOrDefault(path, new String[]{});
@@ -71,48 +63,4 @@ public class Config {
     public static void send(Player player, String path, String... replacements) {
         sendMessages(player, path, replacements);
     }
-
-    public static void broadcast(String path) {
-        String[] messages = get(path);
-        for (String message : messages) {
-            Bukkit.broadcastMessage(message);
-        }
-    }
-
-    public static void broadcast(String path, Object... replacements) {
-        String[] messages = get(path);
-        for (String message : get(path)) {
-            for (int i = 0; i < replacements.length; i += 2) {
-                message = message.replaceAll((String) replacements[i], (String) replacements[i+1]);
-            }
-            Bukkit.broadcastMessage(message);
-        }
-    }
-
-    public static void sendToPerms(String path, String permission) {
-        String[] messages = get(path);
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.hasPermission(permission)) {
-                for (String message : messages) {
-                    player.sendMessage(message);
-                }
-            }
-        }
-    }
-
-    public static void sendToPerms(String path, String permission, Object... replacements) {
-        String[] messages = get(path);
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.hasPermission(permission)) {
-                for (String message : messages) {
-                    for (int i = 0; i < replacements.length; i += 2) {
-                        message = message.replaceAll((String) replacements[i], (String) replacements[i+1]);
-                    }
-                    player.sendMessage(message);
-                }
-            }
-        }
-    }
-
-
 }

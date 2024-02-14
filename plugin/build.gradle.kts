@@ -43,6 +43,9 @@ dependencies {
     implementation("org.spongepowered:configurate-yaml:4.2.0-SNAPSHOT")
     implementation("net.kyori:adventure-api:4.15.0")
     implementation("net.kyori:adventure-platform-bukkit:4.3.2")
+    implementation("net.kyori:adventure-text-minimessage:4.15.0")
+    compileOnly("org.projectlombok:lombok:1.18.30")
+    annotationProcessor("org.projectlombok:lombok:1.18.30")
 }
 
 tasks.processResources {

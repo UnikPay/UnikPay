@@ -7,10 +7,12 @@ import dk.manaxi.unikpay.plugin.enums.Hook;
 import dk.manaxi.unikpay.plugin.manager.UpdateManager;
 import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import dk.manaxi.unikpay.plugin.websocket.IoSocket;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.io.IOException;
 
@@ -21,16 +23,20 @@ public class Status extends ISubCommand {
 
     @Override
     public void onCommand(CommandSender sender, String[] args, String paramString) {
-        if (!sender.hasPermission(Main.configYML.getString("admin-permission")) && !sender.hasPermission("unikpay.reload")) {
-            Config.send(sender, "no-permission");
+        if(!(sender instanceof Player)) return;
+        Player player = (Player) sender;
+        if (!player.hasPermission(Main.configYML.getString("admin-permission")) && !player.hasPermission("unikpay.reload")) {
+            Main.getInstance().getLang().send(player, "no-permission");
             return;
         }
-        sender.sendMessage(Config.get("prefix")[0]);
-        sender.sendMessage(ColorUtils.getColored(" &fVersion: &a" + Main.getInstance().getDescription().getVersion()));
-        sender.sendMessage(ColorUtils.getColored(" &fWebSocket connected: " + (!IoSocket.getSocket().connected() ? "&c✖" : "&a✓")));
-        sender.sendMessage(ColorUtils.getColored(" &fApi connected: " + (!isURLAvailable(dk.manaxi.unikpay.api.Config.MAINURL) ? "&c✖" : "&a✓")));
-        sender.sendMessage(ColorUtils.getColored(" &fApikey indsat: " + (Main.getAPIKEY() == null ? "&c✖" : "&a✓")));
-        sender.sendMessage(ColorUtils.getColored(" &fSkript connected: " + (!Main.isHookInitialised(Hook.SKRIPT) ? "&c✖" : "&a✓")));
+        Main.getInstance().getLang().send(player, "unikpay.status.info",
+                Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")),
+                Placeholder.unparsed("version", Main.getInstance().getDescription().getVersion()),
+                Placeholder.parsed("wsstatus", (!IoSocket.getSocket().connected() ? "<#55FF55>✖" : "<#55FF55>✓")),
+                Placeholder.parsed("apistatus", (!isURLAvailable(dk.manaxi.unikpay.api.Config.MAINURL) ? "<#FF5555>✖" : "<#55FF55>✓")),
+                Placeholder.parsed("apikey", (Main.getAPIKEY() == null ? "<#FF5555>✖" : "<#55FF55>✓")),
+                Placeholder.parsed("skriptstatus", (!Main.isHookInitialised(Hook.SKRIPT) ? "<#FF5555>✖" : "<#55FF55>✓")),
+        );
         if (Main.getInstance().getDescription().getVersion().split("-").length > 1 && Main.getInstance().getDescription().getVersion().split("-")[1].equals("SNAPSHOT")) {
             sender.sendMessage(ColorUtils.getColored("&7 "));
             sender.sendMessage(ColorUtils.getColored(" &fDu kører en snapshot version af UnikPay og det er ikke anbefalet!"));

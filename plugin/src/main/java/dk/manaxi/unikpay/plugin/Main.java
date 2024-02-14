@@ -1,6 +1,7 @@
 package dk.manaxi.unikpay.plugin;
 
 import dk.manaxi.unikpay.plugin.commands.CommandManager;
+import dk.manaxi.unikpay.plugin.configuration.Lang;
 import dk.manaxi.unikpay.plugin.enums.Hook;
 import dk.manaxi.unikpay.plugin.fetch.Payments;
 import dk.manaxi.unikpay.plugin.hooks.SkriptHook;
@@ -10,6 +11,7 @@ import dk.manaxi.unikpay.plugin.utils.ColorUtils;
 import dk.manaxi.unikpay.plugin.utils.Config;
 import dk.manaxi.unikpay.plugin.websocket.Console;
 import dk.manaxi.unikpay.plugin.websocket.IoSocket;
+import lombok.Getter;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
@@ -20,16 +22,21 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 public final class Main extends JavaPlugin {
-    private static final String url = dk.manaxi.unikpay.api.Config.MAINURL + "request";
+    @Getter
     private BukkitAudiences adventure;
+    @Getter
     private static Main instance;
+    @Getter
+    private Lang lang;
     public static Config config;
     public static FileConfiguration configYML;
     public static ConsoleCommandSender log;
     private static final HashMap<Hook, Boolean> HOOKS = new HashMap<>();
+    @Getter
     private static String APIKEY;
 
     @Override
@@ -92,6 +99,12 @@ public final class Main extends JavaPlugin {
         }
         log.sendMessage(ColorUtils.getColored("", "", " &a- Fandt din api-key"));
         APIKEY = configYML.getString("Api-key");
+        try {
+            this.lang = new Lang();
+            this.lang.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -105,14 +118,6 @@ public final class Main extends JavaPlugin {
         IoSocket.connectSocket();
     }
 
-    public static String getAPIKEY(){
-        return APIKEY;
-    }
-
-
-    public static Main getInstance() {
-        return instance;
-    }
 
     public File getFile() {
         return super.getFile();

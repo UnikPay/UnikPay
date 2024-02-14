@@ -1,0 +1,56 @@
+unikpay:
+  help:
+    default:
+      - "<prefix>"
+      - "<#AAAAAA> - <#55FF55>/unikpay <#FF5555>Viser denne hjælp."
+      - "<#AAAAAA> - <#55FF55>/unikpay discord <#FF5555>Sender et link til vores Discord-server."
+    admin:
+      - "<#AAAAAA> - <#55FF55>/unikpay reload <#FF5555>Genindlæser konfigurationen."
+      - "<#AAAAAA> - <#55FF55>/unikpay status <#FF5555>Viser status for din server."
+      - "<#AAAAAA> - <#55FF55>/unikpay update <#FF5555>Opdaterer pluginen."
+  discord:
+    - "<prefix>"
+    - "<#55FF55>Join vores Discord-server: ( https://discord.gg/jnWKcuVmWf )"
+  reload:
+    reloading:
+      - "<prefix>"
+      - "<#55FF55>Genindlæser konfigurationen."
+    reloaded:
+      - "<prefix>"
+      - "<#55FF55>Genindlæste alt. <#AAAAAA>(<time> ms)"
+    error:
+      - "<prefix>"
+      - "<#FF5555>Der skete en fejl under genindlæsningen."
+      - "<#FF5555>Se konsollen for mere information."
+  status:
+    info:
+        - "<prefix>"
+        - "<#55FF55>UnikPay status:"
+        - "<#55FF55> - <#AAAAAA>Version: <#55FF55><version>"
+        - "<#55FF55> - <#AAAAAA>WebSocket forbindelse: <#55FF55><wsstatus>"
+        - "<#55FF55> - <#AAAAAA>API forbindelse: <#55FF55><apistatus>"
+        - "<#55FF55> - <#AAAAAA>API-nøgle indsat: <#55FF55><apikey>"
+        - "<#55FF55> - <#AAAAAA>Skript forbindelse: <#55FF55><skriptstatus>"
+    snapshot:
+        - "<prefix>"
+        -
+
+
+no-permission:
+  - "<prefix> <#55FF55>Du har ikke adgang til denne kommando."
+apikey-missing:
+  - "<prefix> <#55FF55>Du har ikke sat din API-key ind i config.yml"
+prefix:
+    - "<#555555><b>[</b> <#55FF55><b>UNIKPAY</b> <#555555><b>]</b>"
+ikkelinket:
+  - "<prefix> <#FF5555>Det ser ud til, at du ikke har en bruger endnu!"
+  - "<prefix> <#FF5555>Join vores Discord-server: ( https://discord.gg/jnWKcuVmWf ) for at oprette en bruger."
+  - "<prefix> <#FF5555>Og skriv <#55FF55>/link <#FF5555>i en hvilken som helst kanal du har adgang til at skrive i."
+accepterbetaling:
+  - "<prefix> <#55FF55>Accepter købet på Discord."
+paysuccess:
+  - "<prefix> <#55FF55>Du er blevet payet!"
+ratetime:
+  - "<prefix> <#FF5555>Du skal lige vente 15 sekunder, før du kan købe igen."
+allerede_sub:
+  - "<prefix> <#FF5555>Du har allerede abbonneret til det."
