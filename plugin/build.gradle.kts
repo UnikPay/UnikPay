@@ -35,11 +35,14 @@ dependencies {
     }
     implementation("com.google.guava:guava:33.0.0-jre")
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation("org.json:json:20231013")
-    compileOnly("com.github.SkriptLang:Skript:2.8.0") {
+    implementation("org.json:json:20240205")
+    compileOnly("com.github.SkriptLang:Skript:2.8.2") {
         exclude("com.sk89q", "worldguard")
         exclude("net.milkbowl.vault", "Vault")
     }
+    implementation("org.spongepowered:configurate-yaml:4.2.0-SNAPSHOT")
+    implementation("net.kyori:adventure-api:4.15.0")
+    implementation("net.kyori:adventure-platform-bukkit:4.3.2")
 }
 
 tasks.processResources {
