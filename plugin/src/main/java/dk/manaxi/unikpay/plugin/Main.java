@@ -25,6 +25,7 @@ import org.spongepowered.configurate.ConfigurateException;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashMap;
 
 public final class Main extends JavaPlugin {
@@ -108,6 +109,13 @@ public final class Main extends JavaPlugin {
     }
 
     private void initialiseConfigs() {
+        if(!Files.exists(getDataFolder().toPath())) {
+            try {
+                Files.createDirectories(getDataFolder().toPath());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
             this.lang = new Lang();
             this.lang.load();
