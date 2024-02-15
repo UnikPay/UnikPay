@@ -19,7 +19,7 @@ public class Update extends ISubCommand {
         if(!(sender instanceof Player)) return;
         Player player = (Player) sender;
         if (!player.hasPermission(Main.getInstance().getConfigSystem().getADMINPERMISSION()) && !player.hasPermission("unikpay.reload")) {
-            Main.getInstance().getInternalLang().send(player, "no-permission");
+            Main.getInstance().getLang().send(player, "no-permission");
             return;
         }
         Main.getInstance().getInternalLang().send(player, "unikpay.update.start",

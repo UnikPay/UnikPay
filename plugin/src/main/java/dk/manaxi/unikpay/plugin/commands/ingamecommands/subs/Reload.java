@@ -17,7 +17,7 @@ public class Reload extends ISubCommand {
         Player player = (Player) sender;
         //Checks, if player have permission.
         if (!player.hasPermission(Main.getInstance().getConfigSystem().getADMINPERMISSION()) && !player.hasPermission("unikpay.reload")) {
-                Main.getInstance().getInternalLang().send(player, "no-permission");
+                Main.getInstance().getLang().send(player, "no-permission");
             return;
         }
 
