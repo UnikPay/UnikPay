@@ -28,7 +28,7 @@ public class EffAccept extends Effect {
             return;
         }
 
-        String url = Config.MAINURL + "request/" + id.getSingle(e) + "/complete";
+        String url = Main.getInstance().getConfigSystem() + "/v1/request/" + id.getSingle(e) + "/complete";
 
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
             String svar = HttpsClient.sendRequest(url, "POST", "", Main.getAPIKEY(), null);

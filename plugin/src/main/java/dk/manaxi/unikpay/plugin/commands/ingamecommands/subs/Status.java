@@ -31,7 +31,7 @@ public class Status extends ISubCommand {
                 Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")),
                 Placeholder.unparsed("version", Main.getInstance().getDescription().getVersion()),
                 Placeholder.parsed("wsstatus", (!IoSocket.getSocket().connected() ? "<#55FF55>✖" : "<#55FF55>✓")),
-                Placeholder.parsed("apistatus", (!isURLAvailable(dk.manaxi.unikpay.api.Config.MAINURL) ? "<#FF5555>✖" : "<#55FF55>✓")),
+                Placeholder.parsed("apistatus", (!isURLAvailable(Main.getInstance().getConfigSystem().getUrl()) ? "<#FF5555>✖" : "<#55FF55>✓")),
                 Placeholder.parsed("apikey", (Main.getAPIKEY() == null ? "<#FF5555>✖" : "<#55FF55>✓")),
                 Placeholder.parsed("skriptstatus", (!Main.isHookInitialised(Hook.SKRIPT) ? "<#FF5555>✖" : "<#55FF55>✓"))
         );

@@ -1,5 +1,5 @@
 group = "dk.manaxi.unikpay"
-version = "1.0.15-SNAPSHOT"
+version = "1.1.0"
 
 repositories {
     mavenCentral()

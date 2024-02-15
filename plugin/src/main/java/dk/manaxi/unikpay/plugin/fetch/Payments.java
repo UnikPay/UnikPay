@@ -18,7 +18,7 @@ import java.util.*;
 @SuppressWarnings("unchecked")
 public class Payments {
     private static long lastPaymentFetch = 0L;
-    private static final String url = Config.MAINURL + "request";
+    private static final String url = Main.getInstance().getConfigSystem() + "/v1/request";
 
     private static final Set<String> calledIds = Collections.synchronizedSet(new HashSet<>());
     private static final Set<String> lastSeenIds = Collections.synchronizedSet(new HashSet<>());

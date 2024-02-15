@@ -34,7 +34,7 @@ public class IoSocket {
                     .setAuth(singletonMap("token", Main.getAPIKEY()))
                     .setExtraHeaders(singletonMap("version", singletonList(Main.getInstance().getDescription().getVersion())))
                     .build();
-            socket = IO.socket(Config.WS, options);
+            socket = IO.socket(Main.getInstance().getConfigSystem().getUrl(), options);
             socket.on(Socket.EVENT_CONNECT, args -> Main.getInstance().getLogger().info("Socket.io connected."));
             socket.on(Socket.EVENT_DISCONNECT, args -> Main.getInstance().getLogger().info("Socket.io disconnected."));
 

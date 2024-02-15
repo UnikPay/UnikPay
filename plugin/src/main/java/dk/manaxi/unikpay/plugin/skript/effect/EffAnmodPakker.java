@@ -8,13 +8,14 @@ import ch.njol.util.Kleenean;
 import dk.manaxi.unikpay.api.Config;
 import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.API.Internal;
+import dk.manaxi.unikpay.plugin.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class EffAnmodPakker extends Effect {
-    private static final String url = Config.MAINURL + "request";
+    private static final String url = Main.getInstance().getConfigSystem() + "/v1/request";
 
     private Expression<Player> player;
     private Expression<Pakke> pakke;

@@ -17,7 +17,7 @@ import java.nio.file.StandardCopyOption;
 
 public class UpdateManager {
 
-    public static final String ApiUrl = "https://unikpay.manaxi.dk/v1/stats/plugin";
+    public static final String ApiUrl = Main.getInstance().getConfigSystem().getUrl() + "/v1/stats/plugin";
     public static final String DownloadUrl = "https://github.com/UnikPay/UnikPay/releases/latest/download/UnikPay.jar";
 
     public static void Update() throws IOException {

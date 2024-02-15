@@ -29,6 +29,9 @@ public class Config {
         return node.getBoolean(defaultValue);
     }
 
+    public String getUrl() {
+        return splitNode("url", "https://unikpay.manaxi.dk");
+    }
     public String getAPIKEY() {
         return splitNode("Api-key", "KEY HER");
     }
