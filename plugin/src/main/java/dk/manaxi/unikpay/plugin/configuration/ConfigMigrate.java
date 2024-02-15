@@ -1,9 +1,7 @@
 package dk.manaxi.unikpay.plugin.configuration;
 
 import dk.manaxi.unikpay.plugin.Main;
-import org.spongepowered.configurate.ConfigurateException;
-import org.spongepowered.configurate.ConfigurationNode;
-import org.spongepowered.configurate.ConfigurationOptions;
+import org.spongepowered.configurate.*;
 import org.spongepowered.configurate.loader.HeaderMode;
 import org.spongepowered.configurate.yaml.NodeStyle;
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
@@ -48,9 +46,9 @@ public class ConfigMigrate {
                 .path(config)
                 .nodeStyle(NodeStyle.BLOCK)
                 .build();
-        ConfigurationNode newLang = langLoader
+        CommentedConfigurationNode newLang = langLoader
                 .load();
-        ConfigurationNode newConfig = configLoader
+        CommentedConfigurationNode newConfig = configLoader
                 .load();
 
         try (InputStream stream = Main.getInstance().getResource("config.yml")) {
@@ -67,7 +65,6 @@ public class ConfigMigrate {
 
         try (InputStream stream = Main.getInstance().getResource("lang.yml")) {
             assert stream != null;
-            newLang.raw(null);
             newLang.node("version").set("1.0.0");
             String noPermission = oldNode.node("no-permission").getString("{prefix} &cDu har ikke adgang til denne kommando.");
             newLang.node("nopermission").setList(String.class, Collections.singletonList(convertLegacyToMM(noPermission)));

@@ -10,7 +10,7 @@ unikpay:
             - "<#AAAAAA> - <#55FF55>/unikpay update <#FF5555>Opdaterer pluginen."
     discord:
         - "<prefix>"
-        - "<#55FF55>Join vores <hover:show_text:'<yellow>Klik på mig'><click:open_url:https://discord.gg/jnWKcuVmWf>Discord-server</click></hover>"
+        - "<#55FF55>Join vores <hover:show_text:'<yellow>Klik på mig'><click:open_url:https://discord.gg/jnWKcuVmWf>Discord-server</click> (discord.gg/jnWKcuVmWf)</hover>"
     reload:
         reloading:
             - "<prefix>"
