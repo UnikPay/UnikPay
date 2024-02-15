@@ -14,6 +14,7 @@ import dk.manaxi.unikpay.plugin.fetch.Payments;
 import dk.manaxi.unikpay.plugin.skript.classes.AcceptId;
 import io.socket.client.IO;
 import io.socket.client.Socket;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 
 import java.lang.reflect.Type;
@@ -26,6 +27,7 @@ import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
 
 public class IoSocket {
+    @Getter
     private static Socket socket;
 
     public static void connectSocket() {
@@ -34,9 +36,11 @@ public class IoSocket {
                     .setAuth(singletonMap("token", Main.getAPIKEY()))
                     .setExtraHeaders(singletonMap("version", singletonList(Main.getInstance().getDescription().getVersion())))
                     .build();
+            Main.getInstance().getLogger().info("Connecting to socket.io...");
             socket = IO.socket(Main.getInstance().getConfigSystem().getUrl(), options);
             socket.on(Socket.EVENT_CONNECT, args -> Main.getInstance().getLogger().info("Socket.io connected."));
             socket.on(Socket.EVENT_DISCONNECT, args -> Main.getInstance().getLogger().info("Socket.io disconnected."));
+            socket.on(Socket.EVENT_CONNECT_ERROR, args -> Main.getInstance().getLogger().severe("Socket.io connection error: " + Arrays.toString(args)));
 
             //when someone accepts on discord
             socket.on("acceptRequest", args -> {
@@ -86,13 +90,9 @@ public class IoSocket {
             });
 
             socket.connect();
-        } catch (URISyntaxException ignored) {
-
+            Main.getInstance().getLogger().info("Socket.io connected.");
+        } catch (URISyntaxException ex) {
+            Main.getInstance().getLogger().severe("Socket.io failed to connect. Message: " + ex.getMessage());
         }
     }
-
-    public static Socket getSocket() {
-        return socket;
-    }
-
 }

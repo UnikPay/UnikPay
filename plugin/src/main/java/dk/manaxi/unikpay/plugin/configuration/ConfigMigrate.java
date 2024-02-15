@@ -55,7 +55,7 @@ public class ConfigMigrate {
             assert stream != null;
             newConfig.raw(null);
             newConfig.node("version").set("1.0.0");
-            newConfig.node("Api-key").set(oldNode.node("Api-key").getString("KEY HER"));
+            newConfig.node("api-key").set(oldNode.node("Api-key").getString("KEY HER"));
             newConfig.node("admin-permission").set(oldNode.node("admin-permission").getString("unikpay.admin"));
             newConfig.node("skript-hook").set(oldNode.node("skript-hook").getBoolean(true));
             newConfig.node("update-notify").set(oldNode.node("update-notify").getBoolean(true));

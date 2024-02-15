@@ -1,7 +1,6 @@
 package dk.manaxi.unikpay.api;
 
 public class Config {
-    public static String WS = "https://unikpay.manaxi.dk";
     public static String IKKEMC = "mcaccount not found";
     public static String IKKELINKET_MESSAGE = "Personen er ikke linket til en discord bruger.";
     public static String ACCEPTERE_KOEBET = "Request created";

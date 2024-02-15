@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class EffAnmodPakker extends Effect {
-    private static final String url = Main.getInstance().getConfigSystem() + "/v1/request";
+    private static final String url = Main.getInstance().getConfigSystem().getUrl() + "/v1/request";
 
     private Expression<Player> player;
     private Expression<Pakke> pakke;

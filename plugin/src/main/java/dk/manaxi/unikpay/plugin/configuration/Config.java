@@ -33,7 +33,7 @@ public class Config {
         return splitNode("url", "https://unikpay.manaxi.dk");
     }
     public String getAPIKEY() {
-        return splitNode("Api-key", "KEY HER");
+        return splitNode("api-key", "KEY HER");
     }
 
     public String getADMINPERMISSION() {

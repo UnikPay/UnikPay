@@ -18,7 +18,7 @@ import java.util.*;
 @SuppressWarnings("unchecked")
 public class Payments {
     private static long lastPaymentFetch = 0L;
-    private static final String url = Main.getInstance().getConfigSystem() + "/v1/request";
+    private static final String url = Main.getInstance().getConfigSystem().getUrl() + "/v1/request";
 
     private static final Set<String> calledIds = Collections.synchronizedSet(new HashSet<>());
     private static final Set<String> lastSeenIds = Collections.synchronizedSet(new HashSet<>());
@@ -34,9 +34,8 @@ public class Payments {
             JsonObject svarOBJ = gson.fromJson(svar, JsonObject.class);
             Type listType = (new TypeToken<List<Betaling>>() {}).getType();
             final List<Betaling> betalinger = gson.fromJson(svarOBJ.getAsJsonArray("requests"), listType);
-
+            if(betalinger == null) return;
             lastSeenIds.clear();
-
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
                 public void run() {
                     for (Betaling betal : betalinger) {

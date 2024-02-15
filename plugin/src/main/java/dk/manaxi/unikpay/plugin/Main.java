@@ -133,7 +133,6 @@ public final class Main extends JavaPlugin {
     public void reload() {
         long timestampBeforeLoad = System.currentTimeMillis();
         Main.getInstance().getInternalLang().send(adventure.console(), "console.reloading", Placeholder.unparsed("version", getDescription().getVersion()));
-        Main.getInstance().getInternalLang().send(adventure.console(), "console.internalLang");
         try {
             this.internalLang = new InternalLang();
             this.internalLang.load();

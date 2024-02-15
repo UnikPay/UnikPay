@@ -26,7 +26,7 @@ public class RequestManager {
     }
 
     public static void sendPackageRequest(Player player, Pakke[] packages) {
-        String url = Main.getInstance().getConfigSystem() + "/v1/request";
+        String url = Main.getInstance().getConfigSystem().getUrl() + "/v1/request";
         JsonObject payload = new JsonObject();
         payload.addProperty("uuid", player.getUniqueId().toString());
         JsonArray pakker = new JsonArray();
@@ -57,7 +57,7 @@ public class RequestManager {
     }
 
     public static JsonObject sendSubscriptionRequest(Player player, Pakke pakke, Number duration, DurationType type) {
-        String url = Main.getInstance().getConfigSystem() + "/v1/subscription";
+        String url = Main.getInstance().getConfigSystem().getUrl() + "/v1/subscription";
         JsonObject payload = new JsonObject();
         payload.addProperty("uuid", player.getUniqueId().toString());
         payload.add("pakke", pakke.toJSON());
@@ -88,7 +88,7 @@ public class RequestManager {
     }
 
     public static List<Subscription> getSubscriptionsRequest() {
-        String url = Main.getInstance().getConfigSystem() + "/v1/subscription";
+        String url = Main.getInstance().getConfigSystem().getUrl() + "/v1/subscription";
         Gson gson = new Gson();
 
         String svar = HttpsClient.getRequest(url, Main.getAPIKEY());
@@ -100,7 +100,7 @@ public class RequestManager {
     }
 
     public static JsonObject cancelSubscription(Subscription subscription) {
-        String url = Main.getInstance().getConfigSystem() + "/v1/subscription/" + subscription.get_id() + "/cancel";
+        String url = Main.getInstance().getConfigSystem().getUrl() + "/v1/subscription/" + subscription.get_id() + "/cancel";
         String svar = HttpsClient.sendRequest(url, "POST", "", Main.getAPIKEY(), null);
         if (svar == null) return null;
 
@@ -109,7 +109,7 @@ public class RequestManager {
     }
 
     public static void sendPayRequest(Player player, String name, Number amount) {
-        String url = Main.getInstance().getConfigSystem() + "/v1/pay";
+        String url = Main.getInstance().getConfigSystem().getUrl() + "/v1/pay";
 
         JsonObject payload = new JsonObject();
         payload.addProperty("uuid", player.getUniqueId().toString());
@@ -140,7 +140,7 @@ public class RequestManager {
 
     public static void acceptPackageReqeust(String id) {
 
-        String url = Main.getInstance().getConfigSystem() + "/v1/request/" + id + "/complete";
+        String url = Main.getInstance().getConfigSystem().getUrl() + "/v1/request/" + id + "/complete";
 
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
             String svar = HttpsClient.sendRequest(url, "POST", "", Main.getAPIKEY(), null);
