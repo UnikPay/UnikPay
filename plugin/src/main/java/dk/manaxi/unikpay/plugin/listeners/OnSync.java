@@ -20,8 +20,9 @@ public class OnSync implements Listener {
             jsonObject.addProperty("uuid", event.getPlayer().getUniqueId().toString());
             jsonObject.addProperty("username", event.getPlayer().getName());
             IoSocket.getSocket().emit("playerJoin", jsonObject);
-            if (event.getPlayer().isOp() && UpdateManager.isANewVersionAvailable(Main.getInstance().getDescription().getVersion()))  {
-                Main.getInstance().getLang().send(event.getPlayer(), "unikpay.status.update", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
+            if (event.getPlayer().isOp() && UpdateManager.isANewVersionAvailable(Main.getInstance().getDescription().getVersion()) && Main.getInstance().getConfigSystem().getUPDATENOTIFY()) {
+                Main.getInstance().getLang().send(event.getPlayer(), "unikpay.prefix");
+                Main.getInstance().getInternalLang().send(event.getPlayer(), "unikpay.status.update", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
             }
         });
 

@@ -73,9 +73,7 @@ public final class Main extends JavaPlugin {
 
         Main.getInstance().getInternalLang().send(adventure.console(), "console.webSocket");
         IoSocket.connectSocket();
-        if(configSystem.getUPDATENOTIFY()) {
-            Bukkit.getServer().getPluginManager().registerEvents(new OnSync(), this);
-        }
+        Bukkit.getServer().getPluginManager().registerEvents(new OnSync(), this);
 
         Main.getInstance().getInternalLang().send(adventure.console(), "console.console");
         Logger logger = (Logger) LogManager.getRootLogger();
