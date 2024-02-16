@@ -73,6 +73,7 @@ tasks.withType<ShadowJar> {
     relocate("kotlin", "dk.manaxi.kotlin")
     relocate("org.jetbrains.annotations", "dk.manaxi.annotations")
     relocate("org.checkerframework", "dk.manaxi.checkerframework")
+    relocate("net.kyori", "dk.manaxi.kyori")
     archiveFileName.set("UnikPay.jar")
 }
 
