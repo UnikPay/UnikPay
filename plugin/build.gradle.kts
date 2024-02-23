@@ -59,10 +59,7 @@ tasks.processResources {
 }
 
 tasks.withType<ShadowJar> {
-    exclude("META-INF/*.SF")
-    exclude("META-INF/*.DSA")
-    exclude("META-INF/*.RSA")
-    exclude("META-INF/LICENSE")
+    exclude("META-INF/*")
     minimize()
     relocate("okhttp3", "dk.manaxi.okhttp3")
     relocate("okio", "dk.manaxi.okio")
