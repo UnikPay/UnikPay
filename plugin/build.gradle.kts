@@ -24,7 +24,7 @@ dependencies {
         exclude("com.squareup.okhttp3", "okhttp")
     }
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation("org.apache.logging.log4j:log4j-core:2.22.1")
+    implementation("org.apache.logging.log4j:log4j-core:2.23.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.22")
 
     compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT") {
@@ -41,9 +41,9 @@ dependencies {
         exclude("net.milkbowl.vault", "Vault")
     }
     implementation("org.spongepowered:configurate-yaml:4.2.0-SNAPSHOT")
-    implementation("net.kyori:adventure-api:4.15.0")
+    implementation("net.kyori:adventure-api:4.16.0")
     implementation("net.kyori:adventure-platform-bukkit:4.3.2")
-    implementation("net.kyori:adventure-text-minimessage:4.15.0")
+    implementation("net.kyori:adventure-text-minimessage:4.16.0")
     compileOnly("org.projectlombok:lombok:1.18.30")
     annotationProcessor("org.projectlombok:lombok:1.18.30")
 }
@@ -59,10 +59,7 @@ tasks.processResources {
 }
 
 tasks.withType<ShadowJar> {
-    exclude("META-INF/*.SF")
-    exclude("META-INF/*.DSA")
-    exclude("META-INF/*.RSA")
-    exclude("META-INF/LICENSE")
+    exclude("META-INF/*")
     minimize()
     relocate("okhttp3", "dk.manaxi.okhttp3")
     relocate("okio", "dk.manaxi.okio")
