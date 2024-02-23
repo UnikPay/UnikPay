@@ -12,6 +12,7 @@ import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.api.classes.Subscription;
 import dk.manaxi.unikpay.plugin.Main;
 import dk.manaxi.unikpay.plugin.event.OnPayRequest;
+import dk.manaxi.unikpay.plugin.hooks.SkriptHook;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -131,7 +132,10 @@ public class RequestManager {
                 } else if(message.trim().equalsIgnoreCase(Config.IKKEMC)) {
                     Main.getInstance().getLang().send(player, "ikkelinket", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
                 }
-                Skript.error(svar);
+
+                if (SkriptHook.getInstance() != null) {
+                    Skript.error(svar);
+                }
                 Main.getInstance().getLogger().info("En fejl opstod: " + svar);
             }
             Bukkit.getPluginManager().callEvent(new OnPayRequest(player, name, amount.floatValue(), success, message));
@@ -151,7 +155,9 @@ public class RequestManager {
             if(success) {
                 Main.getInstance().getLogger().info("Accepteret " + id);
             } else {
-                Skript.error(svar);
+                if (SkriptHook.getInstance() != null) {
+                    Skript.error(svar);
+                }
                 Main.getInstance().getLogger().info("En fejl opstod: " + svar);
             }
         });
