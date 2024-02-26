@@ -125,7 +125,7 @@ public class RequestManager {
             boolean success = response.get("success").getAsBoolean();
 
             if(success) {
-                Main.getInstance().getLang().send(player, "unikpay.paysuccess", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
+                Main.getInstance().getLang().send(player, "paysuccess", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
             } else {
                 if(message.trim().equalsIgnoreCase(Config.IKKELINKET_MESSAGE)) {
                     Main.getInstance().getLang().send(player, "ikkelinket", Placeholder.component("prefix", Main.getInstance().getLang().get("prefix")));
