@@ -25,7 +25,7 @@ dependencies {
     }
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("org.apache.logging.log4j:log4j-core:2.23.1")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.23")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.24")
 
     compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT") {
         exclude("com.google.code.gson", "gson")
@@ -33,17 +33,17 @@ dependencies {
         exclude("junit", "junit")
         exclude("org.yaml", "snakeyaml")
     }
-    implementation("com.google.guava:guava:33.1.0-jre")
+    implementation("com.google.guava:guava:33.2.0-jre")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("org.json:json:20240303")
-    compileOnly("com.github.SkriptLang:Skript:2.8.4") {
+    compileOnly("com.github.SkriptLang:Skript:2.8.5") {
         exclude("com.sk89q", "worldguard")
         exclude("net.milkbowl.vault", "Vault")
     }
     implementation("org.spongepowered:configurate-yaml:4.2.0-SNAPSHOT")
-    implementation("net.kyori:adventure-api:4.16.0")
+    implementation("net.kyori:adventure-api:4.17.0")
     implementation("net.kyori:adventure-platform-bukkit:4.3.2")
-    implementation("net.kyori:adventure-text-minimessage:4.16.0")
+    implementation("net.kyori:adventure-text-minimessage:4.17.0")
     compileOnly("org.projectlombok:lombok:1.18.32")
     annotationProcessor("org.projectlombok:lombok:1.18.32")
 }
