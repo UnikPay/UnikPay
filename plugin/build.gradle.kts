@@ -33,16 +33,16 @@ dependencies {
         exclude("junit", "junit")
         exclude("org.yaml", "snakeyaml")
     }
-    implementation("com.google.guava:guava:33.2.0-jre")
-    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.google.guava:guava:33.2.1-jre")
+    implementation("com.google.code.gson:gson:2.11.0")
     implementation("org.json:json:20240303")
-    compileOnly("com.github.SkriptLang:Skript:2.8.5") {
+    compileOnly("com.github.SkriptLang:Skript:2.8.6") {
         exclude("com.sk89q", "worldguard")
         exclude("net.milkbowl.vault", "Vault")
     }
     implementation("org.spongepowered:configurate-yaml:4.2.0-SNAPSHOT")
     implementation("net.kyori:adventure-api:4.17.0")
-    implementation("net.kyori:adventure-platform-bukkit:4.3.2")
+    implementation("net.kyori:adventure-platform-bukkit:4.3.3")
     implementation("net.kyori:adventure-text-minimessage:4.17.0")
     compileOnly("org.projectlombok:lombok:1.18.32")
     annotationProcessor("org.projectlombok:lombok:1.18.32")
