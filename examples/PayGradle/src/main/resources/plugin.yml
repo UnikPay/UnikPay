@@ -1,0 +1,13 @@
+name: PayGradle
+version: '${project.version}'
+main: dk.manaxi.paygradle.PayGradle
+api-version: 1.8
+authors:
+  - Itz_Hoffe
+  - Shad0wsense
+  - Iskoldcool
+softdepend:
+  - 'UnikPay'
+commands:
+  pay:
+    description: pay til en spiller fra serverens balance

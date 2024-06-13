@@ -1,8 +1,11 @@
 name: UnikpayTest
 version: '${project.version}'
-main: dk.iskold.unikpaytest.Unikpaytest
+main: dk.manaxi.anmodgradle.AnmodGradle
 api-version: 1.8
-authors: [ iskoldcool ]
+authors:
+  - Itz_Hoffe
+  - Shad0wsense
+  - Iskoldcool
 softdepend:
   - 'UnikPay'
 commands:

@@ -1,0 +1,13 @@
+name: AnmodMaven
+version: '${project.version}'
+main: dk.manaxi.anmodmaven.AnmodMaven
+api-version: 1.8
+authors:
+  - Itz_Hoffe
+  - Shad0wsense
+  - Iskoldcool
+softdepend:
+  - 'UnikPay'
+commands:
+  anmod:
+    description: anmoder til unikpay

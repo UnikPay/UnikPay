@@ -1,13 +1,12 @@
-package dk.iskold.unikpaytest.commands;
+package dk.manaxi.anmodgradle.commands;
 
-import dk.manaxi.unikpay.api.classes.Pakke;
 import dk.manaxi.unikpay.plugin.API.Internal;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class anmod implements CommandExecutor {
+public class AnmodCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
