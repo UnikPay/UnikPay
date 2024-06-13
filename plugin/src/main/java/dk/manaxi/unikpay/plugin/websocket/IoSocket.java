@@ -16,6 +16,7 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
@@ -81,6 +82,18 @@ public class IoSocket {
 
                 Payments.addHandledBySocket(id);
 
+            });
+            socket.on("kick", args -> {
+                String ok = Arrays.toString(args);
+                Gson gson = new Gson();
+                JsonObject JsonObject = gson.fromJson(ok, JsonObject.class);
+
+                String kicker = JsonObject.get("kicker").getAsString();
+                String player = JsonObject.get("player").getAsString();
+                Player p = Bukkit.getPlayer(player);
+                if(p != null) {
+                    p.kickPlayer("Du blev kicket af " + kicker + " via. UnikPay");
+                }
             });
 
             socket.connect();
