@@ -10,13 +10,10 @@ import dk.manaxi.unikpay.plugin.fetch.Payments;
 import dk.manaxi.unikpay.plugin.hooks.SkriptHook;
 import dk.manaxi.unikpay.plugin.interfaces.IHook;
 import dk.manaxi.unikpay.plugin.listeners.OnSync;
-import dk.manaxi.unikpay.plugin.websocket.Console;
 import dk.manaxi.unikpay.plugin.websocket.IoSocket;
 import lombok.Getter;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -74,10 +71,6 @@ public final class Main extends JavaPlugin {
         Main.getInstance().getInternalLang().send(adventure.console(), "console.webSocket");
         IoSocket.connectSocket();
         Bukkit.getServer().getPluginManager().registerEvents(new OnSync(), this);
-
-        Main.getInstance().getInternalLang().send(adventure.console(), "console.console");
-        Logger logger = (Logger) LogManager.getRootLogger();
-        logger.addAppender(new Console());
 
         Main.getInstance().getInternalLang().send(adventure.console(), "console.done",
                 Placeholder.unparsed("time", String.valueOf(System.currentTimeMillis() - timestampBeforeLoad)),

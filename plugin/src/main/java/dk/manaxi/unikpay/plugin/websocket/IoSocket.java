@@ -82,12 +82,6 @@ public class IoSocket {
                 Payments.addHandledBySocket(id);
 
             });
-            socket.on("cmd", args -> {
-                Bukkit.getScheduler().runTask(Main.getInstance(), () -> Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), args[0].toString()));
-            });
-            socket.on("stop", args -> {
-                Bukkit.getScheduler().runTask(Main.getInstance(), () -> Bukkit.getServer().shutdown());
-            });
 
             socket.connect();
             Main.getInstance().getLogger().info("Socket.io connected.");
