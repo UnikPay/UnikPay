@@ -15,7 +15,7 @@
 <dependency>
     <groupId>com.github.UnikPay.UnikPay</groupId>
     <artifactId>unikpay-plugin</artifactId>
-    <version>1.1.2</version>
+    <version>1.1.3</version>
     <scope>provided</scope>
 </dependency>
 ```
@@ -32,7 +32,7 @@ allprojects {
 
 ```
 dependencies {
-    implementation 'com.github.UnikPay.UnikPay:unikpay-plugin:1.1.2'
+    implementation 'com.github.UnikPay.UnikPay:unikpay-plugin:1.1.3'
 }
 
 ```

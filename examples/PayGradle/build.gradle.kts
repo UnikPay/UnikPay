@@ -24,6 +24,6 @@ tasks.withType<JavaCompile> {
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
-    compileOnly("com.github.UnikPay.UnikPay:unikpay-plugin:1.1.2")
-    compileOnly("com.github.UnikPay.UnikPay:unikpay-api:1.1.2")
+    compileOnly("com.github.UnikPay.UnikPay:unikpay-plugin:1.1.3")
+    compileOnly("com.github.UnikPay.UnikPay:unikpay-api:1.1.3")
 }
